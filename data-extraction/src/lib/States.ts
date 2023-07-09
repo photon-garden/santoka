@@ -14,6 +14,7 @@ import type { Translator } from '$lib/Translators'
 import type { Nullish } from '$lib/Nullishes'
 
 export interface SaveableState {
+	id: string
 	selectedElementIndex: number
 	currentPoem: PartiallyCompletePoem
 	currentPublicationId: number
@@ -199,7 +200,18 @@ async function getStartingState(elements: HTMLElement[]): Promise<State> {
 			redoActions: []
 		}
 	} else {
+		const now = new Date()
+
+		const year = now.getFullYear()
+		const month = now.getMonth() + 1
+		const day = now.getDate()
+		const hour = now.getHours()
+		const minute = now.getMinutes()
+
+		const id = `${year}.${month}.${day}.${hour}.${minute}`
+
 		startingState = {
+			id,
 			currentPoem: {
 				id: 0,
 				editing: true,
@@ -253,6 +265,7 @@ export async function update<ActionType extends ActionTypes>(
 	const newState = await handler(state, action)
 
 	Persistence.saveState({
+		id: newState.id,
 		selectedElementIndex: newState.selectedElementIndex,
 		currentPoem: newState.currentPoem,
 		currentPublicationId: newState.currentPublicationId,

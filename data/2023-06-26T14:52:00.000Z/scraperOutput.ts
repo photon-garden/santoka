@@ -1,34 +1,13 @@
+import type { SaveableState } from '$lib/States'
+
 // This data comes from scraping the poems directly on terebess.hu.
-// There are some other pages and files (e.g. .doc files) linked from
-// the Terebess site that I plan on grabbing, but haven't done that yet.
 
-export interface Database {
-	poems: Poem[]
-	publications: Publication[]
-	translators: Translator[]
-}
-
-export interface Poem {
-	id: number
-	englishText: string
-	japaneseText?: string
-	publicationId: number
-	translatorId: number
-	notes?: string
-	editing: false
-}
-
-export interface Translator {
-	id: number
-	name: string
-}
-
-export interface Publication {
-	id: number
-	description: string
-}
-
-const database: Database = {
+const data: SaveableState = {
+	id: '2023.06.26.14.52',
+	selectedElementIndex: 1008,
+	currentPoem: { id: 687, editing: true, translatorId: 20, publicationId: 20 },
+	currentPublicationId: 20,
+	currentTranslatorId: 20,
 	poems: [
 		{
 			id: 0,
@@ -5489,4 +5468,4 @@ const database: Database = {
 	]
 }
 
-export default database
+export default data
