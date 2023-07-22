@@ -1,15 +1,36 @@
 [package]
-name = "santoka-data-rust"
+name = "folkart"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
-axum = "0.6.18"
+axum = { version = "0.6.18", features = ["macros"] }
 dioxus = "0.3.2"
-dioxus-liveview = { version = "0.3.0", features = ["axum"] }
-serde = { version = "1.0.164", features = ["derive"] }
-serde_json = "1.0.99"
+dioxus-ssr = "0.3.0"
+serde = "1.0.174"
+serde_json = "1.0.103"
 tokio = { version = "1.29.1", features = ["full"] }
 ts-rs = "6.2.1"
+
+[package.metadata.commands]
+dev = { parallel = true, cmd = [
+    "cargo cmd watch_tailwind",
+    "cargo cmd watch_html",
+] }
+build = ["cargo cmd build_tailwind", "cargo cmd build_html"]
+# preview = ["cargo cmd build_tailwind","cargo cmd preview_html"]
+setup = [
+    "cargo install cargo-watch --version 8.4.0 --root ./target/.cargo_install",
+    "cargo install cargo-bundle --version 0.6.0 --root ./target/.cargo_install",
+    "npm install && mv node_modules ./target/node_modules",
+]
+watch_tailwind = "npx --prefix ./target/node_modules tailwindcss -i ./src/main.css -o ./target/tailwind/built.css --watch"
+build_tailwind = "npx --prefix ./target/node_modules tailwindcss -i ./src/main.css -o ./target/tailwind/built.css"
+
+watch_html = "./target/.cargo_install/bin/cargo-watch -x 'run -- dev'"
+build_html = "cargo run -- build"
+# preview_html = ""
+
+# watch_dioxus = "./target/.cargo_install/bin/cargo-watch -x run"
+# build_dioxus = "./target/.cargo_install/bin/cargo-bundle bundle --release"
+# preview_dioxus = "./target/.cargo_install/bin/cargo-bundle bundle"
