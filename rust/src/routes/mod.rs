@@ -50,28 +50,42 @@ fn HeroSection() -> Element {
     rsx!(
         section {
             id: "hero",
-            class: "flex justify-start items-start overflow-hidden relative w-full h-[720px] rounded-3xl",
+            class: "flex flex-col justify-start items-start dark:justify-end overflow-hidden relative w-full h-[720px] rounded-3xl",
+            // Light mode image.
             img {
-                class: "shrink-0 min-w-full min-h-full object-cover blur-lg",
+                class: "shrink-0 min-w-full min-h-full object-cover blur-lg dark:hidden",
                 style: "image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;",
                 src: assets.hasui_light_jpeg.lqip
             }
-            img { class: "absolute min-w-full min-h-full object-cover", src: assets.hasui_light_jpeg.url }
+            img {
+                class: "absolute min-w-full min-h-full object-cover dark:hidden",
+                src: assets.hasui_light_jpeg.url
+            }
+            // Dark mode image.
+            img {
+                class: "shrink-0 min-w-full min-h-full object-cover blur-lg hidden dark:block",
+                style: "image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;",
+                src: assets.hasui_dark_jpeg.lqip
+            }
+            img {
+                class: "absolute min-w-full min-h-full object-cover hidden dark:block",
+                src: assets.hasui_dark_jpeg.url
+            }
             div { class: "absolute bottom-0 left-0 flex flex-col gap-1 p-8",
                 span {
                     id: "name-in-kanji",
-                    class: "text-7xl text-neutral-100 whitespace-nowrap",
+                    class: "text-7xl text-neutral-100 dark:text-neutral-300 whitespace-nowrap",
                     "種田山頭火"
                 }
                 span {
                     id: "name-in-romaji",
-                    class: "text-4xl text-neutral-100 font-light whitespace-nowrap",
+                    class: "text-4xl text-neutral-100 dark:text-neutral-300 font-light whitespace-nowrap",
                     "Taneda Santōka"
                 }
                 span {
                     id: "birth-and-death",
-                    class: "text-3xl text-neutral-100 font-light whitespace-nowrap",
-                    "1882&ndash;1940"
+                    class: "text-3xl text-neutral-100 dark:text-neutral-300 font-light whitespace-nowrap",
+                    "1882–1940"
                 }
             }
         }
@@ -102,7 +116,7 @@ fn Publication(publication: &'static Publication) -> Element {
 
     rsx!(
         // self-start is necessary to make sticky work.
-        div { class: "publication sticky top-8 self-start flex flex-col text-neutral-300 items-end w-1/3 text-right",
+        div { class: "publication sticky top-8 self-start flex flex-col text-neutral-400 dark:text-neutral-500 items-end w-1/3 text-right",
             span { class: "translator font-extralight text-3xl", "Translated by {translator.name}" }
             span { class: "publication-name font-thin italic text-2xl", "{publication.name}" }
             span { class: "publication-year font-thin text-2xl",
@@ -131,10 +145,10 @@ fn Poem(poem: &'static Poem) -> Element {
 
     rsx!(
         div { class: "poem flex flex-col gap-2",
-            span { class: "poem-english-text text-3xl font-light lowercase text-neutral-500",
+            span { class: "poem-english-text text-3xl font-light lowercase text-neutral-500 dark:text-neutral-400",
                 "{english_text}"
             }
-            span { class: "poem-japanese-text text-3xl font-extralight lowercase text-neutral-400",
+            span { class: "poem-japanese-text text-3xl font-extralight lowercase text-neutral-400 dark:text-neutral-500",
                 "{japanese_text}"
             }
         }
@@ -144,19 +158,19 @@ fn Poem(poem: &'static Poem) -> Element {
 fn Controls() -> Element {
     rsx!(
         div { class: "controls-container fixed bottom-0 flex flex-row justify-end w-full max-w-screen-2xl px-8 py-4 pr-12",
-            div { class: "controls flex flex-row gap-4 bg-neutral-100 rounded-3xl px-4 py-2 border border-neutral-200",
+            div { class: "controls flex flex-row gap-4 bg-neutral-100 dark:bg-neutral-800 rounded-3xl px-4 py-2 border border-neutral-200 dark:border-neutral-700",
                 a {
-                    class: "about text-base text-neutral-400 font-light underline decoration-1 underline-offset-4",
+                    class: "about text-base text-neutral-400 dark:text-neutral-500 font-light underline decoration-1 underline-offset-4",
                     href: "",
                     "about"
                 }
                 a {
-                    class: "about text-base text-neutral-400 font-light underline decoration-1 underline-offset-4",
+                    class: "about text-base text-neutral-400 dark:text-neutral-500 font-light underline decoration-1 underline-offset-4",
                     href: "",
                     "data + code"
                 }
                 a {
-                    class: "about text-base text-neutral-400 font-light underline decoration-1 underline-offset-4",
+                    class: "about text-base text-neutral-400 dark:text-neutral-500 font-light underline decoration-1 underline-offset-4",
                     href: "",
                     "home"
                 }
