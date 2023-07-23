@@ -2,7 +2,7 @@
 name = "browser"
 version = "0.1.0"
 authors = ["Luca Bailey <mail@photon.garden>"]
-edition = "2018"
+edition = "2021"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
