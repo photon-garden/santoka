@@ -27,7 +27,7 @@ build = [
 ]
 preview = [
     "cargo cmd build",
-    "./target/cargo_install/bin/simple-http-server --port 8000 --index built",
+    "./target/cargo_install/bin/simple-http-server --port 3000 --index built",
 ]
 deploy = [
     "cargo cmd build",
@@ -35,7 +35,6 @@ deploy = [
     "git commit -m 'Deploy'",
     "git push",
 ]
-# preview = ["cargo cmd build_tailwind_production","cargo cmd preview_rust"]
 setup = [
     "cargo install cargo-watch --version 8.4.0 --root ./target/cargo_install",
     "cargo install simple-http-server --version 0.6.7 --root ./target/cargo_install", # For previewing production builds.
