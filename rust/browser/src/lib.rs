@@ -64,26 +64,38 @@ async fn new_version_available() -> bool {
     let maybe_most_recent_build_time = get_most_recent_build_time().await;
     match maybe_most_recent_build_time {
         Ok(most_recent_build_time) => {
-            // log!("Original build time: {}", original_build_time.to_string());
+            // log!("Original build time:", original_build_time.to_string());
             // log!(
-            //     "Most recent server build time: {}",
+            //     "Most recent server build time:",
             //     most_recent_build_time.to_string()
             // );
             let original_build_time =
                 original_build_time_cell.get_or_init(|| most_recent_build_time);
             most_recent_build_time > *original_build_time
         }
-        Err(_) => {
-            log!("Error getting most recent build time. The server is probably rebuilding.");
+        Err(error) => {
+            log!(
+                "Error getting most recent build time. The server might be rebuilding. Error message:",
+                error.to_string()
+            );
             false
         }
     }
 }
-//
 
 async fn get_most_recent_build_time() -> Result<DateTime<Local>, gloo::net::Error> {
     let response = Request::get("/build-time").send().await?;
-    let unparsed = response.text().await.unwrap();
-    let most_recent_build_time = DateTime::parse_from_rfc3339(&unparsed).unwrap().into();
+
+    if !response.ok() {
+        let status_code = response.status();
+        let error_message = format!("Response not ok. Status code {}.", status_code);
+        let error = gloo::net::Error::GlooError(error_message);
+        return Err(error);
+    }
+
+    let unparsed = response.text().await?;
+    let most_recent_build_time = DateTime::parse_from_rfc3339(&unparsed)
+        .expect("Couldn't parse build time from server.")
+        .into();
     Ok(most_recent_build_time)
 }
