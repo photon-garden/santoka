@@ -2,6 +2,8 @@ use crate::prelude::*;
 use axum::response::Html;
 use dioxus::prelude::*;
 
+pub mod browser_bg_wasm;
+pub mod browser_js;
 pub mod hasui_dark_jpeg;
 pub mod hasui_light_jpeg;
 pub mod main_css;
@@ -31,7 +33,8 @@ fn Layout(title: &'static str, body: Element) -> Element {
             title { "{title}" }
         }
         body { class: "bg-neutral-50 dark:bg-neutral-900 flex flex-col items-center selection:bg-neutral-200",
-            body
+            body,
+            BrowserScript()
         }
     )
 }
@@ -148,7 +151,7 @@ fn Poem(poem: &'static Poem) -> Element {
             span { class: "poem-english-text text-3xl font-light lowercase text-neutral-500 dark:text-neutral-400",
                 "{english_text}"
             }
-            span { class: "poem-japanese-text text-3xl font-extralight lowercase text-neutral-400 dark:text-neutral-500",
+            span { class: "poem-japanese-text text-3xl font-extralight lowercase italic text-neutral-400 dark:text-neutral-500",
                 "{japanese_text}"
             }
         }
@@ -177,4 +180,9 @@ fn Controls() -> Element {
             }
         }
     )
+}
+
+fn BrowserScript() -> Element {
+    let contents = include_str!("../boot_browser.js");
+    rsx!( script { "type": "module", "{contents}" } )
 }

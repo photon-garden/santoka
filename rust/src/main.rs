@@ -24,16 +24,24 @@ async fn dev() {
     let app = Router::new()
         .route("/", get(routes::get))
         .route(
-            &assets.main_css.url_with_leading_slash(),
+            &assets.main_css.url.with_leading_slash(),
             get(routes::main_css::get),
         )
         .route(
-            &assets.hasui_light_jpeg.url_with_leading_slash(),
+            &assets.hasui_light_jpeg.url.with_leading_slash(),
             get(routes::hasui_light_jpeg::get),
         )
         .route(
-            &assets.hasui_dark_jpeg.url_with_leading_slash(),
+            &assets.hasui_dark_jpeg.url.with_leading_slash(),
             get(routes::hasui_dark_jpeg::get),
+        )
+        .route(
+            &assets.browser_js.url.with_leading_slash(),
+            get(routes::browser_js::get),
+        )
+        .route(
+            &assets.browser_bg_wasm.url.with_leading_slash(),
+            get(routes::browser_bg_wasm::get),
         );
 
     let address = SocketAddr::from(([127, 0, 0, 1], 3000));
@@ -64,6 +72,8 @@ fn build() {
 
     let hasui_dark_jpeg_built_path = built_dir.join(assets.hasui_dark_jpeg.url);
     fs::write(hasui_dark_jpeg_built_path, assets.hasui_dark_jpeg.bytes).unwrap();
+
+    todo!("Handle browser js and wasm.");
 }
 
 fn get_mode() -> Mode {
