@@ -1,10 +1,10 @@
+use crate::prelude::*;
 use axum::response::Response;
 
-use crate::assets;
-
 pub async fn get() -> Response<String> {
+    let main_css = fs::read_to_string(assets.main_css.path).unwrap();
     Response::builder()
         .header("Content-Type", "text/css")
-        .body(assets::built_css())
+        .body(main_css)
         .unwrap()
 }

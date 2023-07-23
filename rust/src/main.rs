@@ -1,13 +1,16 @@
 #![allow(non_snake_case, non_upper_case_globals)]
 use axum::{routing::get, Router};
 use std::net::SocketAddr;
+use std::path::Path;
 use std::{env, fs};
 
-mod assets;
-mod database;
-mod extensions;
-mod prelude;
-mod routes;
+pub mod assets;
+pub mod database;
+pub mod extensions;
+pub mod prelude;
+pub mod routes;
+
+use prelude::*;
 
 #[tokio::main]
 async fn main() {
@@ -20,10 +23,17 @@ async fn main() {
 async fn dev() {
     let app = Router::new()
         .route("/", get(routes::get))
-        .route("/main.css", get(routes::main_css::get))
         .route(
-            "/hasui-mountains.jpeg",
-            get(routes::hasui_mountains_jpeg::get),
+            &assets.main_css.url_with_leading_slash(),
+            get(routes::main_css::get),
+        )
+        .route(
+            &assets.hasui_light_jpeg.url_with_leading_slash(),
+            get(routes::hasui_light_jpeg::get),
+        )
+        .route(
+            &assets.hasui_dark_jpeg.url_with_leading_slash(),
+            get(routes::hasui_dark_jpeg::get),
         );
 
     let address = SocketAddr::from(([127, 0, 0, 1], 3000));
@@ -35,22 +45,25 @@ async fn dev() {
 }
 
 fn build() {
-    match fs::remove_dir_all("built") {
-        Ok(_) => {
-            println!("Removed ./built folder.");
-        }
-        Err(_) => {
-            println!("No ./built folder to remove.");
-        }
+    let built_dir = "built";
+
+    if let Err(error) = fs::remove_dir_all(built_dir) {
+        println!("Error removing ./built folder: {}", error);
     }
-    fs::create_dir("built").unwrap();
-    fs::write("built/index.html", routes::render_get()).unwrap();
-    fs::copy(assets::built_css_path(), "built/main.css").unwrap();
-    fs::copy(
-        assets::hasui_mountains_jpeg_path(),
-        "built/hasui-mountains.jpeg",
-    )
-    .unwrap();
+
+    fs::create_dir(built_dir).unwrap();
+
+    let index_html_built_path = Path::new(built_dir).join("index.html");
+    fs::write(index_html_built_path, routes::render_get()).unwrap();
+
+    let main_css_built_path = Path::new(built_dir).join(assets.main_css.url);
+    fs::copy(assets.main_css.path, main_css_built_path).unwrap();
+
+    let hasui_light_jpeg_built_path = Path::new(built_dir).join(assets.hasui_light_jpeg.url);
+    fs::copy(assets.hasui_light_jpeg.path, hasui_light_jpeg_built_path).unwrap();
+
+    let hasui_dark_jpeg_built_path = Path::new(built_dir).join(assets.hasui_dark_jpeg.url);
+    fs::copy(assets.hasui_dark_jpeg.path, hasui_dark_jpeg_built_path).unwrap();
 }
 
 fn get_mode() -> Mode {

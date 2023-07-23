@@ -1,11 +1,9 @@
-use crate::{
-    assets::{hasui_mountains_jpeg, hasui_mountains_lqip_url},
-    prelude::*,
-};
+use crate::prelude::*;
 use axum::response::Html;
 use dioxus::prelude::*;
 
-pub mod hasui_mountains_jpeg;
+pub mod hasui_dark_jpeg;
+pub mod hasui_light_jpeg;
 pub mod main_css;
 
 type Element = LazyNodes<'static, 'static>;
@@ -32,7 +30,7 @@ fn Layout(title: &'static str, body: Element) -> Element {
             link { rel: "stylesheet", href: "main.css" }
             title { "{title}" }
         }
-        body { class: "bg-neutral-50 flex flex-col items-center selection:bg-neutral-200",
+        body { class: "bg-neutral-50 dark:bg-neutral-900 flex flex-col items-center selection:bg-neutral-200",
             body
         }
     )
@@ -56,12 +54,9 @@ fn HeroSection() -> Element {
             img {
                 class: "shrink-0 min-w-full min-h-full object-cover blur-lg",
                 style: "image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;",
-                src: hasui_mountains_lqip_url()
+                src: assets.hasui_light_jpeg.lqip
             }
-            img {
-                class: "absolute min-w-full min-h-full object-cover",
-                src: "hasui-mountains.jpeg"
-            }
+            img { class: "absolute min-w-full min-h-full object-cover", src: assets.hasui_light_jpeg.url }
             div { class: "absolute bottom-0 left-0 flex flex-col gap-1 p-8",
                 span {
                     id: "name-in-kanji",
