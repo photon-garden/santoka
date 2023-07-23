@@ -1,12 +1,12 @@
 #![allow(non_snake_case, non_upper_case_globals)]
 use axum::{routing::get, Router};
 use std::net::SocketAddr;
-use std::path::Path;
 use std::{env, fs};
 
 pub mod assets;
 pub mod database;
 pub mod extensions;
+pub mod manifest;
 pub mod prelude;
 pub mod routes;
 
@@ -45,25 +45,25 @@ async fn dev() {
 }
 
 fn build() {
-    let built_dir = "built";
+    let built_dir = manifest::dir().join("built");
 
-    if let Err(error) = fs::remove_dir_all(built_dir) {
+    if let Err(error) = fs::remove_dir_all(&built_dir) {
         println!("Error removing ./built folder: {}", error);
     }
 
-    fs::create_dir(built_dir).unwrap();
+    fs::create_dir(&built_dir).unwrap();
 
-    let index_html_built_path = Path::new(built_dir).join("index.html");
+    let index_html_built_path = built_dir.join("index.html");
     fs::write(index_html_built_path, routes::render_get()).unwrap();
 
-    let main_css_built_path = Path::new(built_dir).join(assets.main_css.url);
-    fs::copy(assets.main_css.path, main_css_built_path).unwrap();
+    let main_css_built_path = built_dir.join(assets.main_css.url);
+    fs::copy(assets.main_css.absolute_path(), main_css_built_path).unwrap();
 
-    let hasui_light_jpeg_built_path = Path::new(built_dir).join(assets.hasui_light_jpeg.url);
-    fs::copy(assets.hasui_light_jpeg.path, hasui_light_jpeg_built_path).unwrap();
+    let hasui_light_jpeg_built_path = built_dir.join(assets.hasui_light_jpeg.url);
+    fs::write(hasui_light_jpeg_built_path, assets.hasui_light_jpeg.bytes).unwrap();
 
-    let hasui_dark_jpeg_built_path = Path::new(built_dir).join(assets.hasui_dark_jpeg.url);
-    fs::copy(assets.hasui_dark_jpeg.path, hasui_dark_jpeg_built_path).unwrap();
+    let hasui_dark_jpeg_built_path = built_dir.join(assets.hasui_dark_jpeg.url);
+    fs::write(hasui_dark_jpeg_built_path, assets.hasui_dark_jpeg.bytes).unwrap();
 }
 
 fn get_mode() -> Mode {
