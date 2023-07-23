@@ -35,8 +35,15 @@ async fn dev() {
 }
 
 fn build() {
-    fs::write("target/app/index.html", routes::render_get()).unwrap();
-    fs::copy(assets::built_css_path(), "target/app/main.css").unwrap();
+    fs::remove_dir_all("target/built_app").unwrap();
+    fs::create_dir("target/built_app").unwrap();
+    fs::write("target/built_app/index.html", routes::render_get()).unwrap();
+    fs::copy(assets::built_css_path(), "target/built_app/main.css").unwrap();
+    fs::copy(
+        assets::hasui_mountains_jpeg_path(),
+        "target/built_app/hasui-mountains.jpeg",
+    )
+    .unwrap();
 }
 
 fn get_mode() -> Mode {
