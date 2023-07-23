@@ -1,6 +1,8 @@
+use once_cell::sync::Lazy;
 use ts_rs::TS;
 
 static json: &str = include_str!("../../data/2023-06-26T14:52:00.000Z/database.json");
+pub static database: Lazy<Database> = Lazy::new(load);
 
 pub fn load() -> Database {
     serde_json::from_str(json).unwrap()
@@ -42,7 +44,7 @@ impl Database {
     }
 }
 
-#[derive(Debug, serde::Deserialize, TS)]
+#[derive(Debug, serde::Deserialize, TS, Clone)]
 #[ts(
     export,
     export_to = "../data/2023-06-26T14:52:00.000Z/typescript-types/Poem.ts"
@@ -71,7 +73,7 @@ impl Poem {
     }
 }
 
-#[derive(Debug, serde::Deserialize, TS)]
+#[derive(Debug, serde::Deserialize, TS, Clone)]
 #[ts(
     export,
     export_to = "../data/2023-06-26T14:52:00.000Z/typescript-types/Publication.ts"
@@ -79,7 +81,26 @@ impl Poem {
 #[serde(rename_all = "camelCase")]
 pub struct Publication {
     pub id: PublicationId,
+    pub name: String,
+    pub year: Option<u16>,
+    pub translator_id: TranslatorId,
     pub description: String,
+}
+
+impl Publication {
+    pub fn poems(&self) -> Vec<&Poem> {
+        database
+            .poems
+            .iter()
+            .filter(|poem| poem.publication_id == self.id)
+            .collect()
+    }
+
+    pub fn year_or_unknown(&self) -> String {
+        self.year
+            .as_ref()
+            .map_or("unknown".to_string(), |year: &u16| year.to_string())
+    }
 }
 
 #[derive(Debug, serde::Deserialize, PartialEq, Clone, Copy, TS)]
@@ -89,7 +110,7 @@ pub struct Publication {
 )]
 pub struct PublicationId(usize);
 
-#[derive(Debug, serde::Deserialize, TS)]
+#[derive(Debug, serde::Deserialize, TS, Clone)]
 #[ts(
     export,
     export_to = "../data/2023-06-26T14:52:00.000Z/typescript-types/Translator.ts"

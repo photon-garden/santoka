@@ -20,7 +20,11 @@ async fn main() {
 async fn dev() {
     let app = Router::new()
         .route("/", get(routes::get))
-        .route("/main.css", get(routes::main_css::get));
+        .route("/main.css", get(routes::main_css::get))
+        .route(
+            "/hasui-mountains.jpeg",
+            get(routes::hasui_mountains_jpeg::get),
+        );
 
     let address = SocketAddr::from(([127, 0, 0, 1], 3000));
 
