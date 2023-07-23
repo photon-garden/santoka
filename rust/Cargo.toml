@@ -34,7 +34,7 @@ setup = [
     "npm install && mv node_modules ./target/node_modules",
 ]
 watch_tailwind = "npx --prefix ./target/node_modules tailwindcss -i ./src/main.css -o ./target/tailwind/built.css --watch"
-build_tailwind = "npx --prefix ./target/node_modules tailwindcss -i ./src/main.css -o ./target/tailwind/built.css"
+build_tailwind = "npx --prefix ./target/node_modules tailwindcss -i ./src/main.css -o ./target/tailwind/built.css --minify"
 
 watch_html = "./target/.cargo_install/bin/cargo-watch -x 'run -- dev'"
 build_html = "cargo run -- build"
