@@ -50,7 +50,7 @@ build_rust_production = [
 ]
 # preview_rust = ""
 
-build_browser_dev = "cd browser && wasm-pack build --target web --dev --out-dir ../target/browser --out-name browser"
+build_browser_dev = "cd browser && wasm-pack build --target web --dev --out-dir ../target/browser --out-name browser --features dev"
 build_browser_production = "cd browser && wasm-pack build --target web --release --out-dir ../target/browser --out-name browser"
 
 server_dev = "cargo run -- dev"
