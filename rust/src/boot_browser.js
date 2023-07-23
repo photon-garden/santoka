@@ -37,7 +37,7 @@ async function run () {
   await init()
 
   // And afterwards we can use all the functionality defined in wasm.
-  greet()
+  // greet()
 }
 
 run()

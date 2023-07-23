@@ -1,4 +1,5 @@
 #![allow(non_snake_case, non_upper_case_globals)]
+
 use axum::{routing::get, Router};
 use std::net::SocketAddr;
 use std::{env, fs};
@@ -42,7 +43,8 @@ async fn dev() {
         .route(
             &assets.browser_bg_wasm.url.with_leading_slash(),
             get(routes::browser_bg_wasm::get),
-        );
+        )
+        .route("/build-time", get(routes::build_time::get));
 
     let address = SocketAddr::from(([127, 0, 0, 1], 3000));
 
@@ -73,7 +75,7 @@ fn build() {
     let hasui_dark_jpeg_built_path = built_dir.join(assets.hasui_dark_jpeg.url);
     fs::write(hasui_dark_jpeg_built_path, assets.hasui_dark_jpeg.bytes).unwrap();
 
-    todo!("Handle browser js and wasm.");
+    // todo!("Handle browser js and wasm.");
 }
 
 fn get_mode() -> Mode {
@@ -92,3 +94,5 @@ enum Mode {
     Dev,
     Build,
 }
+
+pub static build_time: &str = include_str!("../target/build_time.txt");

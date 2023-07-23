@@ -4,6 +4,7 @@ use dioxus::prelude::*;
 
 pub mod browser_bg_wasm;
 pub mod browser_js;
+pub mod build_time;
 pub mod hasui_dark_jpeg;
 pub mod hasui_light_jpeg;
 pub mod main_css;

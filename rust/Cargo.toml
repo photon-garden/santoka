@@ -13,6 +13,9 @@ serde_json = "1.0.103"
 tokio = { version = "1.29.1", features = ["full"] }
 ts-rs = "6.2.1"
 
+[build-dependencies]
+chrono = "0.4.26"
+
 [package.metadata.commands]
 dev = { parallel = true, cmd = [
     "cargo cmd watch_tailwind",
@@ -35,7 +38,8 @@ setup = [
     "npm install && mv node_modules ./target/node_modules",
 ]
 
-watch_rust = "./target/.cargo_install/bin/cargo-watch -x 'cmd build_rust_dev'"
+watch_test = "./target/.cargo_install/bin/cargo-watch --watch ./src --watch ./browser -s 'echo Watch triggered'"
+watch_rust = "./target/.cargo_install/bin/cargo-watch --watch ./src --watch ./browser -x 'cmd build_rust_dev'"
 build_rust_dev = ["cargo cmd build_browser_dev", "cargo run -- dev"]
 build_rust_production = [
     "cargo cmd build_browser_production",
