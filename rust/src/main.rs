@@ -75,7 +75,11 @@ fn build() {
     let hasui_dark_jpeg_built_path = built_dir.join(assets.hasui_dark_jpeg.url);
     fs::write(hasui_dark_jpeg_built_path, assets.hasui_dark_jpeg.bytes).unwrap();
 
-    // todo!("Handle browser js and wasm.");
+    let browser_js_built_path = built_dir.join(assets.browser_js.url);
+    fs::write(browser_js_built_path, assets.browser_js.contents).unwrap();
+
+    let browser_bg_wasm_built_path = built_dir.join(assets.browser_bg_wasm.url);
+    fs::write(browser_bg_wasm_built_path, assets.browser_bg_wasm.bytes).unwrap();
 }
 
 fn get_mode() -> Mode {

@@ -25,6 +25,10 @@ build = [
     "cargo cmd build_tailwind_production",
     "cargo cmd build_rust_production",
 ]
+preview = [
+    "cargo cmd build",
+    "./target/cargo_install/bin/simple-http-server --port 8000 --index built",
+]
 deploy = [
     "cargo cmd build",
     "git add --all",
@@ -33,26 +37,24 @@ deploy = [
 ]
 # preview = ["cargo cmd build_tailwind_production","cargo cmd preview_rust"]
 setup = [
-    "cargo install cargo-watch --version 8.4.0 --root ./target/.cargo_install",
-    "cargo install cargo-bundle --version 0.6.0 --root ./target/.cargo_install",
+    "cargo install cargo-watch --version 8.4.0 --root ./target/cargo_install",
+    "cargo install simple-http-server --version 0.6.7 --root ./target/cargo_install", # For previewing production builds.
     "npm install && mv node_modules ./target/node_modules",
 ]
 
-watch_test = "./target/.cargo_install/bin/cargo-watch --watch ./src --watch ./browser -s 'echo Watch triggered'"
-watch_rust = "./target/.cargo_install/bin/cargo-watch --watch ./src --watch ./browser -x 'cmd build_rust_dev'"
-build_rust_dev = ["cargo cmd build_browser_dev", "cargo run -- dev"]
+watch_rust = "./target/cargo_install/bin/cargo-watch --watch ./src --watch ./browser -x 'cmd build_rust_dev'"
+build_rust_dev = ["cargo cmd build_browser_dev", "cargo cmd server_dev"]
 build_rust_production = [
     "cargo cmd build_browser_production",
-    "cargo run -- build",
+    "cargo cmd build_server_production",
 ]
 # preview_rust = ""
 
 build_browser_dev = "cd browser && wasm-pack build --target web --dev --out-dir ../target/browser --out-name browser"
 build_browser_production = "cd browser && wasm-pack build --target web --release --out-dir ../target/browser --out-name browser"
 
+server_dev = "cargo run -- dev"
+build_server_production = "cargo run -- build"
+
 watch_tailwind = "npx --prefix ./target/node_modules tailwindcss -i ./src/main.css -o ./target/tailwind/built.css --watch"
 build_tailwind_production = "npx --prefix ./target/node_modules tailwindcss -i ./src/main.css -o ./target/tailwind/built.css --minify"
-
-# watch_dioxus = "./target/.cargo_install/bin/cargo-watch -x run"
-# build_dioxus = "./target/.cargo_install/bin/cargo-bundle bundle --release"
-# preview_dioxus = "./target/.cargo_install/bin/cargo-bundle bundle"
