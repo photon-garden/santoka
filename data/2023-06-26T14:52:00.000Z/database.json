@@ -1,5 +1,5 @@
 {
-  "createdAt": "2023-06-26T14:52:00.000Z", 
+  "createdAt": "2023-06-26T14:52:00.000Z",
   "poems": [
     {
       "id": 0,
@@ -167,7 +167,7 @@
       "id": 23,
       "translatorId": 0,
       "publicationId": 0,
-      "englishText": "The grasses / That have become autumn,-- / Sitting down in them.",
+      "englishText": "The grasses / That have become autumn,— / Sitting down in them.",
       "japaneseText": "Aki to natta zasso ni suwaru"
     },
     {
@@ -1895,85 +1895,85 @@
       "id": 270,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "Pine trees\nWith branches all drooping--\nNamu-kanzeon sutra.",
-      "japaneseText": "Matsu wa mina/ eda tarete/ namu-kanzeon"
+      "englishText": "Pine trees\nWith branches all drooping—\nNamu-kanzeon sutra.",
+      "japaneseText": "Matsu wa mina / eda tarete / namu-kanzeon"
     },
     {
       "id": 271,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Ringing the temple-bell\nTo the sound of pine trees;\nMornings and evenings.",
-      "japaneseText": "Matsukaze ni/ ake kure no/ kane tsuite"
+      "japaneseText": "Matsukaze ni / ake kure no / kane tsuite"
     },
     {
       "id": 272,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Sweeping the yard for a change,\nFlowers in the hedge are in bloom.",
-      "japaneseText": "Hisashiburini haku/ kakine no hana ga saita"
+      "japaneseText": "Hisashiburini haku / kakine no hana ga saita"
     },
     {
       "id": 273,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Getting further and further\nInto the mountains,\nBut still deep blue mountains.",
-      "japaneseText": "Wakeittemo/ wakeittemo/ aoi yama"
+      "japaneseText": "Wakeittemo / wakeittemo / aoi yama"
     },
     {
       "id": 274,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Soaked and Soggy to the core,\nIt's a milestone.",
-      "japaneseText": "Shitodo ni nurete/ korewa michishirube no ishi"
+      "japaneseText": "Shitodo ni nurete / korewa michishirube no ishi"
     },
     {
       "id": 275,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Under the canopy of scorching heaven\nI walk and beg.",
-      "japaneseText": "Enten wo itadaite/ koi aruku"
+      "japaneseText": "Enten wo itadaite / koi aruku"
     },
     {
       "id": 276,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Lone crow is cawing;\nI'm alone too.",
-      "japaneseText": "Karasu naite/ watashi mo hitori"
+      "japaneseText": "Karasu naite / watashi mo hitori"
     },
     {
       "id": 277,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "In the midst of life and death\nSnow's falling thick and fast.",
-      "japaneseText": "Shoji no naka no/ yuki furishikiru"
+      "japaneseText": "Shoji no naka no / yuki furishikiru"
     },
     {
       "id": 278,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Leaves are falling;\nI walk and walk.",
-      "japaneseText": "Konoha chiru/ aruki tsumeru"
+      "japaneseText": "Konoha chiru / aruki tsumeru"
     },
     {
       "id": 279,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "All alone,\nLetting mosquitoes bite my flesh.",
-      "japaneseText": "Hitoride/ ka ni kuwareteiru"
+      "japaneseText": "Hitoride / ka ni kuwareteiru"
     },
     {
       "id": 280,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Stretching my legs\nTo the light of a westering sun.",
-      "japaneseText": "Nagedashite/ mada hi no aru ashi"
+      "japaneseText": "Nagedashite / mada hi no aru ashi"
     },
     {
       "id": 281,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Walking with a dragonfly\nResting on my sedge-hat.",
-      "japaneseText": "Kasa ni tombo wo/ tomarasete/ aruku"
+      "japaneseText": "Kasa ni tombo wo / tomarasete / aruku"
     },
     {
       "id": 282,
@@ -1986,162 +1986,162 @@
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "In silence\nI put on straw sandals for today.",
-      "japaneseText": "Damatte/ kyo no waraji haku"
+      "japaneseText": "Damatte / kyo no waraji haku"
     },
     {
       "id": 284,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Late autumn rain's falling;\nI have yet to die.",
-      "japaneseText": "Shigururu ya/ shinanai de iru"
+      "japaneseText": "Shigururu ya / shinanai de iru"
     },
     {
       "id": 285,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "My shadow on the water,\nTraveler I am.",
-      "japaneseText": "Mizu ni kage aru/ tabibito de aru"
+      "japaneseText": "Mizu ni kage aru / tabibito de aru"
     },
     {
       "id": 286,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Late autumn rain's falling\nInto the mountain,\nTowards which I go on walking.",
-      "japaneseText": "Shigururu ya/ shigururu yama e/ ayumi iru"
+      "japaneseText": "Shigururu ya / shigururu yama e / ayumi iru"
     },
     {
       "id": 287,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Buds of trees,\nBuds of grasses,\nI keep on walking.",
-      "japaneseText": "Kinome/ kusanome/ aruki tsuzukeru"
+      "japaneseText": "Kinome  / kusanome / aruki tsuzukeru"
     },
     {
       "id": 288,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "I've survived--\nScratching my body.",
-      "japaneseText": "Iki nokotta karada/ kaite iru"
+      "englishText": "I've survived—\nScratching my body.",
+      "japaneseText": "Iki nokotta karada / kaite iru"
     },
     {
       "id": 289,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Mountains I've left for good\nAre going out of sight.",
-      "japaneseText": "Mata miru koto mo nai yama ga/ toozakaru"
+      "japaneseText": "Mata miru koto mo nai yama ga / toozakaru"
     },
     {
       "id": 290,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Crickets are chirping,\nChirping to me all the time.",
-      "japaneseText": "Koorogi ni/ nakarete bakari"
+      "japaneseText": "Koorogi ni / nakarete bakari"
     },
     {
       "id": 291,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Shrike is chirping;\nNo place to throw away myself.",
-      "japaneseText": "Mozu maite/ mi no sutedokoro nashi"
+      "japaneseText": "Mozu maite / mi no sutedokoro nashi"
     },
     {
       "id": 292,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Slipped, tumbled,\nMountain is quiet and alone.",
-      "japaneseText": "Subette koronde/ yama ga hissori"
+      "japaneseText": "Subette koronde / yama ga hissori"
     },
     {
       "id": 293,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "My tired legs--\nDragonfly landed on one.",
-      "japaneseText": "Tsukareta ashi e/ tombo tomatta"
+      "englishText": "My tired legs—\nDragonfly landed on one.",
+      "japaneseText": "Tsukareta ashi e / tombo tomatta"
     },
     {
       "id": 294,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "Monk-robe\nThreadbare so--\nGrass seeds.",
-      "japaneseText": "Houe/ konnani yaburete/ kusa no mi"
+      "englishText": "Monk-robe\nThreadbare so—\nGrass seeds.",
+      "japaneseText": "Houe / konnani yaburete / kusa no mi"
     },
     {
       "id": 295,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Behind the rocks,\nSure enough, a fountain;\nEureka!",
-      "japaneseText": "Yuwa kage/ masashiku/ mizu ga waite iru"
+      "japaneseText": "Yuwa kage / masashiku / mizu ga waite iru"
     },
     {
       "id": 296,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Those clouds threw a rain shower;\nI'm wet through.",
-      "japaneseText": "Ano kumo ga/ otoshita ane ni/ nurete iru"
+      "japaneseText": "Ano kumo ga / otoshita ane ni / nurete iru"
     },
     {
       "id": 297,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Autumn is come;\nSitting on the weeds.",
-      "japaneseText": "Aki to natta/ zasso ni suwaru"
+      "japaneseText": "Aki to natta / zasso ni suwaru"
     },
     {
       "id": 298,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Water so tasty,\nFlowing all over.",
-      "japaneseText": "Konnani umai mizu ga/ afurete iru"
+      "japaneseText": "Konnani umai mizu ga / afurete iru"
     },
     {
       "id": 299,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Have come down to the village\nWith the sound of water.",
-      "japaneseText": "Mizuoto to isshoni/ sato e orite kita"
+      "japaneseText": "Mizuoto to isshoni / sato e orite kita"
     },
     {
       "id": 300,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "No clouds whatsoe'er,\nI took off my sedge-hat.",
-      "japaneseText": "Mattaku kumo ga nai/ kasa wo nugi"
+      "japaneseText": "Mattaku kumo ga nai / kasa wo nugi"
     },
     {
       "id": 301,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Drunk,\nFound myself sleeping with crickets.",
-      "japaneseText": "Youte/ koorogi to/ nete itayo"
+      "japaneseText": "Youte / koorogi to / nete itayo"
     },
     {
       "id": 302,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Sound of raindrops,\nYou're getting old, too.",
-      "japaneseText": "Amadare no oto mo/ toshi totta"
+      "japaneseText": "Amadare no oto mo / toshi totta"
     },
     {
       "id": 303,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "No more doors to beg,\nClouds o'er the mountains.",
-      "japaneseText": "Mono gou ie mo nakunari/ yama niwa kumo"
+      "japaneseText": "Mono gou ie mo nakunari / yama niwa kumo"
     },
     {
       "id": 304,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "--Reminiscence--\nMy sedge-hat\nGetting leaky at last.",
-      "japaneseText": "Kasa mo/ moridashita ka"
+      "englishText": "—Reminiscence—\nMy sedge-hat\nGetting leaky at last.",
+      "japaneseText": "Kasa mo / moridashita ka"
     },
     {
       "id": 305,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "--Self-ridicule--\nI'm leaving\nWith my backside wet\nIn late autumn rain.",
+      "englishText": "—Self-ridicule—\nI'm leaving\nWith my backside wet\nIn late autumn rain.",
       "notes": "Note: Another self of Santoka's is watching himself from behind with\nself-scorn. He is dual-eyed, before and hind, like a frog\nor a dragonfly.",
-      "japaneseText": "Ushiro sugata no/ shigurete yuku ka"
+      "japaneseText": "Ushiro sugata no / shigurete yuku ka"
     },
     {
       "id": 306,
@@ -2154,458 +2154,458 @@
       "id": 307,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "My native town\nFar, far away--\nBurgeoning trees.",
-      "japaneseText": "Furusato wa/ tooku shite/ ki no me"
+      "englishText": "My native town\nFar, far away—\nBurgeoning trees.",
+      "japaneseText": "Furusato wa / tooku shite / ki no me"
     },
     {
       "id": 308,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Getting out of a nice bath\nInto lovely moonlight.",
-      "japaneseText": "Yoi yu kara/ yoi tsuki e deta"
+      "japaneseText": "Yoi yu kara / yoi tsuki e deta"
     },
     {
       "id": 309,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Among budding trees\nBirds are now singing.",
-      "japaneseText": "Haya mebuku ki de/ naite iru"
+      "japaneseText": "Haya mebuku ki de / naite iru"
     },
     {
       "id": 310,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "Something fell on my sedge-hat--\nCamellia.",
-      "japaneseText": "Kasa e pottori/ tsubaki datta"
+      "englishText": "Something fell on my sedge-hat—\nCamellia.",
+      "japaneseText": "Kasa e pottori / tsubaki datta"
     },
     {
       "id": 311,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Eating fully enough with thanks,\nI put down chopsticks;\nAll alone.",
-      "japaneseText": "Itadaite/ tarite hitori no/ hashi wo oku"
+      "japaneseText": "Itadaite / tarite hitori no / hashi wo oku"
     },
     {
       "id": 312,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "In autumn wind\nI pick up a pebble.",
-      "japaneseText": "Akikaze no/ ishi wo hirou"
+      "japaneseText": "Akikaze no / ishi wo hirou"
     },
     {
       "id": 313,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Alongside today's road\nDandelions in bloom.",
-      "japaneseText": "Kyo nomichi no/ tampopo saita"
+      "japaneseText": "Kyo nomichi no / tampopo saita"
     },
     {
       "id": 314,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "It's raining in my hometown;\nI'm walking barefoot.",
-      "japaneseText": "Ame furu furusato wa/ hadashi de aruku"
+      "japaneseText": "Ame furu furusato wa / hadashi de aruku"
     },
     {
       "id": 315,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Having moved in and settled down,\nI'm surrounded by flowers of the opposite shore/\nflowers of the autumnal equinox.*",
-      "japaneseText": "Utsuri kite/ o-higanbana no/ hana zakari",
-      "notes": "*opposite shore (Higan)--Buddhistic term.\nautumnal equinox (Higan/Shuubun-no-hi)--day on the calendar."
+      "japaneseText": "Utsuri kite / o-higanbana no / hana zakari",
+      "notes": "*opposite shore (Higan)—Buddhistic term.\nautumnal equinox (Higan/Shuubun-no-hi)—day on the calendar."
     },
     {
       "id": 316,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Glory of the morning sky\nHeralds the coming of rain;\nMust sow the seeds of radish.",
-      "japaneseText": "Asayake/ ame furu/ daikon makou"
+      "japaneseText": "Asayake / ame furu / daikon makou"
     },
     {
       "id": 317,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Out of the evening sky\nI pick and pluck a yuzu-citrus.*",
-      "notes": "*Yuzu--yellow, sour and fragrant citrus resembling a lemon, not oval\nbut round and softer. It is symbolic of Japan's winter.\nYuzu-trees, together with persimmon-trees, are seen in the yards of\nrural houses--typical scenery of Japan's countryside just as the\napple tree is to the West. On the day of winter solstice, it is the\ncustom with the Japanese to enjoy yuzu-bath (Yuzu-yu) either in the\nhousehold or in public bathhouses (Sentoh). Urban dwellers can get\nyuzu at stores. Yuzu is also used as healthy natural vinegar. A\ngood subject (season-word) for Haiku. Lots of Haikuists like to\ncompose yuzu-ku around this season. (T. Nonin)",
-      "japaneseText": "Yuuzora kara/ yuzu no hitotsu wo morau"
+      "notes": "*Yuzu—yellow, sour and fragrant citrus resembling a lemon, not oval\nbut round and softer. It is symbolic of Japan's winter.\nYuzu-trees, together with persimmon-trees, are seen in the yards of\nrural houses—typical scenery of Japan's countryside just as the\napple tree is to the West. On the day of winter solstice, it is the\ncustom with the Japanese to enjoy yuzu-bath (Yuzu-yu) either in the\nhousehold or in public bathhouses (Sentoh). Urban dwellers can get\nyuzu at stores. Yuzu is also used as healthy natural vinegar. A\ngood subject (season-word) for Haiku. Lots of Haikuists like to\ncompose yuzu-ku around this season. (T. Nonin)",
+      "japaneseText": "Yuuzora kara / yuzu no hitotsu wo morau"
     },
     {
       "id": 318,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "Tea-blossoms keep falling--\nLet them fall as they do.",
-      "japaneseText": "Cha-no-hana no/ chiru bakari/ chirashite oku"
+      "englishText": "Tea-blossoms keep falling—\nLet them fall as they do.",
+      "japaneseText": "Cha-no-hana no / chiru bakari / chirashite oku"
     },
     {
       "id": 319,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Winter is come;\nSticks of wood,\nSticks of bamboo.",
-      "japaneseText": "Fuyu ga kiteiru/ kigire/ takegire"
+      "japaneseText": "Fuyu ga kiteiru / kigire / takegire"
     },
     {
       "id": 320,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "The moon has risen;\nI'm awaiting nobody and nothing.",
-      "japaneseText": "Tsuki ga nobotte/ nani wo matsu deno naku"
+      "japaneseText": "Tsuki ga nobotte / nani wo matsu deno naku"
     },
     {
       "id": 321,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "There's something to eat,\nThis and that--\nWindy all day.",
-      "japaneseText": "Are kore/ taberumo wa atte/ kaze no ichinichi"
+      "englishText": "There's something to eat,\nThis and that—\nWindy all day.",
+      "japaneseText": "Are kore / taberumo wa atte / kaze no ichinichi"
     },
     {
       "id": 322,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "Sound of water--\nI'm truly settled down and relaxed.",
-      "japaneseText": "Mizuoto/ shinjitsu/ ochitsuki mashita"
+      "englishText": "Sound of water—\nI'm truly settled down and relaxed.",
+      "japaneseText": "Mizuoto / shinjitsu / ochitsuki mashita"
     },
     {
       "id": 323,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "Falling leaves--\nFar beyond,\nI see Buddha.",
-      "japaneseText": "Ochiba furu oku fukaku/ mi-hotoke wo miru"
+      "englishText": "Falling leaves—\nFar beyond,\nI see Buddha.",
+      "japaneseText": "Ochiba furu oku fukaku / mi-hotoke wo miru"
     },
     {
       "id": 324,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Snow is falling\nAll around Gochu hermitage;\nI build a fire as a lonely self.",
-      "japaneseText": "Gochu yuki furu/ hitori to shite/ hi wo taku"
+      "japaneseText": "Gochu yuki furu / hitori to shite / hi wo taku"
     },
     {
       "id": 325,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Warm day,\nI have something more to eat.",
-      "japaneseText": "Nukui hi no/ mada taberumono wa aru"
+      "japaneseText": "Nukui hi no / mada taberumono wa aru"
     },
     {
       "id": 326,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Snow's falling on snow,\nI'm in quietude.",
-      "japaneseText": "Yuki e yuki furu/ shizukesa ni oru"
+      "japaneseText": "Yuki e yuki furu / shizukesa ni oru"
     },
     {
       "id": 327,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Moonlit night,\nHe came with a handout gift;\nI found 'twas rice.",
-      "japaneseText": "tsukiyo/ temiyage wa/ kome datta-ka"
+      "japaneseText": "tsukiyo / temiyage wa / kome datta-ka"
     },
     {
       "id": 328,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Camellias are in bloom;\nThere are tombstones.",
-      "japaneseText": "Tsubaki hiraite/ haka ga aru"
+      "japaneseText": "Tsubaki hiraite / haka ga aru"
     },
     {
       "id": 329,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "A tiny vase,\nA twig of camellia in it.",
-      "japaneseText": "Ichirin-zashi no/ tsubaki ichirin"
+      "japaneseText": "Ichirin-zashi no / tsubaki ichirin"
     },
     {
       "id": 330,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "What's that sound--\nMust be a bird\nEating berries since morning.",
-      "japaneseText": "Oto wa/ asa kara kinomi wo tabe ni kita tori ka"
+      "englishText": "What's that sound—\nMust be a bird\nEating berries since morning.",
+      "japaneseText": "Oto wa / asa kara kinomi wo tabe ni kita tori ka"
     },
     {
       "id": 331,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Uprooted many a time,\nDiehard is the weed;\nI pull out its tenacity.",
-      "japaneseText": "Nuitemo/ nuitemo/ kusa no shuuchaku wo nuku"
+      "japaneseText": "Nuitemo / nuitemo / kusa no shuuchaku wo nuku"
     },
     {
       "id": 332,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Today I picked butterburrs,\nAte butterburrs.",
-      "japaneseText": "Kyo wa/ fuki wo tsumi/ fuki wo tabe"
+      "japaneseText": "Kyo wa / fuki wo tsumi / fuki wo tabe"
     },
     {
       "id": 333,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Sparrows dance,\nDandelions fall.",
-      "japaneseText": "Suzume odoru ya/ tanpopo chiru ya"
+      "japaneseText": "Suzume odoru ya / tanpopo chiru ya"
     },
     {
       "id": 334,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "Morn is about to dawn,\nWindows just opened--\nFresh young leaves.",
-      "japaneseText": "Mou ake souna/ mado akete/ aoba"
+      "englishText": "Morn is about to dawn,\nWindows just opened—\nFresh young leaves.",
+      "japaneseText": "Mou ake souna / mado akete / aoba"
     },
     {
       "id": 335,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Long hair...\nGray.",
-      "japaneseText": "Nagai ke ga/ shiraga"
+      "japaneseText": "Nagai ke ga / shiraga"
     },
     {
       "id": 336,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "I'm true and obedient to my mind;\nRice has just been cooked well.",
-      "japaneseText": "kokoro sunaoni/ gohan ga fuita"
+      "japaneseText": "kokoro sunaoni / gohan ga fuita"
     },
     {
       "id": 337,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "It's good after all\nTo be all by myself--\nWeeds.",
-      "japaneseText": "Yappari/ hitori ga yoroshii/ zasso"
+      "englishText": "It's good after all\nTo be all by myself—\nWeeds.",
+      "japaneseText": "Yappari / hitori ga yoroshii / zasso"
     },
     {
       "id": 338,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "Whole day long\nNo one has come today--\nFirelies.",
-      "japaneseText": "Kyo mo ichinichi/ dare mo konakatta/ houtaru"
+      "englishText": "Whole day long\nNo one has come today—\nFirelies.",
+      "japaneseText": "Kyo mo ichinichi / dare mo konakatta / houtaru"
     },
     {
       "id": 339,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Stark naked I am,\nDragonfly trying to land on me.",
-      "japaneseText": "Suppadaka e/ tombo tomarou to suru ka"
+      "japaneseText": "Suppadaka e / tombo tomarou to suru ka"
     },
     {
       "id": 340,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Making a rustling sound,\nMute insect has come.",
-      "japaneseText": "Kasari kosori/ oto sasete/ nakanu mushi ga kita"
+      "japaneseText": "Kasari kosori / oto sasete / nakanu mushi ga kita"
     },
     {
       "id": 341,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "Wind through the pines;\nCool--\nPeople eat, horses eat.",
-      "japaneseText": "matsukaze suzushiku/ hito mo tabe/ uma mo tabe"
+      "englishText": "Wind through the pines;\nCool—\nPeople eat, horses eat.",
+      "japaneseText": "matsukaze suzushiku / hito mo tabe / uma mo tabe"
     },
     {
       "id": 342,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "All day long, today\nI have walked in the wind.",
-      "japaneseText": "Kyo mo ichinichi/ Kaze wo aruite kita"
+      "japaneseText": "Kyo mo ichinichi / Kaze wo aruite kita"
     },
     {
       "id": 343,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "What's this? What's that?\nEverything is blooming.",
-      "japaneseText": "Nani ga nani yara/ minna saite iru"
+      "japaneseText": "Nani ga nani yara / minna saite iru"
     },
     {
       "id": 344,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "When I walk, I see buttercups;\nWhen I sit, I see buttercups.",
-      "japaneseText": "Arukeba kinpohge/ suwareba kinpohge"
+      "japaneseText": "Arukeba kinpohge / suwareba kinpohge"
     },
     {
       "id": 345,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "Thistles--\nBright in the morning\nAfter the rain.",
-      "japaneseText": "Azami azayakana/ asa no ame agari"
+      "englishText": "Thistles—\nBright in the morning\nAfter the rain.",
+      "japaneseText": "Azami azayakana / asa no ame agari"
     },
     {
       "id": 346,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Hanging down my head,\nI see nothing but pebbles.",
-      "japaneseText": "Utsumuite/ ishikoro bakari"
+      "japaneseText": "Utsumuite / ishikoro bakari"
     },
     {
       "id": 347,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Drippings from young leaves,\nDrippings from my bamboo-hat.",
-      "japaneseText": "Wakaba no shizuku de/ kasa no shizuku de"
+      "japaneseText": "Wakaba no shizuku de / kasa no shizuku de"
     },
     {
       "id": 348,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Come on, fireflies, come on;\nI've come to my native town.",
-      "japaneseText": "Houtaru koi koi/ furusato ni kita"
+      "japaneseText": "Houtaru koi koi / furusato ni kita"
     },
     {
       "id": 349,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Bamboo sprouts of the temple\nHave grown into bamboos.",
-      "japaneseText": "Otera no takenoko/ take ni natta"
+      "japaneseText": "Otera no takenoko / take ni natta"
     },
     {
       "id": 350,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Wind through the pines,\nShadows of the pines;\nI'm lying down in the shade.",
-      "japaneseText": "Matsukaze matsukage/ nekoronde"
+      "japaneseText": "Matsukaze matsukage / nekoronde"
     },
     {
       "id": 351,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Day is breaking;\nI whet a sickle.",
-      "japaneseText": "Akete kuru/ kama wo togu"
+      "japaneseText": "Akete kuru / kama wo togu"
     },
     {
       "id": 352,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "I'm listening alone--\nWoodpecker.",
-      "japaneseText": "Hitori kiite ite/ kitsutsuki"
+      "englishText": "I'm listening alone—\nWoodpecker.",
+      "japaneseText": "Hitori kiite ite / kitsutsuki"
     },
     {
       "id": 353,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "The spa--\nGushing out and overflowing:\nI immerse my body in it.",
-      "japaneseText": "Waite afureru nakani/ neteiru"
+      "englishText": "The spa—\nGushing out and overflowing:\nI immerse my body in it.",
+      "japaneseText": "Waite afureru nakani / neteiru"
     },
     {
       "id": 354,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "I'm waiting;\nCherries are ripe.",
-      "japaneseText": "Matte iru/ sakuranbo urete iru"
+      "japaneseText": "Matte iru / sakuranbo urete iru"
     },
     {
       "id": 355,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Nestling down in the mountain (spa),\nI doff my clothes.",
-      "japaneseText": "Yama futokoro no/ hadaka to nari"
+      "japaneseText": "Yama futokoro no / hadaka to nari"
     },
     {
       "id": 356,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "A whole day in the mountains;\nAnts are walking, too.",
-      "japaneseText": "Yama no ichinichi/ ari mo aruite iru"
+      "japaneseText": "Yama no ichinichi / ari mo aruite iru"
     },
     {
       "id": 357,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Clouds are sailing fast\nTo make the moon look better.",
-      "japaneseText": "Kumo ga isoide/ yoi tsuki ni suru"
+      "japaneseText": "Kumo ga isoide / yoi tsuki ni suru"
     },
     {
       "id": 358,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "I'm always alone,\nRed dragonfly.",
-      "japaneseText": "Itsumo hitori de/ akatombo"
+      "japaneseText": "Itsumo hitori de / akatombo"
     },
     {
       "id": 359,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "I'm on travel;\nUntil my monk's robe dries up,\nWind comes from the weeds.",
-      "japaneseText": "Tabi no houe ga/ kawaku made/ zasso no kaze"
+      "japaneseText": "Tabi no houe ga / kawaku made / zasso no kaze"
     },
     {
       "id": 360,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "It wiggles;\nA bagworm.",
-      "japaneseText": "Ugoite/ minomushi datta yo"
+      "japaneseText": "Ugoite / minomushi datta yo"
     },
     {
       "id": 361,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Across the water\nLights of the brothels\nBegan to twinkle.",
-      "japaneseText": "Mizu wo hedatete/ onagoya no hi ga/matataki dashita"
+      "japaneseText": "Mizu wo hedatete / onagoya no hi ga / matataki dashita"
     },
     {
       "id": 362,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "The mountains\nHazed and overlapped--\nMy home town.",
-      "japaneseText": "Kasunde Kasanatte/ yama ga furusato"
+      "englishText": "The mountains\nHazed and overlapped—\nMy home town.",
+      "japaneseText": "Kasunde Kasanatte / yama ga furusato"
     },
     {
       "id": 363,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "In the spring breeze\nOne begging-bowl is there.",
-      "japaneseText": "Harukaze no/ hachinoko hitotsu"
+      "japaneseText": "Harukaze no / hachinoko hitotsu"
     },
     {
       "id": 364,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "--Returning to my hermitage--\nI'm home after a long absence;\nBamboo sprouts are shooting forth\nEverywhere.",
-      "japaneseText": "Hisabisa modoreba/takenoko nyoki nyoki"
+      "englishText": "—Returning to my hermitage—\nI'm home after a long absence;\nBamboo sprouts are shooting forth\nEverywhere.",
+      "japaneseText": "Hisabisa modoreba / takenoko nyoki nyoki"
     },
     {
       "id": 365,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Soaked with rain and sweat,\nPlough-horse gets many a scolding.",
-      "japaneseText": "Bisshori nurete/ shiro kaku uma wa/ shikararete bakari"
+      "japaneseText": "Bisshori nurete / shiro kaku uma wa / shikararete bakari"
     },
     {
       "id": 366,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "Rain and shine--\nThe fields have turned\nInto green paddies.",
-      "japaneseText": "Haretari futtari/ aota ni natta"
+      "englishText": "Rain and shine—\nThe fields have turned\nInto green paddies.",
+      "japaneseText": "Haretari futtari / aota ni natta"
     },
     {
       "id": 367,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "A thicket--\nThat's the place\nCorpses are cremated.",
-      "japaneseText": "kusa shigeru/ soko wa shinin wo/ yaku tokoro"
+      "englishText": "A thicket—\nThat's the place\nCorpses are cremated.",
+      "japaneseText": "kusa shigeru / soko wa shinin wo / yaku tokoro"
     },
     {
       "id": 368,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Wet with morning dew,\nI take a wayward course.",
-      "japaneseText": "Asatsuyu shittori/ Ikitai hou e iku"
+      "japaneseText": "Asatsuyu shittori / Ikitai hou e iku"
     },
     {
       "id": 369,
       "translatorId": 6,
       "publicationId": 5,
-      "englishText": "Little cuckoos--\nI will go beyond\nThat mountain morrow.",
-      "japaneseText": "Hototogisu/ asu wa ano yama/ koete ikou"
+      "englishText": "Little cuckoos—\nI will go beyond\nThat mountain morrow.",
+      "japaneseText": "Hototogisu / asu wa ano yama / koete ikou"
     },
     {
       "id": 370,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "Doffing my bamboo-hat,\nI'm thoroughly wet.",
-      "japaneseText": "Kasa wo nugi/ shimizimi to nure"
+      "japaneseText": "Kasa wo nugi / shimizimi to nure"
     },
     {
       "id": 371,
       "translatorId": 6,
       "publicationId": 5,
       "englishText": "cockroach!\nyour whiskers are long\nand so are mine",
-      "japaneseText": "Aburamushi/ omae no hige mo/ nobite iru"
+      "japaneseText": "Aburamushi / omae no hige mo / nobite iru"
     },
     {
       "id": 372,
@@ -2617,7 +2617,7 @@
       "id": 373,
       "translatorId": 7,
       "publicationId": 6,
-      "englishText": "Between life\ndeath/snow\nstill falling."
+      "englishText": "Between life\ndeath / snow\nstill falling."
     },
     {
       "id": 374,
@@ -2641,7 +2641,7 @@
       "id": 377,
       "translatorId": 7,
       "publicationId": 6,
-      "englishText": "Rain\nfalling on\nhome\ncountry\nwalk barefoot/here."
+      "englishText": "Rain\nfalling on\nhome\ncountry\nwalk barefoot / here."
     },
     {
       "id": 378,
@@ -2822,7 +2822,7 @@
       "id": 408,
       "translatorId": 8,
       "publicationId": 7,
-      "englishText": "Will the municipality\nstage a banner day\nfor those brought back as bones ?"
+      "englishText": "Will the municipality\nstage a banner day\nfor those brought back as bones?"
     },
     {
       "id": 409,
@@ -2900,7 +2900,7 @@
       "id": 421,
       "translatorId": 8,
       "publicationId": 7,
-      "englishText": "If I sell my rags\nand buy some alcohol -\nwill there still be loneliness ?"
+      "englishText": "If I sell my rags\nand buy some alcohol—\nwill there still be loneliness?"
     },
     {
       "id": 422,
@@ -2936,7 +2936,7 @@
       "id": 427,
       "translatorId": 8,
       "publicationId": 7,
-      "englishText": "Pissing blood -\nhow long will I be able\nto carry on ?"
+      "englishText": "Pissing blood -\nhow long will I be able\nto carry on?"
     },
     {
       "id": 428,
@@ -2979,7 +2979,7 @@
       "translatorId": 9,
       "publicationId": 8,
       "japaneseText": "Hitotsu areba\nkoto taru nabeno\nkome o togu.",
-      "englishText": "One washes rice\nin a metal pot;\nonly one pot, that's enough\nfor me).\nor\nI wash rice\nin a metal pot;\none pot's enough.\nor\nWashing rice\nin a metal pot;\none pot's enough.",
+      "englishText": "One washes rice\nin a metal pot;\nonly one pot, that's enough\nfor me.\nor\nI wash rice\nin a metal pot;\none pot's enough.\nor\nWashing rice\nin a metal pot;\none pot's enough.",
       "notes": "Colloquialisms mark his haiku. He used easy, plain language at its best, never the literary, poetic diction of more ordinary writers."
     },
     {
@@ -3138,7 +3138,7 @@
       "id": 459,
       "translatorId": 10,
       "publicationId": 9,
-      "englishText": "grilling a fish\neven singeing a hand --\nsingle life"
+      "englishText": "grilling a fish\neven singeing a hand —\nsingle life"
     },
     {
       "id": 460,
@@ -3797,7 +3797,7 @@
       "translatorId": 13,
       "publicationId": 14,
       "japaneseText": "tsuki no akarusa wa doko o bakugeki shite iru koto ka",
-      "englishText": "The moon so luminous -- / and showing where / the bombs will fall?"
+      "englishText": "The moon so luminous — / and showing where / the bombs will fall?"
     },
     {
       "id": 565,
@@ -4378,7 +4378,7 @@
       "id": 647,
       "translatorId": 18,
       "publicationId": 18,
-      "englishText": "No path but this one--\nI walk alone."
+      "englishText": "No path but this one—\nI walk alone."
     },
     {
       "id": 648,
@@ -4414,7 +4414,7 @@
       "id": 653,
       "translatorId": 18,
       "publicationId": 18,
-      "englishText": "Going deeper,\nAnd still deeper--\nThe green mountains."
+      "englishText": "Going deeper,\nAnd still deeper—\nThe green mountains."
     },
     {
       "id": 654,
@@ -4432,109 +4432,109 @@
       "id": 656,
       "translatorId": 19,
       "publicationId": 18,
-      "englishText": "soppy with morning dew/ I go off/ in any direction I please"
+      "englishText": "soppy with morning dew / I go off / in any direction I please"
     },
     {
       "id": 657,
       "translatorId": 19,
       "publicationId": 18,
-      "englishText": "drizzly rain/ only one road/ to go by"
+      "englishText": "drizzly rain / only one road / to go by"
     },
     {
       "id": 658,
       "translatorId": 19,
       "publicationId": 18,
-      "englishText": "husband and wife quarreling/ night/ spiders dangle down"
+      "englishText": "husband and wife quarreling / night / spiders dangle down"
     },
     {
       "id": 659,
       "translatorId": 19,
       "publicationId": 18,
-      "englishText": "as muddy water flows/ it becomes clear"
+      "englishText": "as muddy water flows / it becomes clear"
     },
     {
       "id": 660,
       "translatorId": 19,
       "publicationId": 18,
-      "englishText": "hurry down the road/ never look back"
+      "englishText": "hurry down the road / never look back"
     },
     {
       "id": 661,
       "translatorId": 19,
       "publicationId": 18,
-      "englishText": "no help/ for the likes of me/ I go on walking"
+      "englishText": "no help / for the likes of me / I go on walking"
     },
     {
       "id": 662,
       "translatorId": 19,
       "publicationId": 18,
-      "englishText": "get drunk/ you hear all sorts of voices/ winter rain"
+      "englishText": "get drunk / you hear all sorts of voices / winter rain"
     },
     {
       "id": 663,
       "translatorId": 19,
       "publicationId": 18,
-      "englishText": "Heaven/ doesn't kill me/ it makes me write poems"
+      "englishText": "Heaven / doesn't kill me / it makes me write poems"
     },
     {
       "id": 664,
       "translatorId": 19,
       "publicationId": 18,
-      "englishText": "even in/ my iron begging bowl/ hailstones"
+      "englishText": "even in / my iron begging bowl / hailstones"
     },
     {
       "id": 665,
       "translatorId": 19,
       "publicationId": 18,
-      "englishText": "autumn wind/ for all my walking/ for all my walking"
+      "englishText": "autumn wind / for all my walking / for all my walking"
     },
     {
       "id": 666,
       "translatorId": 19,
       "publicationId": 18,
-      "englishText": "stretching out my feet/ they touch the man from Shikoku"
+      "englishText": "stretching out my feet / they touch the man from Shikoku"
     },
     {
       "id": 667,
       "translatorId": 19,
       "publicationId": 18,
-      "englishText": "tree fallen over/ sitting on it"
+      "englishText": "tree fallen over / sitting on it"
     },
     {
       "id": 668,
       "translatorId": 19,
       "publicationId": 18,
-      "englishText": "on the road/ a tooth/ about to come loose"
+      "englishText": "on the road / a tooth / about to come loose"
     },
     {
       "id": 669,
       "translatorId": 19,
       "publicationId": 18,
-      "englishText": "cold clouds/ hurrying"
+      "englishText": "cold clouds / hurrying"
     },
     {
       "id": 670,
       "translatorId": 19,
       "publicationId": 18,
-      "englishText": "not a cloud in sight/ off comes my hat"
+      "englishText": "not a cloud in sight / off comes my hat"
     },
     {
       "id": 671,
       "translatorId": 19,
       "publicationId": 18,
-      "englishText": "camellia/ I turned to look back at/ red"
+      "englishText": "camellia / I turned to look back at / red"
     },
     {
       "id": 672,
       "translatorId": 19,
       "publicationId": 18,
-      "englishText": "nearly run over/ by a car/ cold cold road"
+      "englishText": "nearly run over / by a car / cold cold road"
     },
     {
       "id": 673,
       "translatorId": 19,
       "publicationId": 18,
-      "englishText": "the deeper I go/ the deeper I go/ green mountains"
+      "englishText": "the deeper I go / the deeper I go / green mountains"
     },
     {
       "id": 674,
@@ -4558,7 +4558,7 @@
       "id": 677,
       "translatorId": 19,
       "publicationId": 18,
-      "englishText": "autumn wind\nfor all my walking---\nfor all my walking---"
+      "englishText": "autumn wind\nfor all my walking—-\nfor all my walking—-"
     },
     {
       "id": 678,
@@ -4627,86 +4627,149 @@
   "publications": [
     {
       "id": 0,
+      "name": "Santoka",
+      "translatorId": 0,
+      "year": 1964,
       "description": "\"Santoka\" by R. H. Blyth, in A History of Haiku. Tokyo: The Hokuseido Press, 1964. Volume 2: From Issa to the Present. pp. 173-88."
     },
     {
       "id": 1,
+      "name": "Hail in the Begging Bowl",
+      "translatorId": 1,
+      "year": 1977,
       "description": "Abrams, James. Hail in the Begging Bowl: The Odyssey and Poetry of Santoka.\nMonumenta Nipponica, Volume 32, No. 3. (Autumn, 1977), pp. 269-302."
     },
     {
       "id": 2,
-      "description": "Thistle brilliant morning : Shiki, Hekigodô, Santôka, Hôsai, [translations from the Japanese William J. Higginson]. Byways Press, England, 1973; From Here Press, Paterson, N.J. 1975. 20 p."
+      "name": "Thistle brilliant morning",
+      "translatorId": 2,
+      "year": 1973,
+      "description": "Thistle brilliant morning: Shiki, Hekigodô, Santôka, Hôsai, [translations from the Japanese William J. Higginson]. Byways Press, England, 1973; From Here Press, Paterson, N.J. 1975. 20 p."
     },
     {
       "id": 3,
+      "name": "Santoka: Grass and Tree Cairn",
+      "translatorId": 3,
+      "year": 2002,
       "description": "Santoka: Grass and Tree Cairn by Taneda Santôka. Translations by Hiroaki Sato; illustrations by Stephen Addiss, Winchester, Va.: Red Moon Press, 2002, xxii + 74 pages,"
     },
     {
       "id": 4,
+      "name": "Walking Into the Wind",
+      "translatorId": 5,
+      "year": 1997,
       "description": "Walking Into the Wind: A Sweep of Poems by Santoka, versions of Cid Corman"
     },
     {
       "id": 5,
+      "name": "Grass Tree Stupa (Somokutoh)",
+      "translatorId": 6,
+      "year": null,
       "description": "GRASS TREE STUPA (SOMOKUTOH)\nSelected and translated by Takashi Nonin, Matsuyama University, Matsuyama City, Ehime Prefecture, Japan"
     },
     {
       "id": 6,
-      "description": "Jesse Glass\n        My Santoka Translations\n        http://www.sendecki.com/ahadada/archives/2005/03/06/my_santoka_translations.php\n        These are a few of my translations of the experimental, free-form haiku of Santoka (1882–1940). Santoka practiced “Walking Zen” and traveled Kyushu, Honshu, and Shikoku on foot as an itinerant monk begging enough money for a cup of sake and a bowl of rice a day. Santoka’s father was a womanizer and a spend-thrift and his mother killed herself on account of this. His memory of her body being pulled from the well in which she drowned herself haunted him all of his life."
+      "name": "My Santoka Translations",
+      "translatorId": 7,
+      "year": 2005,
+      "description": "Jesse Glass\nMy Santoka Translations\nhttp://www.sendecki.com/ahadada/archives/2005/03/06/my_santoka_translations.php\n        These are a few of my translations of the experimental, free-form haiku of Santoka (1882–1940). Santoka practiced “Walking Zen” and traveled Kyushu, Honshu, and Shikoku on foot as an itinerant monk begging enough money for a cup of sake and a bowl of rice a day. Santoka’s father was a womanizer and a spend-thrift and his mother killed herself on account of this. His memory of her body being pulled from the well in which she drowned herself haunted him all of his life."
     },
     {
       "id": 7,
+      "name": "Weeds, Falling Rain",
+      "translatorId": 8,
+      "year": null,
       "description": "WEEDS, FALLING RAIN: a selection of Zen Haikai by Santoka Taneda\nnew versions by Okami"
     },
     {
       "id": 8,
-      "description": "Santôka by Kametaro\n        http://web.archive.org/web/20091027124627/http://www.geocities.com/meister_z/SANTOKA.htm\n        http://www.cc.matsuyama-u.ac.jp/~kametaro/santoka1.html"
+      "name": "Santôka",
+      "translatorId": 9,
+      "year": 1980,
+      "description": "Santôka by Kametaro\nhttp://web.archive.org/web/20091027124627/http://www.geocities.com/meister_z/SANTOKA.htm\nhttp://www.cc.matsuyama-u.ac.jp/~kametaro/santoka1.html"
     },
     {
       "id": 9,
+      "name": "The Santoka versions",
+      "translatorId": 10,
+      "year": 2005,
       "description": "The Santoka versions by Scott Watson\nPublished in Japan by Bookgirl Press / 3-13-16 Tsurugaya-higashi Miyagino-ku, Sendai / 983-0826. Manufactured in Sendai, Japan by Sasaki Printing &amp; Publishing Co., Ltd. / 8-45 Nishimachi Rokuchonome / Wakabayashi-ku, Sendai / 984-0011. ISBN: 4-915948-41-2 C0098. Cover and other illustrations by Ed Baker, Cover design by P.B RAPHICS. 2005, 42 pages,"
     },
     {
       "id": 10,
-      "description": "Bookreview by Jane Reichhold\nLYNX, A Journal for Linking Poets, XXI:1 February, 2006\nIn 2000 and 2004, Scott Watson had two articles on his translations of Santoka published in the Tohoku Gakuin Review under the titles \"Weeds We'd Wed\" and \"A Life to Live.\" What the readers will find in this book, are these two journal pieces, without revision or changes, along with the introductions. The cover of the book has an ink wash calligraphy and illustration by Ed Baker.\nThe first article \"Weeds We'd Wed,\" begins with the story of how Scott Watson discovered the work of Taneda Santoka, both in English and then through Japanese friends in a poetry seminar. The translation by Cid Corman which as Watson notes, \"is more Corman than Santoka\" left him searching for versions that better compared to his own. Those of John Stevens's work came under his scrutiny, as well as the work published online by several sites and translators (not named, but should have mentioned Hiroaki Sato). Watson's own versions of the translations then appeared in the now discontinued US haiku magazine Persimmons.\nThe article continues with a brief biography of Santoka's life taken from the Kodansha Encyclopedia of Japan. What the encyclopedia avoids saying is that Santoka was an alcoholic who then drifted from job down to lower job, was divorced, and ended up traveling around as a mendicant Zen priest, begging from friends and writing travel diaries.\nWatson then uses a page to describe and analyze Santoka's poetry and ends with his relationship to Zen poetry. Watson uses a Zen approach to translating the poems into a non form - giving them the number of words or lines as the spirit moves him. Thus, he ends up with such haiku:"
+      "name": "Weeds We'd Wed and A Life to Live",
+      "translatorId": 10,
+      "year": 2000,
+      "description": "Book review by Jane Reichhold\nLYNX, A Journal for Linking Poets, XXI:1 February, 2006\nIn 2000 and 2004, Scott Watson had two articles on his translations of Santoka published in the Tohoku Gakuin Review under the titles \"Weeds We'd Wed\" and \"A Life to Live.\" What the readers will find in this book, are these two journal pieces, without revision or changes, along with the introductions. The cover of the book has an ink wash calligraphy and illustration by Ed Baker.\nThe first article \"Weeds We'd Wed,\" begins with the story of how Scott Watson discovered the work of Taneda Santoka, both in English and then through Japanese friends in a poetry seminar. The translation by Cid Corman which as Watson notes, \"is more Corman than Santoka\" left him searching for versions that better compared to his own. Those of John Stevens's work came under his scrutiny, as well as the work published online by several sites and translators (not named, but should have mentioned Hiroaki Sato). Watson's own versions of the translations then appeared in the now discontinued US haiku magazine Persimmons.\nThe article continues with a brief biography of Santoka's life taken from the Kodansha Encyclopedia of Japan. What the encyclopedia avoids saying is that Santoka was an alcoholic who then drifted from job down to lower job, was divorced, and ended up traveling around as a mendicant Zen priest, begging from friends and writing travel diaries.\nWatson then uses a page to describe and analyze Santoka's poetry and ends with his relationship to Zen poetry. Watson uses a Zen approach to translating the poems into a non form - giving them the number of words or lines as the spirit moves him. Thus, he ends up with such haiku:"
     },
     {
       "id": 11,
+      "name": "Walking By My Self Again",
+      "translatorId": 10,
+      "year": 2011,
       "description": "Walking By My Self Again by Taneda Santoka, Versions by Scott Watson, Sendai, Japan: Bookgirl Press, 2011, 68 pages"
     },
     {
       "id": 12,
+      "name": "Santôka",
+      "translatorId": 11,
+      "year": 2006,
       "description": "Santôka: A Translation with Photographic Images. Photographs by Hakudô Inoue; book and cover design by Kazuya Takaoka; English text by Emiko Miyashita and Paul Watsky. (PIE Books, Tokyo, 2006). 400 pages"
     },
     {
       "id": 13,
+      "name": "Haiku Spirit: Santoka",
+      "translatorId": 12,
+      "year": null,
       "description": "Santôka's haiku translated by Gilles Fabre > http://haikuspirit.org/santokaEN.html"
     },
     {
       "id": 14,
+      "name": "Taneda Santôka",
+      "translatorId": 13,
+      "year": 2007,
       "description": "Taneda Santôka: A Selection of His Haiku, with Commentary by Sean Somers, Simply Haiku: A Quarterly Journal of Japanese Short Form Poetry, Summer 2007, vol 5 no 2"
     },
     {
       "id": 15,
+      "name": "Rain in the Wind",
+      "translatorId": 14,
+      "year": 1990,
       "description": "Rain in the Wind: Four Stories. By Saiichi Maruya. Translated by Dennis Keene. Tokyo; New York: Kodansha International, 1990, pp. 109-234. (Japan's modern writers)"
     },
     {
       "id": 16,
+      "name": "Haiku: An Anthology of Japanese Poems",
+      "translatorId": 15,
+      "year": 2009,
       "description": "Stephen Addiss\nHaiku: An Anthology of Japanese Poems (with Fumiko and Akira Yamamoto). Boston and London: Shambhala Publications, 2009, 208 pages"
     },
     {
       "id": 17,
+      "name": "Long Dream: Santoka",
+      "translatorId": 17,
+      "year": 2012,
       "description": "Alex Fyffe\nhttp://longdream.wordpress.com/category/poetry/taneda-santoka/\nTaneda Santōka (1882-1940) was an early free-form haiku poet, a contemporary of Ogiwara Seisensui and Ozaki Hōsai. His given name was Taneda Shōichi (種田正一), but like most (if not all) Japanese haiku poets (俳人, haijin) he gave himself a haiku pseudonym (俳号, haigou). Santōka (山頭火) means “fire on the mountain.” I hope that you have enjoyed taking this little walk with me and Santōka. But now I think it’s time to let him walk the mountains alone, once again, with the insects. All poems taken from the Gendai Haiku Association Database (現代俳句協会, Modern Haiku Association)"
     },
     {
       "id": 18,
+      "name": "The Poetry of Santoka",
+      "translatorId": 21,
+      "year": 1988,
       "description": "J. Thomas Rimer. \"The Poetry of Santoka (1882-1940)\"\nin: A Reader's Guide to Japanese Literature, Kodansha International, 1988, pp. 121-23."
     },
     {
-      "id": 19,
+      "id": 20,
+      "name": "Cherry Blossom Epiphany",
+      "translatorId": 19,
+      "year": 2007,
       "description": "Robin D. Gill\nCherry Blossom Epiphany: The poetry and philosophy of a flowering tree, Paraverse Press, Coconut Grove, Florida 2007, pp. 303-304."
     },
     {
       "id": 20,
+      "name": "The 5th Season",
+      "translatorId": 20,
+      "year": 2007,
       "description": "Robin D. Gill\nThe 5th Season, Paraverse Press, Coconut Grove, Florida 2007, pp. 128, 156, 435."
     }
   ],
@@ -4725,7 +4788,7 @@
     },
     {
       "id": 3,
-      "name": "Hiroaki Sato"
+      "name": "Hiroaki Satō"
     },
     {
       "id": 5,
@@ -4786,6 +4849,10 @@
     {
       "id": 20,
       "name": "Robin D. Gill"
+    },
+    {
+      "id": 21,
+      "name": "J. Thomas Rimer"
     }
   ]
 }
