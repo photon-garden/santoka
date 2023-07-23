@@ -35,13 +35,20 @@ async fn dev() {
 }
 
 fn build() {
-    fs::remove_dir_all("target/built_app").unwrap();
-    fs::create_dir("target/built_app").unwrap();
-    fs::write("target/built_app/index.html", routes::render_get()).unwrap();
-    fs::copy(assets::built_css_path(), "target/built_app/main.css").unwrap();
+    match fs::remove_dir_all("built") {
+        Ok(_) => {
+            println!("Removed ./built folder.");
+        }
+        Err(_) => {
+            println!("No ./built folder to remove.");
+        }
+    }
+    fs::create_dir("built").unwrap();
+    fs::write("built/index.html", routes::render_get()).unwrap();
+    fs::copy(assets::built_css_path(), "built/main.css").unwrap();
     fs::copy(
         assets::hasui_mountains_jpeg_path(),
-        "target/built_app/hasui-mountains.jpeg",
+        "built/hasui-mountains.jpeg",
     )
     .unwrap();
 }

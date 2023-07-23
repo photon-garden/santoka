@@ -19,6 +19,12 @@ dev = { parallel = true, cmd = [
     "cargo cmd watch_html",
 ] }
 build = ["cargo cmd build_tailwind", "cargo cmd build_html"]
+deploy = [
+    "cargo cmd build",
+    "git add --all",
+    "git commit -m 'Deploy'",
+    "git push",
+]
 # preview = ["cargo cmd build_tailwind","cargo cmd preview_html"]
 setup = [
     "cargo install cargo-watch --version 8.4.0 --root ./target/.cargo_install",
