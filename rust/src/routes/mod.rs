@@ -57,21 +57,25 @@ fn HeroSection() -> Element {
             class: "flex flex-col justify-start items-start dark:justify-end overflow-hidden relative w-full h-[720px] rounded-3xl",
             // Light mode image.
             img {
+                alt: "Clouds and a red mountain in the distance, with darker mountains in the midground. Water and grass is in the foreground.",
                 class: "shrink-0 min-w-full min-h-full object-cover blur-lg dark:hidden",
                 style: "image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;",
                 src: assets.hasui_light_jpeg.lqip
             }
             img {
+                alt: "Clouds and a red mountain in the distance, with darker mountains in the midground. Water and grass is in the foreground.",
                 class: "absolute min-w-full min-h-full object-cover dark:hidden",
                 src: assets.hasui_light_jpeg.url
             }
             // Dark mode image.
             img {
+                alt: "A dark, rainswept village at night. Shadows of trees in the distance, but a few lights are on in the village.",
                 class: "shrink-0 min-w-full min-h-full object-cover blur-lg hidden dark:block",
                 style: "image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;",
                 src: assets.hasui_dark_jpeg.lqip
             }
             img {
+                alt: "A dark, rainswept village at night. Shadows of trees in the distance, but a few lights are on in the village.",
                 class: "absolute min-w-full min-h-full object-cover hidden dark:block",
                 src: assets.hasui_dark_jpeg.url
             }
