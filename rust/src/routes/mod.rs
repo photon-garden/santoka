@@ -48,20 +48,25 @@ fn Nav() -> Element {
             class: "
                 fixed top-8 z-10
                 {horizontal_center_fixed()}
-                w-full max-w-[calc(min(theme(screens.2xl)-4rem,100vw-4rem))] rounded-3xl
-                p-6 py-4
+                w-full max-w-screen-2xl 
+                px-8
                 text-2xl tracking-wide text-neutral-100 dark:text-neutral-200
-                overflow-hidden rounded-3xl
-                bg-[pink] 
-                    flex flex-row gap-4 justify-between 
             ",
-            a {
-                class: "logo block rounded-full bg-neutral-50 dark:bg-neutral-300 w-8 h-8 cursor-pointer",
-                href: ""
-            }
-            div { class: "links flex flex-row gap-4 font-normal",
-                Link("", "about", "!decoration-2 tracking-wide"),
-                Link("", "data + code", "!decoration-2 tracking-wide")
+            div {
+                //
+                class: "
+                    logo-and-links bg-[pink] overflow-hidden rounded-3xl w-1/4
+                    p-4
+                    flex flex-row gap-4 justify-between 
+                ",
+                a {
+                    class: "logo block rounded-full bg-neutral-50 dark:bg-neutral-300 w-8 h-8 cursor-pointer",
+                    href: ""
+                }
+                div { class: "links flex flex-row gap-4 font-normal",
+                    Link("", "about", "!decoration-2 tracking-wide"),
+                    Link("", "data + code", "!decoration-2 tracking-wide")
+                }
             }
         }
     )
@@ -182,7 +187,7 @@ fn Publication(publication: &'static Publication) -> Element {
     // }
     rsx!(
         // self-start is necessary to make sticky work.
-        div { class: "publication sticky top-32 self-start flex flex-col text-neutral-400 dark:text-neutral-500 items-end w-1/3 text-right",
+        div { class: "publication sticky top-32 self-start flex flex-col text-neutral-400 dark:text-neutral-500 items-end w-1/4 text-right",
             span { class: "translator font-extralight text-3xl", "Translated by {translator.name}" }
             span { class: "publication-name font-thin italic text-2xl", "{publication.name}" }
             span { class: "publication-year font-thin text-2xl",
