@@ -33,7 +33,7 @@ fn Layout(title: &'static str, body: Element) -> Element {
             link { rel: "stylesheet", href: "main.css" }
             title { "{title}" }
         }
-        body { class: "bg-neutral-50 dark:bg-neutral-900 flex flex-col items-center selection:bg-neutral-200",
+        body { class: "bg-neutral-50 dark:bg-neutral-900 flex flex-col items-center selection:bg-neutral-200/75 dark:selection:bg-neutral-700/75",
             body,
             BrowserScript()
         }
@@ -44,8 +44,7 @@ fn Body() -> Element {
     rsx!(
         main { class: "relative p-8 flex flex-col gap-32 w-full max-w-screen-2xl",
             HeroSection(),
-            PoetrySection(),
-            Controls()
+            PoetrySection()
         }
     )
 }
@@ -54,46 +53,64 @@ fn HeroSection() -> Element {
     rsx!(
         section {
             id: "hero",
-            class: "flex flex-col justify-start items-start dark:justify-end overflow-hidden relative w-full h-[720px] rounded-3xl",
+            class: "
+                flex flex-col justify-start items-start dark:justify-end overflow-hidden relative w-full h-[720px] rounded-3xl selection:bg-neutral-700/75 dark:selection:bg-neutral-500/75
+                tracking-wide
+                text-neutral-100 dark:text-neutral-200
+            ",
+
             // Light mode image.
             img {
                 alt: "Clouds and a red mountain in the distance, with darker mountains in the midground. Water and grass is in the foreground.",
-                class: "shrink-0 min-w-full min-h-full object-cover blur-lg dark:hidden",
+                class: "shrink-0 min-w-full min-h-full object-cover blur-lg dark:hidden select-none",
                 style: "image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;",
                 src: assets.hasui_light_jpeg.lqip
             }
             img {
                 alt: "Clouds and a red mountain in the distance, with darker mountains in the midground. Water and grass is in the foreground.",
-                class: "absolute min-w-full min-h-full object-cover dark:hidden",
+                class: "absolute min-w-full min-h-full object-cover dark:hidden select-none",
                 src: assets.hasui_light_jpeg.url
             }
+
             // Dark mode image.
             img {
                 alt: "A dark, rainswept village at night. Shadows of trees in the distance, but a few lights are on in the village.",
-                class: "shrink-0 min-w-full min-h-full object-cover blur-lg hidden dark:block",
+                class: "shrink-0 min-w-full min-h-full object-cover blur-lg hidden dark:block select-none",
                 style: "image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;",
                 src: assets.hasui_dark_jpeg.lqip
             }
             img {
                 alt: "A dark, rainswept village at night. Shadows of trees in the distance, but a few lights are on in the village.",
-                class: "absolute min-w-full min-h-full object-cover hidden dark:block",
+                class: "absolute min-w-full min-h-full object-cover hidden dark:block select-none",
                 src: assets.hasui_dark_jpeg.url
             }
+
+            nav { class: "absolute w-full top-0 left-0 flex flex-row gap-4 p-8 justify-between text-2xl",
+                a {
+                    class: "logo block rounded-full bg-neutral-100 dark:bg-neutral-300 w-8 h-8 cursor-pointer",
+                    href: ""
+                }
+                div { class: "links flex flex-row gap-4 font-normal",
+                    Link("", "about", "!decoration-2 tracking-wide"),
+                    Link("", "data + code", "!decoration-2 tracking-wide")
+                }
+            }
+
             div { class: "absolute bottom-0 left-0 flex flex-col gap-1 p-8",
                 span {
                     id: "name-in-kanji",
-                    class: "text-7xl text-neutral-100 dark:text-neutral-300 whitespace-nowrap",
+                    class: "text-7xl font-semibold tracking-wide whitespace-nowrap",
                     "種田山頭火"
                 }
                 span {
                     id: "name-in-romaji",
-                    class: "text-4xl text-neutral-100 dark:text-neutral-300 font-light whitespace-nowrap",
+                    class: "text-4xl font-normal tracking-wide whitespace-nowrap",
                     "Taneda Santōka"
                 }
                 span {
                     id: "birth-and-death",
-                    class: "text-3xl text-neutral-100 dark:text-neutral-300 font-light whitespace-nowrap",
-                    "1882–1940"
+                    class: "text-3xl font-normal tracking-wide whitespace-nowrap",
+                    "1882 – 1940"
                 }
             }
         }
@@ -122,6 +139,9 @@ fn PoemsAndPublication(publication: &'static Publication) -> Element {
 fn Publication(publication: &'static Publication) -> Element {
     let translator = database.get_translator(publication.translator_id);
 
+    // a { class: "underline decoration-1 underline-offset-4 cursor-pointer",
+    //     "hide"
+    // }
     rsx!(
         // self-start is necessary to make sticky work.
         div { class: "publication sticky top-8 self-start flex flex-col text-neutral-400 dark:text-neutral-500 items-end w-1/3 text-right",
@@ -129,9 +149,7 @@ fn Publication(publication: &'static Publication) -> Element {
             span { class: "publication-name font-thin italic text-2xl", "{publication.name}" }
             span { class: "publication-year font-thin text-2xl",
                 "{publication.year_or_unknown()} • "
-                a { class: "underline decoration-1 underline-offset-4 cursor-pointer",
-                    "hide"
-                }
+                Link("", "hide", "")
             }
         }
     )
@@ -190,4 +208,14 @@ fn Controls() -> Element {
 fn BrowserScript() -> Element {
     let contents = include_str!("../boot_browser.js");
     rsx!( script { "type": "module", "{contents}" } )
+}
+
+fn Link(href: &'static str, content: &'static str, classes: &'static str) -> Element {
+    rsx!(
+        a {
+            class: "underline decoration-1 underline-offset-4 cursor-pointer {classes}",
+            href: href,
+            "{content}"
+        }
+    )
 }
