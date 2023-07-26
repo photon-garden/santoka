@@ -34,10 +34,41 @@ fn Layout(title: &'static str, body: Element) -> Element {
             title { "{title}" }
         }
         body { class: "bg-neutral-50 dark:bg-neutral-900 flex flex-col items-center selection:bg-neutral-200/75 dark:selection:bg-neutral-700/75",
+            Nav(),
             body,
             BrowserScript()
         }
     )
+}
+
+fn Nav() -> Element {
+    rsx!(
+        nav {
+            //
+            class: "
+                fixed top-8 z-10
+                {horizontal_center_fixed()}
+                w-full max-w-[calc(min(theme(screens.2xl)-4rem,100vw-4rem))] rounded-3xl
+                p-6 py-4
+                text-2xl tracking-wide text-neutral-100 dark:text-neutral-200
+                overflow-hidden rounded-3xl
+                bg-[pink] 
+                    flex flex-row gap-4 justify-between 
+            ",
+            a {
+                class: "logo block rounded-full bg-neutral-50 dark:bg-neutral-300 w-8 h-8 cursor-pointer",
+                href: ""
+            }
+            div { class: "links flex flex-row gap-4 font-normal",
+                Link("", "about", "!decoration-2 tracking-wide"),
+                Link("", "data + code", "!decoration-2 tracking-wide")
+            }
+        }
+    )
+}
+
+fn horizontal_center_fixed() -> &'static str {
+    "left-1/2 transform -translate-x-1/2"
 }
 
 fn Body() -> Element {
@@ -55,9 +86,27 @@ fn HeroSection() -> Element {
             id: "hero",
             class: "
                 flex flex-col justify-start items-start dark:justify-end overflow-hidden relative w-full h-[720px] rounded-3xl selection:bg-neutral-700/75 dark:selection:bg-neutral-500/75
-                tracking-wide
-                text-neutral-100 dark:text-neutral-200
+                tracking-wide text-neutral-100 dark:text-neutral-200
+                z-20
             ",
+
+            nav {
+                //
+                class: "
+                    logo-and-links absolute p-8 top-0 left-0 w-full 
+                    flex flex-row gap-4 justify-between 
+                    text-2xl tracking-wide text-neutral-100 dark:text-neutral-200
+                    z-10
+                ",
+                a {
+                    class: "logo block rounded-full bg-neutral-50 dark:bg-neutral-300 w-8 h-8 cursor-pointer",
+                    href: ""
+                }
+                div { class: "links flex flex-row gap-4 font-normal",
+                    Link("", "about", "!decoration-2 tracking-wide"),
+                    Link("", "data + code", "!decoration-2 tracking-wide")
+                }
+            }
 
             // Light mode image.
             img {
@@ -83,17 +132,6 @@ fn HeroSection() -> Element {
                 alt: "A dark, rainswept village at night. Shadows of trees in the distance, but a few lights are on in the village.",
                 class: "absolute min-w-full min-h-full object-cover hidden dark:block select-none",
                 src: assets.hasui_dark_jpeg.url
-            }
-
-            nav { class: "absolute w-full top-0 left-0 flex flex-row gap-4 p-8 justify-between text-2xl",
-                a {
-                    class: "logo block rounded-full bg-neutral-100 dark:bg-neutral-300 w-8 h-8 cursor-pointer",
-                    href: ""
-                }
-                div { class: "links flex flex-row gap-4 font-normal",
-                    Link("", "about", "!decoration-2 tracking-wide"),
-                    Link("", "data + code", "!decoration-2 tracking-wide")
-                }
             }
 
             div { class: "absolute bottom-0 left-0 flex flex-col gap-1 p-8",
@@ -144,7 +182,7 @@ fn Publication(publication: &'static Publication) -> Element {
     // }
     rsx!(
         // self-start is necessary to make sticky work.
-        div { class: "publication sticky top-8 self-start flex flex-col text-neutral-400 dark:text-neutral-500 items-end w-1/3 text-right",
+        div { class: "publication sticky top-32 self-start flex flex-col text-neutral-400 dark:text-neutral-500 items-end w-1/3 text-right",
             span { class: "translator font-extralight text-3xl", "Translated by {translator.name}" }
             span { class: "publication-name font-thin italic text-2xl", "{publication.name}" }
             span { class: "publication-year font-thin text-2xl",
