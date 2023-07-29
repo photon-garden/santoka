@@ -46,6 +46,7 @@ fn Nav() -> Element {
         nav {
             //
             class: "
+                script:show-if-scrolled
                 fixed top-8 z-10
                 {horizontal_center_fixed()}
                 w-full max-w-screen-2xl 
@@ -55,7 +56,7 @@ fn Nav() -> Element {
             div {
                 //
                 class: "
-                    logo-and-links bg-[pink] overflow-hidden rounded-3xl w-1/4
+                    logo-and-links bg-[linear-gradient(90deg,_#e6edee,_#98b7ca)] overflow-hidden rounded-3xl w-1/4
                     p-4
                     flex flex-row gap-4 justify-between 
                 ",
@@ -65,7 +66,7 @@ fn Nav() -> Element {
                 }
                 div { class: "links flex flex-row gap-4 font-normal",
                     Link("", "about", "!decoration-2 tracking-wide"),
-                    Link("", "data + code", "!decoration-2 tracking-wide")
+                    Link("", "data & code", "!decoration-2 tracking-wide")
                 }
             }
         }
@@ -109,14 +110,14 @@ fn HeroSection() -> Element {
                 }
                 div { class: "links flex flex-row gap-4 font-normal",
                     Link("", "about", "!decoration-2 tracking-wide"),
-                    Link("", "data + code", "!decoration-2 tracking-wide")
+                    Link("", "data & code", "!decoration-2 tracking-wide")
                 }
             }
 
             // Light mode image.
             img {
                 alt: "Clouds and a red mountain in the distance, with darker mountains in the midground. Water and grass is in the foreground.",
-                class: "shrink-0 min-w-full min-h-full object-cover blur-lg dark:hidden select-none",
+                class: "shrink-0 min-w-full min-h-full object-cover dark:hidden select-none",
                 style: "image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;",
                 src: assets.hasui_light_jpeg.lqip
             }
@@ -129,7 +130,7 @@ fn HeroSection() -> Element {
             // Dark mode image.
             img {
                 alt: "A dark, rainswept village at night. Shadows of trees in the distance, but a few lights are on in the village.",
-                class: "shrink-0 min-w-full min-h-full object-cover blur-lg hidden dark:block select-none",
+                class: "shrink-0 min-w-full min-h-full object-cover hidden dark:block select-none",
                 style: "image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;",
                 src: assets.hasui_dark_jpeg.lqip
             }
@@ -236,7 +237,7 @@ fn Controls() -> Element {
                 a {
                     class: "about text-base text-neutral-400 dark:text-neutral-500 font-light underline decoration-1 underline-offset-4",
                     href: "",
-                    "data + code"
+                    "data & code"
                 }
                 a {
                     class: "about text-base text-neutral-400 dark:text-neutral-500 font-light underline decoration-1 underline-offset-4",
