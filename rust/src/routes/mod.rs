@@ -47,26 +47,28 @@ fn Nav() -> Element {
             //
             class: "
                 script:show-if-scrolled
-                fixed top-8 z-10
+                fixed top-0 md:top-8 z-10
+                pt-4 md:pt-0
                 {horizontal_center_fixed()}
                 w-full max-w-screen-2xl 
-                px-8
-                text-2xl tracking-wide text-neutral-100 dark:text-neutral-200
+                px-4 md:px-8
+                text-base md:text-2xl tracking-wide text-neutral-100 dark:text-neutral-200
+                bg-neutral-50
             ",
             div {
                 //
                 class: "
-                    logo-and-links bg-[linear-gradient(90deg,_#e6edee,_#98b7ca)] overflow-hidden rounded-3xl w-1/4
+                    logo-and-links bg-[linear-gradient(90deg,_#e6edee,_#98b7ca)] overflow-hidden rounded-3xl md:w-1/4
                     p-4
                     flex flex-row gap-4 justify-between 
                 ",
                 a {
-                    class: "logo block rounded-full bg-neutral-50 dark:bg-neutral-300 w-8 h-8 cursor-pointer",
+                    class: "logo block rounded-full bg-neutral-50 dark:bg-neutral-300 w-6 md:w-8 h-6 md:h-8 cursor-pointer",
                     href: ""
                 }
                 div { class: "links flex flex-row gap-4 font-normal",
                     Link("", "about", "!decoration-2 tracking-wide"),
-                    Link("", "data & code", "!decoration-2 tracking-wide")
+                    Link("", "data + code", "!decoration-2 tracking-wide")
                 }
             }
         }
@@ -79,7 +81,7 @@ fn horizontal_center_fixed() -> &'static str {
 
 fn Body() -> Element {
     rsx!(
-        main { class: "relative p-8 flex flex-col gap-32 w-full max-w-screen-2xl",
+        main { class: "relative p-4 md:p-8 flex flex-col gap-8 md:gap-32 w-full max-w-screen-2xl",
             HeroSection(),
             PoetrySection()
         }
@@ -91,7 +93,7 @@ fn HeroSection() -> Element {
         section {
             id: "hero",
             class: "
-                flex flex-col justify-start items-start dark:justify-end overflow-hidden relative w-full h-[720px] rounded-3xl selection:bg-neutral-700/75 dark:selection:bg-neutral-500/75
+                flex flex-col justify-start items-start dark:justify-end overflow-hidden relative w-full h-[384px] md:h-[720px] max-h-[calc(100vh-4rem)] rounded-3xl selection:bg-neutral-700/75 dark:selection:bg-neutral-500/75
                 tracking-wide text-neutral-100 dark:text-neutral-200
                 z-20
             ",
@@ -99,18 +101,18 @@ fn HeroSection() -> Element {
             nav {
                 //
                 class: "
-                    logo-and-links absolute p-8 top-0 left-0 w-full 
+                    logo-and-links absolute p-4 md:p-8 top-0 left-0 w-full 
                     flex flex-row gap-4 justify-between 
-                    text-2xl tracking-wide text-neutral-100 dark:text-neutral-200
+                    text-base md:text-2xl tracking-wide text-neutral-100 dark:text-neutral-200
                     z-10
                 ",
                 a {
-                    class: "logo block rounded-full bg-neutral-50 dark:bg-neutral-300 w-8 h-8 cursor-pointer",
+                    class: "logo block rounded-full bg-neutral-50 dark:bg-neutral-300 w-6 md:w-8 h-6 md:h-8 cursor-pointer",
                     href: ""
                 }
                 div { class: "links flex flex-row gap-4 font-normal",
                     Link("", "about", "!decoration-2 tracking-wide"),
-                    Link("", "data & code", "!decoration-2 tracking-wide")
+                    Link("", "data + code", "!decoration-2 tracking-wide")
                 }
             }
 
@@ -140,20 +142,20 @@ fn HeroSection() -> Element {
                 src: assets.hasui_dark_jpeg.url
             }
 
-            div { class: "absolute bottom-0 left-0 flex flex-col gap-1 p-8",
+            div { class: "absolute bottom-0 left-0 flex flex-col p-4 md:p-8",
                 span {
                     id: "name-in-kanji",
-                    class: "text-7xl font-semibold tracking-wide whitespace-nowrap",
+                    class: "text-4xl md:text-7xl font-semibold tracking-wide whitespace-nowrap",
                     "種田山頭火"
                 }
                 span {
                     id: "name-in-romaji",
-                    class: "text-4xl font-normal tracking-wide whitespace-nowrap",
+                    class: "text-xl md:text-4xl font-normal tracking-wide whitespace-nowrap",
                     "Taneda Santōka"
                 }
                 span {
                     id: "birth-and-death",
-                    class: "text-3xl font-normal tracking-wide whitespace-nowrap",
+                    class: "text-base md:text-3xl font-normal tracking-wide whitespace-nowrap",
                     "1882 – 1940"
                 }
             }
@@ -163,7 +165,7 @@ fn HeroSection() -> Element {
 
 fn PoetrySection() -> Element {
     rsx!(
-        section { id: "poems", class: "flex flex-col gap-32",
+        section { id: "poems", class: "flex flex-col gap-8 md:gap-32",
             for publication in database.publications.iter() {
                 PoemsAndPublication(publication)
             }
@@ -173,7 +175,7 @@ fn PoetrySection() -> Element {
 
 fn PoemsAndPublication(publication: &'static Publication) -> Element {
     rsx!(
-        div { class: "poems-and-publication flex flex-row gap-12",
+        div { class: "poems-and-publication flex flex-col md:flex-row gap-2 md:gap-12",
             Publication(publication),
             PoemsInPublication(publication)
         }
@@ -188,10 +190,24 @@ fn Publication(publication: &'static Publication) -> Element {
     // }
     rsx!(
         // self-start is necessary to make sticky work.
-        div { class: "publication sticky top-32 self-start flex flex-col text-neutral-400 dark:text-neutral-500 items-end w-1/4 text-right",
-            span { class: "translator font-extralight text-3xl", "Translated by {translator.name}" }
-            span { class: "publication-name font-thin italic text-2xl", "{publication.name}" }
-            span { class: "publication-year font-thin text-2xl",
+        div { class: "
+                publication
+                sticky top-[4.5rem] md:top-32 self-start
+                py-4 md:pt-0
+                flex flex-col
+                items-start md:items-end
+                w-full md:w-1/4 
+                md:text-right
+                text-neutral-400 dark:text-neutral-500 bg-neutral-50
+                border-b border-neutral-200 dark:border-neutral-700 md:border-0
+            ",
+            span { class: "translator font-normal md:font-extralight text-lg md:text-3xl",
+                "Translated by {translator.name}"
+            }
+            span { class: "publication-name font-light md:font-thin italic text-sm md:text-2xl",
+                "{publication.name}"
+            }
+            span { class: "publication-year font-light md:font-thin text-sm md:text-2xl",
                 "{publication.year_or_unknown()} • "
                 Link("", "hide", "")
             }
@@ -201,7 +217,7 @@ fn Publication(publication: &'static Publication) -> Element {
 
 fn PoemsInPublication(publication: &'static Publication) -> Element {
     rsx!(
-        div { class: "poems-in-publication flex flex-col gap-24 w-2/3",
+        div { class: "poems-in-publication flex flex-col gap-4 md:gap-24 w-2/3",
             for poem in publication.poems().into_iter() {
                 Poem(poem)
             }
@@ -214,36 +230,12 @@ fn Poem(poem: &'static Poem) -> Element {
     let japanese_text = poem.japanese_text_or_default(); //.replace('\n', "<br>");
 
     rsx!(
-        div { class: "poem flex flex-col gap-2",
-            span { class: "poem-english-text text-3xl font-light lowercase text-neutral-500 dark:text-neutral-400",
+        div { class: "poem flex flex-col gap-1 md:gap-2 text-base md:text-3xl lowercase ",
+            span { class: "poem-english-text font-normal md:font-light text-neutral-500 dark:text-neutral-400",
                 "{english_text}"
             }
-            span { class: "poem-japanese-text text-3xl font-extralight lowercase italic text-neutral-400 dark:text-neutral-500",
+            span { class: "poem-japanese-text font-light md:font-extralight italic text-neutral-400 dark:text-neutral-500",
                 "{japanese_text}"
-            }
-        }
-    )
-}
-
-fn Controls() -> Element {
-    rsx!(
-        div { class: "controls-container fixed bottom-0 flex flex-row justify-end w-full max-w-screen-2xl px-8 py-4 pr-12",
-            div { class: "controls flex flex-row gap-4 bg-neutral-100 dark:bg-neutral-800 rounded-3xl px-4 py-2 border border-neutral-200 dark:border-neutral-700",
-                a {
-                    class: "about text-base text-neutral-400 dark:text-neutral-500 font-light underline decoration-1 underline-offset-4",
-                    href: "",
-                    "about"
-                }
-                a {
-                    class: "about text-base text-neutral-400 dark:text-neutral-500 font-light underline decoration-1 underline-offset-4",
-                    href: "",
-                    "data & code"
-                }
-                a {
-                    class: "about text-base text-neutral-400 dark:text-neutral-500 font-light underline decoration-1 underline-offset-4",
-                    href: "",
-                    "home"
-                }
             }
         }
     )

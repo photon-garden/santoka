@@ -1875,15 +1875,13 @@
       "id": 267,
       "translatorId": 5,
       "publicationId": 4,
-      "englishText": "where the walls are\nvines the grass",
-      "japaneseText": "falling apart the"
+      "englishText": "where the walls are\nfalling apart the\nvines the grass"
     },
     {
       "id": 268,
       "translatorId": 5,
       "publicationId": 4,
-      "englishText": "and the shadows too",
-      "japaneseText": "men women\ndancing"
+      "englishText": "men women\nand the shadows too\ndancing"
     },
     {
       "id": 269,
@@ -2995,14 +2993,14 @@
       "publicationId": 8,
       "notes": "The following haiku in not grammatically correct Japanese. Santoka often was careless about grammar. He seemed to want us to read between the lines, and more often than not his grammatical mistakes, a sign of his nonchalance, add charm to his work.",
       "japaneseText": "Anta to ko-shite kisha ga\nitta ri kitari suru\nkemuri.",
-      "englishText": "In your company\ngoing this way and that . . .\nthe smoke of train."
+      "englishText": "In your company\ngoing this way and that...\nthe smoke of train."
     },
     {
       "id": 437,
       "translatorId": 9,
       "publicationId": 8,
       "japaneseText": "Ame furu\nfuru-sato wa\nhadashi de aruku.",
-      "englishText": "The old home\nin the rain . . .\nI walk barefooted."
+      "englishText": "The old home\nin the rain...\nI walk barefooted."
     },
     {
       "id": 438,
@@ -3059,7 +3057,7 @@
       "translatorId": 10,
       "publicationId": 9,
       "englishText": "certain days\nstop begging to take in\nthe mountains",
-      "notes": "Moreover, as Scott himself says of an old Frank Zappa lyric “you gotta get into it before you get out of it; you gotta get out of it before you get into it.” I can tell you, not only does he apply this to his translations, but Scott commands readers to thoroughly get in and out of Santoka's haiku—his English versions rendered as if they themselves, were . . . Japanese."
+      "notes": "Moreover, as Scott himself says of an old Frank Zappa lyric “you gotta get into it before you get out of it; you gotta get out of it before you get into it.” I can tell you, not only does he apply this to his translations, but Scott commands readers to thoroughly get in and out of Santoka's haiku—his English versions rendered as if they themselves, were... Japanese."
     },
     {
       "id": 447,
@@ -3790,7 +3788,7 @@
       "translatorId": 13,
       "publicationId": 14,
       "japaneseText": "fuyu ame no ishidan o noboru santa maria",
-      "englishText": "Winter's rain, I scale the / slick stone steps . . . / Santa Maria."
+      "englishText": "Winter's rain, I scale the / slick stone steps... / Santa Maria."
     },
     {
       "id": 564,

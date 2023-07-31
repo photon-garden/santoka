@@ -11,14 +11,19 @@ pub mod manifest;
 pub mod prelude;
 pub mod routes;
 
+use color_eyre::eyre::Result;
 use prelude::*;
 
 #[tokio::main]
-async fn main() {
+async fn main() -> Result<()> {
+    color_eyre::install()?;
+
     match get_mode() {
         Mode::Dev => dev().await,
         Mode::Build => build(),
     }
+
+    Ok(())
 }
 
 async fn dev() {
@@ -46,7 +51,10 @@ async fn dev() {
         )
         .route("/build-time", get(routes::build_time::get));
 
-    let address = SocketAddr::from(([127, 0, 0, 1], 3000));
+    let port = 3000;
+    let address = SocketAddr::from(([127, 0, 0, 1], port));
+
+    println!("Listening on http://{}", address);
 
     axum::Server::bind(&address)
         .serve(app.into_make_service())

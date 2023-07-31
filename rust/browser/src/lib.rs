@@ -1,6 +1,5 @@
 #![allow(non_upper_case_globals)]
 
-use gloo::console;
 use gloo::events::EventListener;
 use wasm_bindgen::prelude::*;
 use web_sys::Event;
@@ -26,12 +25,19 @@ fn main() -> Result<(), JsValue> {
     #[cfg(feature = "dev")]
     dev::main();
 
-    let window = web_sys::window().expect("no global `window` exists");
-    let document = window.document().expect("should have a document on window");
-    let body = document.body().expect("document should have a body");
+    show_nav_if_scrolled();
+
+    Ok(())
+}
+
+// We could replace this with an html element.
+fn show_nav_if_scrolled() {
+    let window = web_sys::window().expect("web_sys::window() failed.");
+    let document = window.document().expect("window.document() failed.");
+    let body = document.body().expect("document.body() failed.");
     let show_if_scrolled = body
         .query_selector(".script\\:show-if-scrolled")
-        .expect("query_selector failed.")
+        .expect("body.query_selector() failed.")
         .expect("Couldn't find an element that matched .script:show-if-scrolled.");
 
     let mut showing = true;
@@ -50,6 +56,4 @@ fn main() -> Result<(), JsValue> {
         classes.remove_1("hidden").unwrap();
     })
     .forget();
-
-    Ok(())
 }
