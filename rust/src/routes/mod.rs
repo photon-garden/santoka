@@ -33,40 +33,54 @@ fn Layout(title: &'static str, body: Element) -> Element {
             link { rel: "stylesheet", href: "main.css" }
             title { "{title}" }
         }
-        body { class: "bg-neutral-50 dark:bg-neutral-900 flex flex-col items-center selection:bg-neutral-200/75 dark:selection:bg-neutral-700/75",
-            Nav(),
+        body { class: "{bg_background()} flex flex-col items-center selection:bg-neutral-200/75 dark:selection:bg-neutral-700/75",
+            FloatingNav(),
             body,
             BrowserScript()
         }
     )
 }
 
-fn Nav() -> Element {
+fn FloatingNav() -> Element {
     rsx!(
         nav {
             //
             class: "
                 script:show-if-scrolled
-                fixed top-0 lg:top-8 z-10
-                pt-4 lg:pt-0
+                fixed top-0 z-10
                 {horizontal_center_fixed()}
                 w-full max-w-screen-2xl 
                 pointer-events-none
                 px-4 lg:px-8
                 text-base lg:text-2xl tracking-wide text-neutral-100 dark:text-neutral-200
-                bg-neutral-50 lg:bg-transparent
             ",
             div {
-                //
+                // We use this extra div to prevent text from showing up once it has scrolled
+                // up past the nav.
                 class: "
-                    logo-and-links bg-[linear-gradient(90deg,_#e6edee,_#98b7ca)] overflow-hidden rounded-3xl lg:w-1/4
+                    vertical-spacer
+                    pt-4 lg:pt-8
+                    lg:w-1/4
+                    rounded-b-3xl
+                    {bg_background()}
+                ",
+
+                div {
+                    //
+                    class: "
+                    logo-and-links 
+                    bg-[linear-gradient(90deg,_#e6edee,_#98b7ca)]
+                    dark:bg-[linear-gradient(90deg,#5b6f76,#212123)]
+                    overflow-hidden rounded-3xl 
                     p-4
+                    w-full
                     flex flex-row gap-4 justify-between 
                     pointer-events-auto
                     select-none
                 ",
-                NavLogo(),
-                NavLinks()
+                    NavLogo(),
+                    NavLinks()
+                }
             }
         }
     )
@@ -189,7 +203,8 @@ fn Publication(publication: &'static Publication) -> Element {
                 items-start lg:items-end
                 w-full lg:w-1/4 
                 lg:text-right
-                text-neutral-400 dark:text-neutral-500 bg-neutral-50
+                text-neutral-400 dark:text-neutral-400 
+                {bg_background()}
                 border-b border-neutral-200 dark:border-neutral-700 lg:border-0
             ",
             span { class: "translator font-normal lg:font-extralight text-lg lg:text-3xl",
@@ -265,4 +280,8 @@ fn NavLinks() -> Element {
             Link("", "data + code", "lg:!decoration-2 tracking-wide")
         }
     )
+}
+
+fn bg_background() -> &'static str {
+    "bg-neutral-50 dark:bg-neutral-900"
 }
