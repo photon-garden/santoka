@@ -52,7 +52,7 @@ fn FloatingNav() -> Element {
                 w-full max-w-screen-2xl 
                 pointer-events-none
                 px-4 lg:px-8
-                text-base lg:text-2xl tracking-wide text-neutral-100 dark:text-neutral-200
+                text-base lg:text-2xl tracking-wide
             ",
             div {
                 // We use this extra div to prevent text from showing up once it has scrolled
@@ -79,7 +79,7 @@ fn FloatingNav() -> Element {
                     select-none
                 ",
                     NavLogo(),
-                    NavLinks()
+                    NavLinks("")
                 }
             }
         }
@@ -104,8 +104,12 @@ fn HeroSection() -> Element {
         section {
             id: "hero",
             class: "
-                flex flex-col justify-start items-start dark:justify-end overflow-hidden relative w-full h-[384px] lg:h-[720px] max-h-[calc(100vh-4rem)] rounded-3xl selection:bg-neutral-700/75 dark:selection:bg-neutral-500/75
-                tracking-wide text-neutral-100 dark:text-neutral-200
+                flex flex-col justify-start items-start dark:justify-end
+                overflow-hidden rounded-3xl 
+                relative
+                w-full h-[384px] lg:h-[720px] max-h-[calc(100vh-4rem)]
+                selection:bg-neutral-700/75 dark:selection:bg-neutral-500/75
+                text-neutral-100 dark:text-neutral-300 tracking-wide
                 z-20
             ",
 
@@ -118,7 +122,7 @@ fn HeroSection() -> Element {
                     z-10
                 ",
                 NavLogo(),
-                NavLinks()
+                NavLinks("")
             }
 
             // Light mode image.
@@ -267,15 +271,29 @@ fn Link(href: &'static str, content: &'static str, classes: &'static str) -> Ele
 fn NavLogo() -> Element {
     rsx!(
         a {
-            class: "logo block rounded-full bg-neutral-50 dark:bg-neutral-300 w-6 lg:w-8 h-6 lg:h-8 cursor-pointer",
+            class: "
+                logo
+                block rounded-full
+                w-6 lg:w-8 h-6 lg:h-8
+                bg-neutral-50 dark:bg-neutral-300
+                cursor-pointer
+            ",
             href: ""
         }
     )
 }
 
-fn NavLinks() -> Element {
+fn NavLinks(classes: &'static str) -> Element {
     rsx!(
-        div { class: "links flex flex-row gap-4 font-light lg:font-normal",
+        div {
+            //
+            class: "
+                links
+                flex flex-row gap-4
+                font-light lg:font-normal
+                text-neutral-100 dark:text-neutral-300
+                {classes}
+            ",
             Link("", "about", "lg:!decoration-2 tracking-wide"),
             Link("", "data + code", "lg:!decoration-2 tracking-wide")
         }
