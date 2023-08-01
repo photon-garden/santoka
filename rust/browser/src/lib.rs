@@ -1,5 +1,6 @@
 #![allow(non_upper_case_globals)]
 
+use gloo::console;
 use gloo::events::EventListener;
 use wasm_bindgen::prelude::*;
 use web_sys::Event;
@@ -26,6 +27,7 @@ fn main() -> Result<(), JsValue> {
     dev::main();
 
     show_nav_if_scrolled();
+    load_more_poems_on_link_click();
 
     Ok(())
 }
@@ -56,4 +58,28 @@ fn show_nav_if_scrolled() {
         classes.remove_1("hidden").unwrap();
     })
     .forget();
+}
+
+fn load_more_poems_on_link_click() {
+    let window = web_sys::window().expect("web_sys::window() failed.");
+    let document = window.document().expect("window.document() failed.");
+    let load_more_links = document
+        .query_selector_all(".script\\:load-more-poems")
+        .expect("document.query_selector_all() failed.");
+
+    console::log!(
+        "Registering event listeners for {} load more links.",
+        load_more_links.length()
+    );
+
+    for index in 0..load_more_links.length() {
+        let link = load_more_links
+            .get(index)
+            .expect("load_more_links.get() failed.");
+
+        EventListener::new(&link, "click", move |_: &Event| {
+            console::log!("Clicked load more poems link.");
+        })
+        .forget();
+    }
 }

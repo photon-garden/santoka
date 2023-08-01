@@ -61,7 +61,7 @@ fn FloatingNav() -> Element {
                     vertical-spacer
                     pt-4 lg:pt-8
                     lg:w-1/4
-                    rounded-b-3xl
+                    lg:rounded-b-3xl
                     {bg_background()}
                 ",
 
@@ -229,9 +229,37 @@ fn PoemsInPublication(publication: &'static Publication) -> Element {
     // We use padding-bottom instead of gap on the parent because of the way it affects the publication's
     // sticky positioning.
     rsx!(
-        div { class: "poems-in-publication flex flex-col gap-8 lg:gap-24 lg:w-2/3 pb-16 lg:pb-32",
-            for poem in publication.poems().into_iter() {
+        div { class: "
+                poems-in-publication
+                flex flex-col gap-8 lg:gap-24
+                lg:w-2/3
+                pb-16 lg:pb-32
+                text-base lg:text-3xl 
+            ",
+            for poem in publication.poems().into_iter().take(3) {
                 Poem(poem)
+            }
+            // bg-neutral-200 dark:bg-neutral-600
+            span { class: "
+                    text-neutral-400 dark:text-neutral-400
+                    flex flex-row gap-2
+                ",
+
+                "⨀"
+
+                button {
+                    disabled: "true",
+                    class: "
+                        script-link
+                        script:load-more-poems
+                        tracking-wide
+                        whitespace-nowrap
+                        font-thin
+                        w-min
+                        {link_classes()}
+                    ",
+                    "load more"
+                }
             }
         }
     )
@@ -242,7 +270,7 @@ fn Poem(poem: &'static Poem) -> Element {
     let japanese_text = poem.japanese_text_or_default(); //.replace('\n', "<br>");
 
     rsx!(
-        div { class: "poem flex flex-col gap-1 lg:gap-2 text-base lg:text-3xl lowercase ",
+        div { class: "poem flex flex-col gap-1 lg:gap-2 lowercase ",
             span { class: "poem-english-text font-normal lg:font-light text-neutral-500 dark:text-neutral-400",
                 "{english_text}"
             }
@@ -259,13 +287,7 @@ fn BrowserScript() -> Element {
 }
 
 fn Link(href: &'static str, content: &'static str, classes: &'static str) -> Element {
-    rsx!(
-        a {
-            class: "underline decoration-1 underline-offset-4 cursor-pointer {classes}",
-            href: href,
-            "{content}"
-        }
-    )
+    rsx!( a { class: "{link_classes()}", href: href, "{content}" } )
 }
 
 fn NavLogo() -> Element {
@@ -294,12 +316,16 @@ fn NavLinks(classes: &'static str) -> Element {
                 text-neutral-100 dark:text-neutral-300
                 {classes}
             ",
-            Link("", "about", "lg:!decoration-2 tracking-wide"),
-            Link("", "data + code", "lg:!decoration-2 tracking-wide")
+            Link("", "about", "tracking-wide"),
+            Link("", "data + code", "tracking-wide")
         }
     )
 }
 
 fn bg_background() -> &'static str {
     "bg-neutral-50 dark:bg-neutral-900"
+}
+
+fn link_classes() -> &'static str {
+    "underline decoration-1 underline-offset-4 cursor-pointer {classes}"
 }
