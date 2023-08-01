@@ -54,7 +54,7 @@ fn Nav() -> Element {
                 pointer-events-none
                 px-4 lg:px-8
                 text-base lg:text-2xl tracking-wide text-neutral-100 dark:text-neutral-200
-                bg-neutral-50 md:bg-transparent
+                bg-neutral-50 lg:bg-transparent
             ",
             div {
                 //
@@ -65,14 +65,8 @@ fn Nav() -> Element {
                     pointer-events-auto
                     select-none
                 ",
-                a {
-                    class: "logo block rounded-full bg-neutral-50 dark:bg-neutral-300 w-6 lg:w-8 h-6 lg:h-8 cursor-pointer",
-                    href: ""
-                }
-                div { class: "links flex flex-row gap-4 font-normal",
-                    Link("", "about", "!decoration-2 tracking-wide"),
-                    Link("", "data + code", "!decoration-2 tracking-wide")
-                }
+                NavLogo(),
+                NavLinks()
             }
         }
     )
@@ -109,26 +103,20 @@ fn HeroSection() -> Element {
                     text-base lg:text-2xl tracking-wide text-neutral-100 dark:text-neutral-200
                     z-10
                 ",
-                a {
-                    class: "logo block rounded-full bg-neutral-50 dark:bg-neutral-300 w-6 lg:w-8 h-6 lg:h-8 cursor-pointer",
-                    href: ""
-                }
-                div { class: "links flex flex-row gap-4 font-normal",
-                    Link("", "about", "!decoration-2 tracking-wide"),
-                    Link("", "data + code", "!decoration-2 tracking-wide")
-                }
+                NavLogo(),
+                NavLinks()
             }
 
             // Light mode image.
             img {
                 alt: "Clouds and a red mountain in the distance, with darker mountains in the midground. Water and grass is in the foreground.",
-                class: "shrink-0 min-w-full min-h-full object-cover dark:hidden select-none transform -scale-x-100 md:scale-x-100 object-right md:object-left",
+                class: "shrink-0 min-w-full min-h-full object-cover dark:hidden select-none transform -scale-x-100 lg:scale-x-100 object-right lg:object-left",
                 style: "image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;",
                 src: assets.hasui_light_jpeg.lqip
             }
             img {
                 alt: "Clouds and a red mountain in the distance, with darker mountains in the midground. Water and grass is in the foreground.",
-                class: "absolute min-w-full min-h-full object-cover dark:hidden select-none -scale-x-100 md:scale-x-100 object-right md:object-left",
+                class: "absolute min-w-full min-h-full object-cover dark:hidden select-none -scale-x-100 lg:scale-x-100 object-right lg:object-left",
                 src: assets.hasui_light_jpeg.url
             }
 
@@ -168,7 +156,7 @@ fn HeroSection() -> Element {
 
 fn PoetrySection() -> Element {
     rsx!(
-        section { id: "poems", class: "flex flex-col gap-8 lg:gap-32",
+        section { id: "poems", class: "flex flex-col",
             for publication in database.publications.iter() {
                 PoemsAndPublication(publication)
             }
@@ -178,7 +166,7 @@ fn PoetrySection() -> Element {
 
 fn PoemsAndPublication(publication: &'static Publication) -> Element {
     rsx!(
-        div { class: "poems-and-publication flex flex-col lg:flex-row gap-2 lg:gap-12",
+        div { class: "poems-and-publication flex flex-col lg:flex-row gap-10 lg:gap-12",
             Publication(publication),
             PoemsInPublication(publication)
         }
@@ -219,8 +207,10 @@ fn Publication(publication: &'static Publication) -> Element {
 }
 
 fn PoemsInPublication(publication: &'static Publication) -> Element {
+    // We use padding-bottom instead of gap on the parent because of the way it affects the publication's
+    // sticky positioning.
     rsx!(
-        div { class: "poems-in-publication flex flex-col gap-4 lg:gap-24 w-2/3",
+        div { class: "poems-in-publication flex flex-col gap-8 lg:gap-24 lg:w-2/3 pb-16 lg:pb-32",
             for poem in publication.poems().into_iter() {
                 Poem(poem)
             }
@@ -255,6 +245,24 @@ fn Link(href: &'static str, content: &'static str, classes: &'static str) -> Ele
             class: "underline decoration-1 underline-offset-4 cursor-pointer {classes}",
             href: href,
             "{content}"
+        }
+    )
+}
+
+fn NavLogo() -> Element {
+    rsx!(
+        a {
+            class: "logo block rounded-full bg-neutral-50 dark:bg-neutral-300 w-6 lg:w-8 h-6 lg:h-8 cursor-pointer",
+            href: ""
+        }
+    )
+}
+
+fn NavLinks() -> Element {
+    rsx!(
+        div { class: "links flex flex-row gap-4 font-light lg:font-normal",
+            Link("", "about", "lg:!decoration-2 tracking-wide"),
+            Link("", "data + code", "lg:!decoration-2 tracking-wide")
         }
     )
 }
