@@ -4,7 +4,7 @@ use gloo::console;
 use gloo::events::EventListener;
 use prelude::*;
 use wasm_bindgen::prelude::*;
-use web_sys::Event;
+use web_sys::{Element, Event};
 
 #[cfg(feature = "dev")]
 mod dev;
@@ -46,7 +46,8 @@ fn show_nav_if_scrolled() {
         .expect("Couldn't find an element that matched .script:show-if-scrolled.");
 
     let mut showing = true;
-    EventListener::new(&document, "scroll", move |_: &Event| {
+
+    let mut show_or_hide_element_based_on_scroll_position = move || {
         let threshold = 100.0;
         let scroll_y = window.scroll_y().unwrap();
 
@@ -60,6 +61,13 @@ fn show_nav_if_scrolled() {
             showing = false;
             show_if_scrolled.hide();
         }
+    };
+
+    // Call it once to set the initial state.
+    show_or_hide_element_based_on_scroll_position();
+
+    EventListener::new(&document, "scroll", move |_: &Event| {
+        show_or_hide_element_based_on_scroll_position();
     })
     .forget();
 }
