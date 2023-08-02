@@ -43,6 +43,19 @@ fn Layout(title: &'static str, body: Element) -> Element {
 
 fn FloatingNav() -> Element {
     rsx!(
+        div {
+            //
+            class: "
+                cover-nav
+                z-20
+                absolute
+                -top-32 left-0
+                w-screen
+                p-32
+                {bg_background()}
+            "
+        }
+
         nav {
             //
             class: "
@@ -54,6 +67,7 @@ fn FloatingNav() -> Element {
                 px-4 lg:px-8
                 text-base lg:text-2xl tracking-wide
             ",
+
             div {
                 // We use this extra div to prevent text from showing up once it has scrolled
                 // up past the nav.
@@ -291,18 +305,16 @@ fn Link(href: &'static str, content: &'static str, classes: &'static str) -> Ele
 }
 
 fn NavLogo() -> Element {
-    rsx!(
-        a {
-            class: "
+    rsx!(a {
+        class: "
                 logo
                 block rounded-full
                 w-6 lg:w-8 h-6 lg:h-8
                 bg-neutral-50 dark:bg-neutral-300
                 cursor-pointer
             ",
-            href: ""
-        }
-    )
+        href: ""
+    })
 }
 
 fn NavLinks(classes: &'static str) -> Element {

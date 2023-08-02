@@ -2,11 +2,14 @@
 
 use gloo::console;
 use gloo::events::EventListener;
+use prelude::*;
 use wasm_bindgen::prelude::*;
 use web_sys::Event;
 
 #[cfg(feature = "dev")]
 mod dev;
+mod extensions;
+mod prelude;
 
 #[wasm_bindgen]
 extern "C" {
@@ -44,18 +47,19 @@ fn show_nav_if_scrolled() {
 
     let mut showing = true;
     EventListener::new(&document, "scroll", move |_: &Event| {
+        let threshold = 100.0;
         let scroll_y = window.scroll_y().unwrap();
-        let classes = show_if_scrolled.class_list();
-        if scroll_y <= 0.0 && showing {
-            // Hide.
-            showing = false;
-            classes.add_1("hidden").unwrap();
+
+        if scroll_y >= threshold && !showing {
+            showing = true;
+            show_if_scrolled.show();
             return;
         }
 
-        // Show.
-        showing = true;
-        classes.remove_1("hidden").unwrap();
+        if scroll_y < threshold && showing {
+            showing = false;
+            show_if_scrolled.hide();
+        }
     })
     .forget();
 }
