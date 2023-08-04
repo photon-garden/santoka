@@ -73,7 +73,9 @@ fn build() {
     fs::create_dir(&built_dir).unwrap();
 
     let index_html_built_path = built_dir.join("index.html");
-    fs::write(index_html_built_path, routes::render_get()).unwrap();
+    let minified_html =
+        minify_html::minify(routes::render_get().as_bytes(), &minify_html::Cfg::new());
+    fs::write(index_html_built_path, minified_html).unwrap();
 
     let main_css_built_path = built_dir.join(assets.main_css.url);
     fs::copy(assets.main_css.absolute_path(), main_css_built_path).unwrap();
@@ -85,7 +87,8 @@ fn build() {
     fs::write(hasui_dark_jpeg_built_path, assets.hasui_dark_jpeg.bytes).unwrap();
 
     let browser_js_built_path = built_dir.join(assets.browser_js.url);
-    fs::write(browser_js_built_path, assets.browser_js.contents).unwrap();
+    let minified_js = minifier::js::minify(assets.browser_js.contents).to_string();
+    fs::write(browser_js_built_path, minified_js).unwrap();
 
     let browser_bg_wasm_built_path = built_dir.join(assets.browser_bg_wasm.url);
     fs::write(browser_bg_wasm_built_path, assets.browser_bg_wasm.bytes).unwrap();
