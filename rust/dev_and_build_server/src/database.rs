@@ -1,7 +1,7 @@
 use once_cell::sync::Lazy;
 use ts_rs::TS;
 
-static json: &str = include_str!("../../data/2023-06-26T14:52:00.000Z/database.json");
+static json: &str = include_str!("../../../data/2023-06-26T14:52:00.000Z/database.json");
 pub static database: Lazy<Database> = Lazy::new(load);
 
 pub fn load() -> Database {

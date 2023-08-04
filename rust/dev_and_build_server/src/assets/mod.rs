@@ -25,11 +25,11 @@ pub static assets: Assets = Assets {
     },
     browser_js: JsAsset {
         url: "browser.js",
-        contents: include_str!("../../target/browser/browser.js"),
+        contents: include_str!("../../../target/browser/browser.js"),
     },
     browser_bg_wasm: WasmAsset {
         url: "browser_bg.wasm",
-        bytes: include_bytes!("../../target/browser/browser_bg.wasm"),
+        bytes: include_bytes!("../../../target/browser/browser_bg.wasm"),
     },
 };
 

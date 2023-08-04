@@ -59,7 +59,7 @@ fn FloatingNav() -> Element {
         nav {
             //
             class: "
-                script:show-if-scrolled
+                {server_show_if_scrolled()}
                 fixed top-0 z-10
                 {horizontal_center_fixed()}
                 w-full max-w-screen-2xl 
@@ -301,7 +301,7 @@ fn BrowserScript() -> Element {
 }
 
 fn Link(href: &'static str, content: &'static str, classes: &'static str) -> Element {
-    rsx!( a { class: "{link_classes()}", href: href, "{content}" } )
+    rsx!( a { class: "{classes} {link_classes()}", href: href, "{content}" } )
 }
 
 fn NavLogo() -> Element {

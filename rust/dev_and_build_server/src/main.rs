@@ -1,6 +1,7 @@
 #![allow(non_snake_case, non_upper_case_globals)]
 
 use axum::{routing::get, Router};
+use shared::prelude::*;
 use std::net::SocketAddr;
 use std::{env, fs};
 
@@ -107,4 +108,4 @@ enum Mode {
     Build,
 }
 
-pub static build_time: &str = include_str!("../target/build_time.txt");
+pub static build_time: &str = include_str!("../../target/build_time.txt");
