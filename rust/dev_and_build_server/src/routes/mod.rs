@@ -76,8 +76,11 @@ fn FloatingNav() -> Element {
                     pt-4 lg:pt-8
                     lg:w-1/4
                     lg:rounded-b-3xl
+                    shadow-neutral-50 dark:shadow-neutral-900
                     {bg_background()}
                 ",
+
+                style: "box-shadow: var(--tw-shadow-color) 0px 0px 0 2px;",
 
                 div {
                     //
@@ -342,11 +345,11 @@ fn link_classes() -> &'static str {
     "underline decoration-1 underline-offset-4 cursor-pointer {classes}"
 }
 
-fn Image(asset: &ImageAsset, classes: &'static str) -> Element {
+fn Image(asset: &'static ImageAsset, classes: &'static str) -> Element {
     rsx!(img {
         class: "{classes}",
         src: asset.url,
-        srcset: asset.srcset().as_str(),
+        srcset: asset.srcset(),
         alt: asset.alt
     })
 }
