@@ -52,9 +52,30 @@ pub struct ImageAsset {
     pub url: &'static str,
     pub bytes: &'static [u8],
     pub lqip: &'static str,
+    pub alt: &'static str,
 }
 
-impl ImageAsset {}
+impl ImageAsset {
+    pub fn srcset(&self) -> String {
+        Self::image_widths()
+            .iter()
+            .map(|width| format!("{} {}w", self.url_with_width(*width), width))
+            .collect::<Vec<String>>()
+            .join(", ")
+    }
+
+    fn image_widths() -> Vec<u32> {
+        vec![
+            16, 32, 48, 64, 96, 128, 256, 384, 512, 640, 768, 896, 1024, 1152, 1280, 1408, 1536,
+            1664, 1792, 1920, 2048, 2176, 2304, 2432, 2560, 2688, 2816, 2944, 3072, 3200, 3328,
+            3456, 3584,
+        ]
+    }
+
+    fn url_with_width(&self, width: u32) -> String {
+        format!("{}?width={}", self.url, width)
+    }
+}
 
 pub struct JsAsset {
     pub url: &'static str,

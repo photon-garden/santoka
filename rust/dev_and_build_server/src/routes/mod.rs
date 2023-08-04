@@ -1,4 +1,4 @@
-use crate::prelude::*;
+use crate::{assets::ImageAsset, prelude::*};
 use axum::response::Html;
 use dioxus::prelude::*;
 
@@ -340,4 +340,13 @@ fn bg_background() -> &'static str {
 
 fn link_classes() -> &'static str {
     "underline decoration-1 underline-offset-4 cursor-pointer {classes}"
+}
+
+fn Image(asset: &ImageAsset, classes: &'static str) -> Element {
+    rsx!(img {
+        class: "{classes}",
+        src: asset.url,
+        srcset: asset.srcset().as_str(),
+        alt: asset.alt
+    })
 }
