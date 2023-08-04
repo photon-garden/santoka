@@ -9,17 +9,17 @@ mod dev;
 mod extensions;
 mod prelude;
 
-#[wasm_bindgen]
-extern "C" {
-    // JS alert function.
-    fn alert(s: &str);
-}
+// #[wasm_bindgen]
+// extern "C" {
+//     // JS alert function.
+//     fn alert(s: &str);
+// }
 
 // Callable from JS.
-#[wasm_bindgen]
-pub fn greet() {
-    alert("Hello!");
-}
+// #[wasm_bindgen]
+// pub fn greet() {
+//     alert("Hello!");
+// }
 
 // Called when the wasm module is instantiated.
 #[wasm_bindgen(start)]
