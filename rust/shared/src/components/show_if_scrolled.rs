@@ -1,6 +1,9 @@
 pub static show_if_scrolled_class_name: &str = "script:show-if-scrolled";
 
+#[cfg(feature = "browser")]
 pub use self::browser::browser_show_if_scrolled;
+
+#[cfg(feature = "server")]
 pub use self::server::server_show_if_scrolled;
 
 #[cfg(feature = "browser")]

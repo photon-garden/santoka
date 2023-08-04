@@ -1,6 +1,5 @@
 #![allow(non_upper_case_globals)]
 
-use gloo::console;
 use prelude::*;
 use shared::prelude::*;
 use web_sys::Element;
@@ -27,8 +26,6 @@ pub fn greet() {
 fn main() -> Result<(), JsValue> {
     #[cfg(feature = "dev")]
     dev::main();
-
-    console::log!(shared::add(1, 2));
 
     // load_more_poems_on_link_click();
 

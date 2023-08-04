@@ -5,7 +5,3 @@ pub mod extensions;
 pub mod prelude;
 
 pub use prelude::*;
-
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
