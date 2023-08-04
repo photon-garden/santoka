@@ -87,7 +87,8 @@ fn build() {
     fs::write(hasui_dark_jpeg_built_path, assets.hasui_dark_jpeg.bytes).unwrap();
 
     let browser_js_built_path = built_dir.join(assets.browser_js.url);
-    let minified_js = minifier::js::minify(assets.browser_js.contents).to_string();
+    // let minified_js = minifier::js::minify(assets.browser_js.contents).to_string();
+    let minified_js = assets.browser_js.contents;
     fs::write(browser_js_built_path, minified_js).unwrap();
 
     let browser_bg_wasm_built_path = built_dir.join(assets.browser_bg_wasm.url);
