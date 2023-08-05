@@ -23,10 +23,7 @@ build = [
     "cargo cmd build_tailwind_production",
     "cargo cmd build_rust_production",
 ]
-preview = [
-    "cargo cmd build",
-    "./target/cargo_install/bin/simple-http-server --port 3000 --index built",
-]
+preview = ["cargo cmd build", "cargo cmd serve_static_files"]
 deploy = [
     "cargo cmd build",
     "git add --all",
@@ -42,8 +39,11 @@ setup = [
 ]
 
 # Rust
-watch_rust = "./target/cargo_install/bin/cargo-watch --watch ./dev_and_build_server --watch ./browser -x 'cmd build_rust_dev'"
-build_rust_dev = ["cargo cmd build_browser_dev", "cargo cmd server_dev"]
+build_rust_dev = [
+    "cargo cmd build_browser_dev",
+    "cargo cmd build_server_dev",
+    "cargo cmd serve_static_files",
+]
 build_rust_production = [
     "cargo cmd build_browser_production",
     "cargo cmd build_server_production",
@@ -57,9 +57,11 @@ build_browser_production = [
     "cd browser && ../target/cargo_install/bin/wasm-opt -Os -o ../target/browser/browser_bg.wasm ../target/browser/browser_bg.wasm",
 ]
 
-server_dev = "cargo run -- dev"
+build_server_dev = "cargo run -- dev"
 build_server_production = "cargo run -- build"
+serve_static_files = "./target/cargo_install/bin/simple-http-server --port 3000 --index built"
 
 # Tailwind
 watch_tailwind = "npx --prefix ./target/node_modules tailwindcss -i ./dev_and_build_server/src/main.css -o ./target/tailwind/built.css --watch"
 build_tailwind_production = "npx --prefix ./target/node_modules tailwindcss -i ./dev_and_build_server/src/main.css -o ./target/tailwind/built.css --minify"
+watch_rust = "./target/cargo_install/bin/cargo-watch --watch ./dev_and_build_server --watch ./browser -x 'cmd build_rust_dev'"
