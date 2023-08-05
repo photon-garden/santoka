@@ -143,30 +143,24 @@ fn HeroSection() -> Element {
             }
 
             // Light mode image.
-            img {
-                alt: "Clouds and a red mountain in the distance, with darker mountains in the midground. Water and grass is in the foreground.",
-                class: "shrink-0 min-w-full min-h-full object-cover dark:hidden select-none transform -scale-x-100 lg:scale-x-100 object-right lg:object-left",
-                style: "image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;",
-                src: assets.hasui_light_jpeg.lqip
-            }
-            img {
-                alt: "Clouds and a red mountain in the distance, with darker mountains in the midground. Water and grass is in the foreground.",
-                class: "absolute min-w-full min-h-full object-cover dark:hidden select-none -scale-x-100 lg:scale-x-100 object-right lg:object-left",
-                src: assets.hasui_light_jpeg.url
-            }
+            Image(&assets.hasui_light_jpeg, "
+                shrink-0 min-w-full min-h-full object-cover
+                dark:hidden
+                transform -scale-x-100 lg:scale-x-100 object-right lg:object-left
+            "),
 
             // Dark mode image.
-            img {
-                alt: "A dark, rainswept village at night. Shadows of trees in the distance, but a few lights are on in the village.",
-                class: "shrink-0 min-w-full min-h-full object-cover hidden dark:block select-none",
-                style: "image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;",
-                src: assets.hasui_dark_jpeg.lqip
-            }
-            img {
-                alt: "A dark, rainswept village at night. Shadows of trees in the distance, but a few lights are on in the village.",
-                class: "absolute min-w-full min-h-full object-cover hidden dark:block select-none",
-                src: assets.hasui_dark_jpeg.url
-            }
+            // img {
+            //     alt: "A dark, rainswept village at night. Shadows of trees in the distance, but a few lights are on in the village.",
+            //     class: "shrink-0 min-w-full min-h-full object-cover hidden dark:block select-none",
+            //     style: "image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;",
+            //     src: assets.hasui_dark_jpeg.lqip
+            // }
+            // img {
+            //     alt: "A dark, rainswept village at night. Shadows of trees in the distance, but a few lights are on in the village.",
+            //     class: "absolute min-w-full min-h-full object-cover hidden dark:block select-none",
+            //     src: assets.hasui_dark_jpeg.url
+            // }
 
             div { class: "absolute bottom-0 left-0 flex flex-col p-4 lg:p-8",
                 span {
@@ -346,10 +340,25 @@ fn link_classes() -> &'static str {
 }
 
 fn Image(asset: &'static ImageAsset, classes: &'static str) -> Element {
-    rsx!(img {
-        class: "{classes}",
-        src: asset.url,
-        srcset: asset.srcset(),
-        alt: asset.alt
-    })
+    rsx!(
+        div {
+            //
+            class: "select-none relative {classes}",
+
+            img {
+                alt: asset.alt,
+                class: "shrink-0 min-w-full min-h-full object-cover",
+                style: "image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;",
+                src: asset.lqip
+            }
+
+            img {
+                //
+                alt: asset.alt,
+                class: "absolute top-0 left-0 min-w-full min-h-full object-cover",
+                src: asset.url,
+                srcset: asset.srcset()
+            }
+        }
+    )
 }

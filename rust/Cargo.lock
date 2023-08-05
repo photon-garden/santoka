@@ -523,6 +523,7 @@ dependencies = [
  "minify-html",
  "minify-js 0.5.6",
  "once_cell",
+ "rayon",
  "serde",
  "serde_json",
  "shared",
