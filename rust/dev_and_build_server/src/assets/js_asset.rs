@@ -1,5 +1,6 @@
 use crate::prelude::*;
 
+#[derive(PartialEq)]
 pub struct JsAsset {
     pub asset_path: &'static str,
     pub contents: &'static str,

@@ -29,7 +29,7 @@ async fn main() -> Result<()> {
     fs::create_dir(&built_dir).unwrap();
 
     println!("Saving assets to disk.");
-    assets.save_to_disk(&built_dir, &mode);
+    Assets::new().save_to_disk(&built_dir, &mode);
 
     Ok(())
 }

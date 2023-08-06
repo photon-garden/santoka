@@ -58,7 +58,7 @@ build_browser_production = [
 ]
 
 build_server_dev = "cargo run -- dev"
-build_server_production = "cargo run -- build"
+build_server_production = "cargo run -- production"
 serve_static_files = "./target/cargo_install/bin/simple-http-server --port 3000 built"
 
 # Tailwind

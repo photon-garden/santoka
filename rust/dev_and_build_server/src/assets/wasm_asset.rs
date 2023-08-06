@@ -1,5 +1,6 @@
 use crate::prelude::*;
 
+#[derive(PartialEq)]
 pub struct WasmAsset {
     pub asset_path: &'static str,
     pub bytes: &'static [u8],

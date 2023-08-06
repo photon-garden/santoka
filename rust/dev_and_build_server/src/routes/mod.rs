@@ -1,14 +1,14 @@
+use std::rc::Rc;
+
 use crate::{assets::ImageAsset, prelude::*};
 use dioxus::prelude::*;
 
 // type Element = LazyNodes<'static, 'static>;
 // type Element = VirtualDom;
 
-pub fn get() -> String {
-    // dioxus_ssr::render_lazy(App())
-    // dioxus_ssr::render(App())
+pub fn get(non_html_assets: Rc<NonHtmlAssets>) -> String {
     // create a VirtualDom with the app component
-    let mut app = VirtualDom::new(App);
+    let mut app = VirtualDom::new_with_props(App, AppProps { non_html_assets });
 
     // rebuild the VirtualDom before rendering
     let _ = app.rebuild();
@@ -17,7 +17,44 @@ pub fn get() -> String {
     dioxus_ssr::render(&app)
 }
 
-fn App(cx: Scope) -> Element {
+#[derive(Props, PartialEq)]
+struct RealAppProps {
+    non_html_assets: Rc<NonHtmlAssets>,
+}
+
+#[derive(Props, PartialEq)]
+struct AppProps {
+    todos: Vec<Todo>,
+}
+
+#[derive(PartialEq)]
+pub struct Todo {
+    text: String,
+}
+
+fn App(cx: Scope<AppProps>) -> Element {
+    use_shared_state_provider(cx, || cx.props.todos);
+    cx.render(rsx!(Todos {}))
+}
+
+fn Todos(cx: Scope) -> Element {
+    let todos = use_shared_state::<Vec<Todo>>(cx).unwrap();
+    let todos = todos.read();
+
+    cx.render(rsx!(for todo in todos.iter() {
+        Todo { todo: todo }
+    }))
+}
+
+#[inline_props]
+fn Todo<'todo>(cx: Scope, todo: &'todo Todo) -> Element<'todo> {
+    cx.render(rsx!(
+        div { class: "todo", span { class: "todo-text", "{todo.text}" } }
+    ))
+}
+
+fn RealApp(cx: Scope<AppProps>) -> Element {
+    use_shared_state_provider(cx, || cx.props.non_html_assets.clone());
     cx.render(rsx!(
         Layout { title: "Taneda Santōka", Body {} }
     ))
@@ -126,6 +163,9 @@ fn Body(cx: Scope) -> Element {
 }
 
 fn HeroSection(cx: Scope) -> Element {
+    let assets_shared_state = use_shared_state::<Rc<NonHtmlAssets>>(cx).unwrap();
+    let assets = assets_shared_state.read();
+
     dbg!("HeroSection");
     cx.render(rsx!(
         section {
@@ -377,7 +417,7 @@ fn link_classes() -> &'static str {
 }
 
 #[inline_props]
-fn Image(cx: Scope, asset: &'static ImageAsset, classes: &'static str) -> Element {
+fn Image<'a>(cx: Scope, asset: &'a ImageAsset, classes: &'static str) -> Element<'a> {
     dbg!("Image");
     cx.render(rsx!(
         div {
