@@ -1,5 +1,6 @@
 use crate::prelude::*;
 use once_cell::sync::Lazy;
+use rayon::prelude::*;
 use std::fs;
 use std::path::{Path, PathBuf};
 
@@ -153,6 +154,7 @@ impl NonHtmlAssets {
         vec![&self.hasui_light_jpeg, &self.hasui_dark_jpeg]
             .into_iter()
             .flat_map(|image_asset| image_asset.resized_variants())
+            .par_bridge()
             .for_each(|resized_image_asset| {
                 resized_image_asset.save_to_disk(built_dir, mode);
             });

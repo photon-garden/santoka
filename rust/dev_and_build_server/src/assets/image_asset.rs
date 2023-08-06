@@ -82,8 +82,7 @@ impl ImageAsset {
     }
 
     fn possible_widths() -> Vec<u32> {
-        vec![1000, 2000, 3000]
-        // (32..=3584).step_by(1000).collect()
+        (100..=4000).step_by(100).collect()
     }
 
     fn asset_path_with_width(asset_path: &str, width: u32) -> String {
@@ -101,6 +100,7 @@ pub struct ResizedImageAsset<'image> {
 
 impl<'image> ResizedImageAsset<'image> {
     pub fn save_to_disk(&self, built_dir: &Path, _mode: &Mode) {
+        dbg!("Deciding whenter to save resized image to disk");
         if self.needs_to_be_recreated(built_dir) {
             let path = Assets::path_on_disk(built_dir, &self.asset_path);
 
