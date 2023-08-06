@@ -13,7 +13,7 @@ impl HtmlAsset {
 
 impl NonImageAsset for HtmlAsset {
     fn asset_path(&self) -> &'static str {
-        &self.asset_path
+        self.asset_path
     }
 
     fn bytes(&self, mode: &Mode) -> Vec<u8> {

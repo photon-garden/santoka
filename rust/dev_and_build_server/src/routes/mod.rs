@@ -155,7 +155,7 @@ fn HeroSection(cx: Scope) -> Element {
 
             // Light mode image.
             Image {
-                asset: &non_html_assets.hasui_light_jpeg,
+                asset: &non_html_assets.images.hasui_light,
                 classes: "
                     shrink-0 min-w-full min-h-full object-cover
                     dark:hidden

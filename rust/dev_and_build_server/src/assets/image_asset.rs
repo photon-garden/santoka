@@ -1,4 +1,8 @@
-use std::path::Path;
+use std::{
+    collections::HashSet,
+    path::{Path, PathBuf},
+    sync::Arc,
+};
 
 use crate::prelude::*;
 use image::{DynamicImage, GenericImageView};
@@ -13,9 +17,10 @@ pub struct ImageAsset {
 
     pub width: u32,
     pub height: u32,
+    pub resized_variants: Vec<ResizedImageAsset>,
 
     srcset: String,
-    image: DynamicImage,
+    image: Arc<DynamicImage>,
 }
 
 impl ImageAsset {
@@ -27,8 +32,10 @@ impl ImageAsset {
     ) -> ImageAsset {
         let asset_path = "images/".to_string() + asset_path;
         let image = image::load_from_memory(bytes).unwrap();
+        let image = Arc::new(image);
         let (width, height) = image.dimensions();
         let srcset = Self::create_srcset(&asset_path, width);
+        let resized_variants = Self::resized_variants(&asset_path, &image);
 
         ImageAsset {
             asset_path,
@@ -39,28 +46,36 @@ impl ImageAsset {
             height,
             srcset,
             image,
+            resized_variants,
         }
     }
 
     pub fn src(&self) -> &str {
-        &self.asset_path
-    }
-
-    pub fn resized_variants(&self) -> Vec<ResizedImageAsset> {
-        let original_width = self.image.width();
-
-        Self::available_widths(original_width)
-            .into_par_iter()
-            .map(|target_width| ResizedImageAsset {
-                asset_path: Self::asset_path_with_width(&self.asset_path, target_width),
-                width: target_width,
-                image: &self.image,
-            })
-            .collect()
+        // If their browser doesn't have support for the srcset attribute,
+        // it's probably an old mobile browser. If that's the case, they
+        // also probably don't have a lot of bandwidth so go with the smallest
+        // image possible.
+        self.resized_variants.first().unwrap().asset_path.as_str()
     }
 
     pub fn srcset(&self) -> &str {
         &self.srcset
+    }
+
+    fn resized_variants(
+        asset_path: &str,
+        original_image: &Arc<DynamicImage>,
+    ) -> Vec<ResizedImageAsset> {
+        let original_width = original_image.width();
+
+        Self::available_widths(original_width)
+            .into_par_iter()
+            .map(|target_width| ResizedImageAsset {
+                asset_path: Self::asset_path_with_width(asset_path, target_width),
+                width: target_width,
+                image: original_image.clone(),
+            })
+            .collect()
     }
 
     fn create_srcset(asset_path: &str, image_width: u32) -> String {
@@ -92,24 +107,29 @@ impl ImageAsset {
     }
 }
 
-pub struct ResizedImageAsset<'image> {
+#[derive(PartialEq)]
+pub struct ResizedImageAsset {
     asset_path: String,
     width: u32,
-    image: &'image DynamicImage,
+    image: Arc<DynamicImage>,
 }
 
-impl<'image> ResizedImageAsset<'image> {
-    pub fn save_to_disk(&self, built_dir: &Path, _mode: &Mode) {
-        dbg!("Deciding whenter to save resized image to disk");
-        if self.needs_to_be_recreated(built_dir) {
-            let path = Assets::path_on_disk(built_dir, &self.asset_path);
-
+impl ResizedImageAsset {
+    pub fn save_to_disk(
+        &self,
+        built_dir: &Path,
+        _mode: &Mode,
+        paths_of_files_in_built_dir: &HashSet<PathBuf>,
+    ) {
+        println!("Deciding whether to save resized image to disk");
+        let path = Assets::path_on_disk(built_dir, &self.asset_path);
+        if self.needs_to_be_recreated(&path, paths_of_files_in_built_dir) {
             let parent_dir = path.parent().unwrap();
             if !parent_dir.exists() {
                 fs::create_dir_all(parent_dir).unwrap();
             }
 
-            dbg!("Saving resized image to disk: {:?}", &self.asset_path);
+            println!("Saving resized image to disk: {:?}", &self.asset_path);
             self.image
                 .resize_to_width(self.width)
                 .save_with_format(path, image::ImageFormat::Jpeg)
@@ -118,23 +138,22 @@ impl<'image> ResizedImageAsset<'image> {
             return;
         }
 
-        dbg!(
+        println!(
             "Resized image {} already exists, so skipping saving it to disk.",
             &self.asset_path
         );
     }
 
-    pub fn needs_to_be_recreated(&self, built_dir: &Path) -> bool {
-        let path = Assets::path_on_disk(built_dir, &self.asset_path);
-        if !Path::exists(&path) {
-            return true;
-        }
-
-        let image_on_disk = image::open(&path).unwrap();
-        if image_on_disk.width() == self.width {
-            return false;
-        }
-
-        true
+    pub fn needs_to_be_recreated(
+        &self,
+        path_to_resized_image: &Path,
+        paths_of_files_in_built_dir: &HashSet<PathBuf>,
+    ) -> bool {
+        // let image_on_disk = image::open(path_to_resized_image).unwrap();
+        // if image_on_disk.width() == self.width {
+        //     return false;
+        // }
+        let already_exists = paths_of_files_in_built_dir.contains(path_to_resized_image);
+        !already_exists
     }
 }

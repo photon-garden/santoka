@@ -8,7 +8,7 @@ pub struct CssAsset {
 
 impl NonImageAsset for CssAsset {
     fn asset_path(&self) -> &str {
-        &self.asset_path
+        self.asset_path
     }
 
     fn bytes(&self, _mode: &Mode) -> Vec<u8> {

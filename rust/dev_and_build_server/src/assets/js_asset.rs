@@ -24,7 +24,7 @@ impl JsAsset {
 
 impl NonImageAsset for JsAsset {
     fn asset_path(&self) -> &str {
-        &self.asset_path
+        self.asset_path
     }
 
     fn bytes(&self, mode: &Mode) -> Vec<u8> {
