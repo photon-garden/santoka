@@ -154,27 +154,13 @@ fn HeroSection(cx: Scope) -> Element {
             }
 
             // Light mode image.
-            Image {
-                asset: &non_html_assets.images.hasui_light,
+            LightDarkImage {
+                asset: &non_html_assets.images.hasui_hero,
                 classes: "
                     shrink-0 min-w-full min-h-full object-cover
-                    dark:hidden
                     transform -scale-x-100 lg:scale-x-100 object-right lg:object-left
                 "
             }
-
-            // Dark mode image.
-            // img {
-            //     alt: "A dark, rainswept village at night. Shadows of trees in the distance, but a few lights are on in the village.",
-            //     class: "shrink-0 min-w-full min-h-full object-cover hidden dark:block select-none",
-            //     style: "image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;",
-            //     src: assets.hasui_dark_jpeg.lqip
-            // }
-            // img {
-            //     alt: "A dark, rainswept village at night. Shadows of trees in the distance, but a few lights are on in the village.",
-            //     class: "absolute min-w-full min-h-full object-cover hidden dark:block select-none",
-            //     src: assets.hasui_dark_jpeg.url
-            // }
 
             div { class: "absolute bottom-0 left-0 flex flex-col p-4 lg:p-8",
                 span {
@@ -398,6 +384,73 @@ fn Image<'a>(cx: Scope, asset: &'a ImageAsset, classes: &'static str) -> Element
                 class: "absolute top-0 left-0 min-w-full min-h-full object-cover",
                 src: asset.src(),
                 srcset: asset.srcset()
+            }
+        }
+    ))
+}
+
+#[inline_props]
+fn LightDarkImage<'a>(
+    cx: Scope,
+    asset: &'a LightDarkImageAsset,
+    classes: &'static str,
+) -> Element<'a> {
+    dbg!("Image");
+    cx.render(rsx!(
+        div {
+            //
+            class: "select-none relative {classes}",
+
+            picture {
+                class: "shrink-0 min-w-full min-h-full object-cover",
+                style: "image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;",
+
+                source {
+                    //
+                    "media": "(prefers-color-scheme: light)",
+                    "srcset": asset.light_mode.lqip,
+                    "type": "image/jpeg"
+                }
+
+                source {
+                    //
+                    "media": "(prefers-color-scheme: dark)",
+                    "srcset": asset.dark_mode.lqip,
+                    "type": "image/jpeg"
+                }
+
+                img {
+                    //
+                    alt: asset.alt,
+                    class: "shrink-0 min-w-full min-h-full object-cover",
+                    src: asset.light_mode.src()
+                }
+            }
+
+            picture {
+                //
+                class: "absolute top-0 left-0 min-w-full min-h-full object-cover",
+
+                source {
+                    //
+                    "media": "(prefers-color-scheme: light)",
+                    "srcset": asset.light_mode.srcset(),
+                    "type": asset.light_mode.mime_type()
+                }
+
+                source {
+                    //
+                    "media": "(prefers-color-scheme: dark)",
+                    "srcset": asset.dark_mode.srcset(),
+                    "type": asset.dark_mode.mime_type()
+                }
+
+                img {
+                    //
+                    alt: asset.alt,
+                    class: "absolute top-0 left-0 min-w-full min-h-full object-cover",
+                    src: asset.light_mode.src()
+                }
             }
         }
     ))

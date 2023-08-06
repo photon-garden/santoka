@@ -6,13 +6,6 @@ members = ["browser", "dev_and_build_server", "shared"]
 opt-level = "s"
 lto = true
 
-# Always build the backtrace crate with optimizations enabled, even in debug mode.
-# This speeds up color-eyre.
-#
-# https://docs.rs/color-eyre/latest/color_eyre/#improving-perf-on-debug-builds
-[profile.dev.package.backtrace]
-opt-level = 3
-
 # For cargo-commander.
 [commands]
 dev = { parallel = true, cmd = [

@@ -15,7 +15,7 @@ mod html_asset;
 use html_asset::*;
 
 mod image_asset;
-pub use image_asset::ImageAsset;
+pub use image_asset::*;
 
 mod js_asset;
 use js_asset::*;
@@ -49,8 +49,7 @@ pub struct NonHtmlAssets {
 
 #[derive(PartialEq)]
 pub struct ImageAssets {
-    pub hasui_light: ImageAsset,
-    pub hasui_dark: ImageAsset,
+    pub hasui_hero: LightDarkImageAsset,
 }
 
 pub trait NonImageAsset {
@@ -172,8 +171,11 @@ impl ImageAssets {
         );
 
         ImageAssets {
-            hasui_dark,
-            hasui_light,
+            hasui_hero: LightDarkImageAsset {
+                alt: "A woodblock print by Kawase Hasui. In dark mode, it's a town at night. In light mode, it's a mountain in the distance.",
+                light_mode: hasui_light,
+                dark_mode: hasui_dark,
+            },
         }
     }
 
@@ -186,9 +188,7 @@ impl ImageAssets {
             .map(|entry| entry.unwrap().path())
             .collect::<HashSet<PathBuf>>();
 
-        dbg!(&paths_of_files_in_built_dir);
-
-        vec![&self.hasui_light, &self.hasui_dark]
+        vec![&self.hasui_hero.light_mode, &self.hasui_hero.dark_mode]
             .into_iter()
             .flat_map(|image_asset| &image_asset.resized_variants)
             .par_bridge()

@@ -1,12 +1,16 @@
-use std::{
-    collections::HashSet,
-    path::{Path, PathBuf},
-    sync::Arc,
-};
-
 use crate::prelude::*;
 use image::{DynamicImage, GenericImageView};
 use rayon::prelude::*;
+use std::collections::HashSet;
+use std::path::{Path, PathBuf};
+use std::sync::Arc;
+
+#[derive(PartialEq)]
+pub struct LightDarkImageAsset {
+    pub alt: &'static str,
+    pub light_mode: ImageAsset,
+    pub dark_mode: ImageAsset,
+}
 
 #[derive(PartialEq)]
 pub struct ImageAsset {
@@ -14,6 +18,8 @@ pub struct ImageAsset {
     pub alt: &'static str,
     pub bytes: &'static [u8],
     pub lqip: &'static str,
+
+    mime_type: String,
 
     pub width: u32,
     pub height: u32,
@@ -36,6 +42,7 @@ impl ImageAsset {
         let (width, height) = image.dimensions();
         let srcset = Self::create_srcset(&asset_path, width);
         let resized_variants = Self::resized_variants(&asset_path, &image);
+        let mime_type = tree_magic::from_u8(bytes);
 
         ImageAsset {
             asset_path,
@@ -47,6 +54,7 @@ impl ImageAsset {
             srcset,
             image,
             resized_variants,
+            mime_type,
         }
     }
 
@@ -60,6 +68,10 @@ impl ImageAsset {
 
     pub fn srcset(&self) -> &str {
         &self.srcset
+    }
+
+    pub fn mime_type(&self) -> &str {
+        &self.mime_type
     }
 
     fn resized_variants(
