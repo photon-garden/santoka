@@ -44,7 +44,7 @@ impl Database {
     }
 }
 
-#[derive(Debug, serde::Deserialize, TS, Clone)]
+#[derive(Debug, serde::Deserialize, TS, Clone, PartialEq)]
 #[ts(
     export,
     export_to = "../data/2023-06-26T14:52:00.000Z/typescript-types/Poem.ts"
@@ -73,7 +73,7 @@ impl Poem {
     }
 }
 
-#[derive(Debug, serde::Deserialize, TS, Clone)]
+#[derive(Debug, serde::Deserialize, TS, Clone, PartialEq)]
 #[ts(
     export,
     export_to = "../data/2023-06-26T14:52:00.000Z/typescript-types/Publication.ts"

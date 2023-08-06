@@ -1,48 +1,57 @@
 use crate::{assets::ImageAsset, prelude::*};
-use axum::response::Html;
 use dioxus::prelude::*;
 
-pub mod browser_bg_wasm;
-pub mod browser_js;
-pub mod build_time;
-pub mod hasui_dark_jpeg;
-pub mod hasui_light_jpeg;
-pub mod main_css;
+// type Element = LazyNodes<'static, 'static>;
+// type Element = VirtualDom;
 
-type Element = LazyNodes<'static, 'static>;
+pub fn get() -> String {
+    // dioxus_ssr::render_lazy(App())
+    // dioxus_ssr::render(App())
+    // create a VirtualDom with the app component
+    let mut app = VirtualDom::new(App);
 
-#[axum::debug_handler]
-pub async fn get() -> Html<String> {
-    Html(render_get())
+    // rebuild the VirtualDom before rendering
+    let _ = app.rebuild();
+
+    // render the VirtualDom to HTML
+    dioxus_ssr::render(&app)
 }
 
-pub fn render_get() -> String {
-    dioxus_ssr::render_lazy(App())
+fn App(cx: Scope) -> Element {
+    cx.render(rsx!(
+        Layout { title: "Taneda Santōka", Body {} }
+    ))
 }
 
-fn App() -> Element {
-    rsx!(Layout("Taneda Santōka", Body()))
+#[derive(Props)]
+struct LayoutProps<'a> {
+    title: &'static str,
+    children: Element<'a>,
 }
 
-fn Layout(title: &'static str, body: Element) -> Element {
-    rsx!(
+// fn Layout(title: &'static str, body: Element) -> Element {
+fn Layout<'a>(cx: Scope<'a, LayoutProps<'a>>) -> Element {
+    dbg!("Layout");
+    cx.render(rsx!(
         head {
             meta { charset: "UTF-8" }
             meta { content: "width=device-width, initial-scale=1.0", name: "viewport" }
             meta { http_equiv: "X-UA-Compatible", content: "ie=edge" }
             link { rel: "stylesheet", href: "main.css" }
-            title { "{title}" }
+            title { "{cx.props.title}" }
         }
+
         body { class: "{bg_background()} flex flex-col items-center selection:bg-neutral-200/75 dark:selection:bg-neutral-700/75",
-            FloatingNav(),
-            body,
-            BrowserScript()
+            FloatingNav {}
+            &cx.props.children,
+            BrowserScript {}
         }
-    )
+    ))
 }
 
-fn FloatingNav() -> Element {
-    rsx!(
+fn FloatingNav(cx: Scope) -> Element {
+    dbg!("FloatingNav");
+    cx.render(rsx!(
         div {
             //
             class: "
@@ -95,29 +104,30 @@ fn FloatingNav() -> Element {
                     pointer-events-auto
                     select-none
                 ",
-                    NavLogo(),
-                    NavLinks("")
+                    NavLogo {}
+                    NavLinks { classes: "" }
                 }
             }
         }
-    )
+    ))
 }
 
 fn horizontal_center_fixed() -> &'static str {
     "left-1/2 transform -translate-x-1/2"
 }
 
-fn Body() -> Element {
-    rsx!(
+fn Body(cx: Scope) -> Element {
+    dbg!("Body");
+    cx.render(rsx!(
         main { class: "relative p-4 lg:p-8 flex flex-col gap-8 lg:gap-32 w-full max-w-screen-2xl",
-            HeroSection(),
-            PoetrySection()
+            HeroSection {}
         }
-    )
+    ))
 }
 
-fn HeroSection() -> Element {
-    rsx!(
+fn HeroSection(cx: Scope) -> Element {
+    dbg!("HeroSection");
+    cx.render(rsx!(
         section {
             id: "hero",
             class: "
@@ -138,16 +148,19 @@ fn HeroSection() -> Element {
                     text-base lg:text-2xl tracking-wide text-neutral-100 dark:text-neutral-200
                     z-10
                 ",
-                NavLogo(),
-                NavLinks("")
+                NavLogo {}
+                NavLinks { classes: "" }
             }
 
             // Light mode image.
-            Image(&assets.hasui_light_jpeg, "
-                shrink-0 min-w-full min-h-full object-cover
-                dark:hidden
-                transform -scale-x-100 lg:scale-x-100 object-right lg:object-left
-            "),
+            Image {
+                asset: &assets.hasui_light_jpeg,
+                classes: "
+                    shrink-0 min-w-full min-h-full object-cover
+                    dark:hidden
+                    transform -scale-x-100 lg:scale-x-100 object-right lg:object-left
+                "
+            }
 
             // Dark mode image.
             // img {
@@ -180,35 +193,40 @@ fn HeroSection() -> Element {
                 }
             }
         }
-    )
+    ))
 }
 
-fn PoetrySection() -> Element {
-    rsx!(
-        section { id: "poems", class: "flex flex-col",
-            for publication in database.publications.iter() {
-                PoemsAndPublication(publication)
-            }
-        }
-    )
+fn PoetrySection(cx: Scope) -> Element {
+    dbg!("PoetrySection");
+    cx.render(rsx!(section {
+        id: "poems",
+        class: "flex flex-col"
+    }))
+    // for publication in database.publications.iter() {
+    //     PoemsAndPublication { publication: publication }
+    // }
 }
 
-fn PoemsAndPublication(publication: &'static Publication) -> Element {
-    rsx!(
+#[inline_props]
+fn PoemsAndPublication(cx: Scope, publication: &'static Publication) -> Element {
+    dbg!("PoemsAndPublication");
+    cx.render(rsx!(
         div { class: "poems-and-publication flex flex-col lg:flex-row gap-10 lg:gap-12",
-            Publication(publication),
-            PoemsInPublication(publication)
+            Publication { publication: publication }
+            PoemsInPublication { publication: publication }
         }
-    )
+    ))
 }
 
-fn Publication(publication: &'static Publication) -> Element {
+#[inline_props]
+fn Publication(cx: Scope, publication: &'static Publication) -> Element {
+    dbg!("Publication");
     let translator = database.get_translator(publication.translator_id);
 
     // a { class: "underline decoration-1 underline-offset-4 cursor-pointer",
     //     "hide"
     // }
-    rsx!(
+    cx.render(rsx!(
         // self-start is necessary to make sticky work.
         div { class: "
                 publication
@@ -230,16 +248,18 @@ fn Publication(publication: &'static Publication) -> Element {
             }
             span { class: "publication-year font-light lg:font-thin text-sm lg:text-2xl",
                 "{publication.year_or_unknown()} • "
-                Link("", "hide", "")
+                Link { href: "", classes: "", "hide" }
             }
         }
-    )
+    ))
 }
 
-fn PoemsInPublication(publication: &'static Publication) -> Element {
+#[inline_props]
+fn PoemsInPublication(cx: Scope, publication: &'static Publication) -> Element {
+    dbg!("PoemsInPublication");
     // We use padding-bottom instead of gap on the parent because of the way it affects the publication's
     // sticky positioning.
-    rsx!(
+    cx.render(rsx!(
         div { class: "
                 poems-in-publication
                 flex flex-col gap-8 lg:gap-24
@@ -248,7 +268,7 @@ fn PoemsInPublication(publication: &'static Publication) -> Element {
                 text-base lg:text-3xl 
             ",
             for poem in publication.poems().into_iter().take(3) {
-                Poem(poem)
+                Poem { poem: poem }
             }
             // bg-neutral-200 dark:bg-neutral-600
             span { class: "
@@ -273,14 +293,16 @@ fn PoemsInPublication(publication: &'static Publication) -> Element {
                 }
             }
         }
-    )
+    ))
 }
 
-fn Poem(poem: &'static Poem) -> Element {
+#[inline_props]
+fn Poem(cx: Scope, poem: &'static Poem) -> Element {
+    dbg!("Poem");
     let english_text = poem.english_text.replace("—\n", "—");
     let japanese_text = poem.japanese_text_or_default(); //.replace('\n', "<br>");
 
-    rsx!(
+    cx.render(rsx!(
         div { class: "poem flex flex-col gap-1 lg:gap-2 lowercase ",
             span { class: "poem-english-text font-normal lg:font-light text-neutral-500 dark:text-neutral-400",
                 "{english_text}"
@@ -289,20 +311,33 @@ fn Poem(poem: &'static Poem) -> Element {
                 "{japanese_text}"
             }
         }
-    )
+    ))
 }
 
-fn BrowserScript() -> Element {
+fn BrowserScript(cx: Scope) -> Element {
+    dbg!("BrowserScript");
     let contents = include_str!("../boot_browser.js");
-    rsx!( script { "type": "module", "{contents}" } )
+    cx.render(rsx!( script { "type": "module", "{contents}" } ))
 }
 
-fn Link(href: &'static str, content: &'static str, classes: &'static str) -> Element {
-    rsx!( a { class: "{classes} {link_classes()}", href: href, "{content}" } )
+#[derive(Props)]
+struct LinkProps<'a> {
+    href: &'static str,
+    classes: &'static str,
+    children: Element<'a>,
 }
 
-fn NavLogo() -> Element {
-    rsx!(a {
+fn Link<'a>(cx: Scope<'a, LinkProps<'a>>) -> Element {
+    dbg!("Link");
+    let props = cx.props;
+    cx.render(rsx!(
+        a { class: "{props.classes} {link_classes()}", href: props.href, &props.children }
+    ))
+}
+
+fn NavLogo(cx: Scope) -> Element {
+    dbg!("NavLogo");
+    cx.render(rsx!(a {
         class: "
                 logo
                 block rounded-full
@@ -311,11 +346,13 @@ fn NavLogo() -> Element {
                 cursor-pointer
             ",
         href: ""
-    })
+    }))
 }
 
-fn NavLinks(classes: &'static str) -> Element {
-    rsx!(
+#[inline_props]
+fn NavLinks(cx: Scope, classes: &'static str) -> Element {
+    dbg!("NavLinks");
+    cx.render(rsx!(
         div {
             //
             class: "
@@ -325,10 +362,10 @@ fn NavLinks(classes: &'static str) -> Element {
                 text-neutral-100 dark:text-neutral-300
                 {classes}
             ",
-            Link("", "about", "tracking-wide"),
-            Link("", "data + code", "tracking-wide")
+            Link { href: "", classes: "tracking-wide", "about" }
+            Link { href: "", classes: "tracking-wide", "data + code" }
         }
-    )
+    ))
 }
 
 fn bg_background() -> &'static str {
@@ -339,8 +376,10 @@ fn link_classes() -> &'static str {
     "underline decoration-1 underline-offset-4 cursor-pointer {classes}"
 }
 
-fn Image(asset: &'static ImageAsset, classes: &'static str) -> Element {
-    rsx!(
+#[inline_props]
+fn Image(cx: Scope, asset: &'static ImageAsset, classes: &'static str) -> Element {
+    dbg!("Image");
+    cx.render(rsx!(
         div {
             //
             class: "select-none relative {classes}",
@@ -356,9 +395,9 @@ fn Image(asset: &'static ImageAsset, classes: &'static str) -> Element {
                 //
                 alt: asset.alt,
                 class: "absolute top-0 left-0 min-w-full min-h-full object-cover",
-                src: asset.url,
+                src: asset.src(),
                 srcset: asset.srcset()
             }
         }
-    )
+    ))
 }

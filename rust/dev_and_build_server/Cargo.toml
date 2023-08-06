@@ -8,10 +8,9 @@ repository = "https://github.com/photon-garden/santoka/"
 
 [dependencies]
 shared = { path = "../shared", features = ["server"] }
-axum = { version = "0.6.18", features = ["macros"] }
 color-eyre = "0.6.2"
-dioxus = "0.3.2"
-dioxus-ssr = "0.3.0"
+dioxus = "0.4.0"
+dioxus-ssr = "0.4.0"
 image = { version = "0.24.6", features = ["webp-encoder"] }
 once_cell = "1.18.0"
 serde = "1.0.174"
