@@ -6,7 +6,7 @@ pub struct JsonAsset {
     pub content: &'static str,
 }
 
-impl Asset for JsonAsset {
+impl NonImageAsset for JsonAsset {
     fn asset_path(&self) -> &str {
         &self.asset_path
     }

@@ -6,7 +6,7 @@ pub struct WasmAsset {
     pub bytes: &'static [u8],
 }
 
-impl Asset for WasmAsset {
+impl NonImageAsset for WasmAsset {
     fn asset_path(&self) -> &str {
         &self.asset_path
     }

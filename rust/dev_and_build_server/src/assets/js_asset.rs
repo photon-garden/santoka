@@ -22,7 +22,7 @@ impl JsAsset {
     }
 }
 
-impl Asset for JsAsset {
+impl NonImageAsset for JsAsset {
     fn asset_path(&self) -> &str {
         &self.asset_path
     }

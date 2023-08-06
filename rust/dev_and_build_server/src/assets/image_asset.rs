@@ -25,7 +25,7 @@ impl ImageAsset {
         bytes: &'static [u8],
         lqip: &'static str,
     ) -> ImageAsset {
-        let asset_path = "images".to_string() + asset_path;
+        let asset_path = "images/".to_string() + asset_path;
         let image = image::load_from_memory(bytes).unwrap();
         let (width, height) = image.dimensions();
         let srcset = Self::create_srcset(&asset_path, width);
@@ -101,11 +101,27 @@ pub struct ResizedImageAsset<'image> {
 
 impl<'image> ResizedImageAsset<'image> {
     pub fn save_to_disk(&self, built_dir: &Path, _mode: &Mode) {
-        let path = Assets::path_on_disk(built_dir, &self.asset_path);
         if self.needs_to_be_recreated(built_dir) {
-            let resized_bytes = self.image.resize_to_width(self.width).into_bytes();
-            fs::write(path, resized_bytes).unwrap();
+            let path = Assets::path_on_disk(built_dir, &self.asset_path);
+
+            let parent_dir = path.parent().unwrap();
+            if !parent_dir.exists() {
+                fs::create_dir_all(parent_dir).unwrap();
+            }
+
+            dbg!("Saving resized image to disk: {:?}", &self.asset_path);
+            self.image
+                .resize_to_width(self.width)
+                .save_with_format(path, image::ImageFormat::Jpeg)
+                .unwrap();
+
+            return;
         }
+
+        dbg!(
+            "Resized image {} already exists, so skipping saving it to disk.",
+            &self.asset_path
+        );
     }
 
     pub fn needs_to_be_recreated(&self, built_dir: &Path) -> bool {

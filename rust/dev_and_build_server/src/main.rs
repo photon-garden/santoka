@@ -20,13 +20,15 @@ async fn main() -> Result<()> {
 
     let built_dir = manifest::dir().join("built");
 
-    println!("Removing built folder");
-    if let Err(error) = fs::remove_dir_all(&built_dir) {
-        println!("Error removing ./built folder: {}", error);
-    }
+    // println!("Removing built folder");
+    // if let Err(error) = fs::remove_dir_all(&built_dir) {
+    //     println!("Error removing ./built folder: {}", error);
+    // }
 
     println!("Creating built folder.");
-    fs::create_dir(&built_dir).unwrap();
+    if let Err(error) = fs::create_dir(&built_dir) {
+        println!("Error creating built folder: {}", error);
+    }
 
     println!("Saving assets to disk.");
     Assets::new().save_to_disk(&built_dir, &mode);

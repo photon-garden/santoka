@@ -1,14 +1,14 @@
-use std::rc::Rc;
-
 use crate::{assets::ImageAsset, prelude::*};
 use dioxus::prelude::*;
+
+mod test_mod;
 
 // type Element = LazyNodes<'static, 'static>;
 // type Element = VirtualDom;
 
-pub fn get(non_html_assets: Rc<NonHtmlAssets>) -> String {
+pub fn get() -> String {
     // create a VirtualDom with the app component
-    let mut app = VirtualDom::new_with_props(App, AppProps { non_html_assets });
+    let mut app = VirtualDom::new(App);
 
     // rebuild the VirtualDom before rendering
     let _ = app.rebuild();
@@ -17,44 +17,7 @@ pub fn get(non_html_assets: Rc<NonHtmlAssets>) -> String {
     dioxus_ssr::render(&app)
 }
 
-#[derive(Props, PartialEq)]
-struct RealAppProps {
-    non_html_assets: Rc<NonHtmlAssets>,
-}
-
-#[derive(Props, PartialEq)]
-struct AppProps {
-    todos: Vec<Todo>,
-}
-
-#[derive(PartialEq)]
-pub struct Todo {
-    text: String,
-}
-
-fn App(cx: Scope<AppProps>) -> Element {
-    use_shared_state_provider(cx, || cx.props.todos);
-    cx.render(rsx!(Todos {}))
-}
-
-fn Todos(cx: Scope) -> Element {
-    let todos = use_shared_state::<Vec<Todo>>(cx).unwrap();
-    let todos = todos.read();
-
-    cx.render(rsx!(for todo in todos.iter() {
-        Todo { todo: todo }
-    }))
-}
-
-#[inline_props]
-fn Todo<'todo>(cx: Scope, todo: &'todo Todo) -> Element<'todo> {
-    cx.render(rsx!(
-        div { class: "todo", span { class: "todo-text", "{todo.text}" } }
-    ))
-}
-
-fn RealApp(cx: Scope<AppProps>) -> Element {
-    use_shared_state_provider(cx, || cx.props.non_html_assets.clone());
+fn App(cx: Scope) -> Element {
     cx.render(rsx!(
         Layout { title: "Taneda Santōka", Body {} }
     ))
@@ -158,14 +121,12 @@ fn Body(cx: Scope) -> Element {
     cx.render(rsx!(
         main { class: "relative p-4 lg:p-8 flex flex-col gap-8 lg:gap-32 w-full max-w-screen-2xl",
             HeroSection {}
+            PoetrySection {}
         }
     ))
 }
 
 fn HeroSection(cx: Scope) -> Element {
-    let assets_shared_state = use_shared_state::<Rc<NonHtmlAssets>>(cx).unwrap();
-    let assets = assets_shared_state.read();
-
     dbg!("HeroSection");
     cx.render(rsx!(
         section {
@@ -194,7 +155,7 @@ fn HeroSection(cx: Scope) -> Element {
 
             // Light mode image.
             Image {
-                asset: &assets.hasui_light_jpeg,
+                asset: &non_html_assets.hasui_light_jpeg,
                 classes: "
                     shrink-0 min-w-full min-h-full object-cover
                     dark:hidden
@@ -238,13 +199,13 @@ fn HeroSection(cx: Scope) -> Element {
 
 fn PoetrySection(cx: Scope) -> Element {
     dbg!("PoetrySection");
-    cx.render(rsx!(section {
-        id: "poems",
-        class: "flex flex-col"
-    }))
-    // for publication in database.publications.iter() {
-    //     PoemsAndPublication { publication: publication }
-    // }
+    cx.render(rsx!(
+        section { id: "poems", class: "flex flex-col",
+            for publication in database.publications.iter() {
+                PoemsAndPublication { publication: publication }
+            }
+        }
+    ))
 }
 
 #[inline_props]
@@ -357,7 +318,7 @@ fn Poem(cx: Scope, poem: &'static Poem) -> Element {
 fn BrowserScript(cx: Scope) -> Element {
     dbg!("BrowserScript");
     let contents = include_str!("../boot_browser.js");
-    cx.render(rsx!( script { "type": "module", "{contents}" } ))
+    cx.render(rsx!( script { "type": "module", dangerous_inner_html: "{contents}" } ))
 }
 
 #[derive(Props)]

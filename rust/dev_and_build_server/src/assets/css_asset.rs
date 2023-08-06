@@ -6,7 +6,7 @@ pub struct CssAsset {
     pub contents: &'static str,
 }
 
-impl Asset for CssAsset {
+impl NonImageAsset for CssAsset {
     fn asset_path(&self) -> &str {
         &self.asset_path
     }

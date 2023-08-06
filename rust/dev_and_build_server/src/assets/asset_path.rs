@@ -5,8 +5,11 @@ pub fn map_filename_without_extension(
     map_last_segment(input, |filename| {
         let mut split = filename.split('.');
         let filename_without_extension = split.next().unwrap();
+        let extension = split.next().unwrap();
 
-        map(filename_without_extension)
+        let new_filename_without_extension = map(filename_without_extension);
+
+        format!("{}.{}", new_filename_without_extension, extension)
     })
 }
 

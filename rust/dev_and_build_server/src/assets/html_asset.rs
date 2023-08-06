@@ -11,7 +11,7 @@ impl HtmlAsset {
     }
 }
 
-impl Asset for HtmlAsset {
+impl NonImageAsset for HtmlAsset {
     fn asset_path(&self) -> &'static str {
         &self.asset_path
     }
