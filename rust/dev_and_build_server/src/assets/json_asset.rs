@@ -11,7 +11,7 @@ impl NonImageAsset for JsonAsset {
         self.asset_path
     }
 
-    fn bytes(&self, _mode: &Mode) -> Vec<u8> {
+    fn bytes(&self) -> Vec<u8> {
         self.content.as_bytes().to_vec()
     }
 }

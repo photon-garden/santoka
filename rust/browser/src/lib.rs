@@ -1,6 +1,8 @@
 #![allow(non_upper_case_globals)]
 
+use gloo::console;
 use prelude::*;
+use serde::de::DeserializeOwned;
 use shared::prelude::*;
 use web_sys::Element;
 
@@ -29,24 +31,34 @@ fn main() -> Result<(), JsValue> {
 
     // load_more_poems_on_link_click();
 
-    mount_component(show_if_scrolled_class_name, browser_show_if_scrolled);
+    mount_component(show_if_scrolled::name, hydrate_show_if_scrolled);
 
     Ok(())
 }
 
-fn mount_component(class_name: &'static str, mount: fn(Element)) {
+fn mount_component<Props: DeserializeOwned>(
+    component_name: &'static str,
+    mount: fn(Element, Props),
+) {
+    console::log!("Mounting components named:", component_name);
+
     let window = web_sys::window().expect("web_sys::window() failed.");
     let document = window.document().expect("window.document() failed.");
 
-    let selector = format!(".{}", class_name).replace(':', "\\:");
+    let selector = format!("[data-browser-component-name=\"{}\"]", component_name);
     let nodes = document
         .query_selector_all(&selector)
         .expect("document.query_selector_all() failed.");
 
     for index in 0..nodes.length() {
         let node = nodes.get(index).expect("nodes.get() failed.");
-        let element = node.dyn_into().expect("element.dyn_into() failed.");
-        mount(element);
+        let element: Element = node.dyn_into().expect("element.dyn_into() failed.");
+        let serialized_props = element
+            .get_attribute("data-browser-component-props")
+            .expect("element.get_attribute() failed.");
+        let deserialized_props: Props =
+            serde_json::from_str(&serialized_props).expect("serde_json::from_str() failed.");
+        mount(element, deserialized_props);
     }
 }
 

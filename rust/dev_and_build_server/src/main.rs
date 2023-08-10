@@ -10,13 +10,13 @@ pub mod prelude;
 pub mod routes;
 
 use color_eyre::eyre::Result;
+use once_cell::sync::Lazy;
 use prelude::*;
 
-#[tokio::main]
-async fn main() -> Result<()> {
-    color_eyre::install()?;
+pub static mode: Lazy<Mode> = Lazy::new(get_mode);
 
-    let mode = get_mode();
+fn main() -> Result<()> {
+    color_eyre::install()?;
 
     let built_dir = manifest::dir().join("built");
 
@@ -31,7 +31,7 @@ async fn main() -> Result<()> {
     }
 
     println!("Saving assets to disk.");
-    Assets::new().save_to_disk(&built_dir, &mode);
+    Assets::new().save_to_disk(&built_dir);
 
     Ok(())
 }

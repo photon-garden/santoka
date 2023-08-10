@@ -11,7 +11,7 @@ impl NonImageAsset for CssAsset {
         self.asset_path
     }
 
-    fn bytes(&self, _mode: &Mode) -> Vec<u8> {
+    fn bytes(&self) -> Vec<u8> {
         self.contents.as_bytes().to_vec()
     }
 }

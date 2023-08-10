@@ -55,15 +55,15 @@ pub struct ImageAssets {
 pub trait NonImageAsset {
     fn asset_path(&self) -> &str;
 
-    fn bytes(&self, mode: &Mode) -> Vec<u8>;
+    fn bytes(&self) -> Vec<u8>;
 
-    fn save_to_disk(&self, built_dir: &Path, mode: &Mode) {
+    fn save_to_disk(&self, built_dir: &Path) {
         println!("Saving asset: {:?}", self.asset_path());
         let path = Assets::path_on_disk(built_dir, self.asset_path());
         if let Err(error) = fs::remove_file(&path) {
             println!("Error removing file: {}", error);
         }
-        let bytes = self.bytes(mode);
+        let bytes = self.bytes();
         fs::write(path, bytes).unwrap();
     }
 }
@@ -78,10 +78,10 @@ impl Assets {
         Assets { index_html }
     }
 
-    pub fn save_to_disk(&self, built_dir: &Path, mode: &Mode) {
+    pub fn save_to_disk(&self, built_dir: &Path) {
         println!("index.html");
-        self.index_html.save_to_disk(built_dir, mode);
-        non_html_assets.save_to_disk(built_dir, mode);
+        self.index_html.save_to_disk(built_dir);
+        non_html_assets.save_to_disk(built_dir);
     }
 
     fn path_on_disk(build_dir: &Path, asset_path: impl Into<String>) -> PathBuf {
@@ -109,6 +109,13 @@ impl NonHtmlAssets {
             contents: include_str!("../../../target/browser/browser.js"),
         };
 
+        let browser_bg_wasm_bytes = match *mode {
+            Mode::Dev => include_bytes!("../../../target/browser/browser_bg.wasm").to_vec(),
+            Mode::Production => {
+                include_bytes!("../../../target/browser/browser_bg.min.wasm").to_vec()
+            }
+        };
+
         println!("browser_bg.wasm");
         let browser_bg_wasm = WasmAsset {
             asset_path: "browser_bg.wasm",
@@ -132,17 +139,17 @@ impl NonHtmlAssets {
         }
     }
 
-    fn save_to_disk(&self, built_dir: &Path, mode: &Mode) {
+    fn save_to_disk(&self, built_dir: &Path) {
         println!("main.css");
-        self.main_css.save_to_disk(built_dir, mode);
+        self.main_css.save_to_disk(built_dir);
         println!("browser.js");
-        self.browser_js.save_to_disk(built_dir, mode);
+        self.browser_js.save_to_disk(built_dir);
         println!("browser_bg.wasm");
-        self.browser_bg_wasm.save_to_disk(built_dir, mode);
+        self.browser_bg_wasm.save_to_disk(built_dir);
         println!("build-time.json");
-        self.build_time.save_to_disk(built_dir, mode);
+        self.build_time.save_to_disk(built_dir);
 
-        self.images.save_to_disk(built_dir, mode);
+        self.images.save_to_disk(built_dir);
     }
 }
 
@@ -179,7 +186,7 @@ impl ImageAssets {
         }
     }
 
-    fn save_to_disk(&self, built_dir: &Path, mode: &Mode) {
+    fn save_to_disk(&self, built_dir: &Path) {
         println!("Images");
         let images_folder = built_dir.join("images");
         // Get list of all files in built_dir
@@ -193,7 +200,7 @@ impl ImageAssets {
             .flat_map(|image_asset| &image_asset.resized_variants)
             .par_bridge()
             .for_each(|resized_image_asset| {
-                resized_image_asset.save_to_disk(built_dir, mode, &paths_of_files_in_built_dir);
+                resized_image_asset.save_to_disk(built_dir, &paths_of_files_in_built_dir);
             });
     }
 }

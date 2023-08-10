@@ -1,5 +1,6 @@
 use crate::{assets::ImageAsset, prelude::*};
 use dioxus::prelude::*;
+use serde::Serialize;
 
 mod test_mod;
 
@@ -65,10 +66,11 @@ fn FloatingNav(cx: Scope) -> Element {
             "
         }
 
+        RenderBrowserComponent { component: show_if_scrolled }
+
         nav {
             //
             class: "
-                {server_show_if_scrolled()}
                 fixed top-0 z-10
                 {horizontal_center_fixed()}
                 w-full max-w-screen-2xl 
@@ -324,16 +326,18 @@ fn Link<'a>(cx: Scope<'a, LinkProps<'a>>) -> Element {
 
 fn NavLogo(cx: Scope) -> Element {
     dbg!("NavLogo");
-    cx.render(rsx!(a {
-        class: "
+    cx.render(rsx!(
+        a {
+            class: "
                 logo
                 block rounded-full
                 w-6 lg:w-8 h-6 lg:h-8
                 bg-neutral-50 dark:bg-neutral-300
                 cursor-pointer
             ",
-        href: ""
-    }))
+            href: ""
+        }
+    ))
 }
 
 #[inline_props]
@@ -384,6 +388,40 @@ fn Image<'a>(cx: Scope, asset: &'a ImageAsset, classes: &'static str) -> Element
                 class: "absolute top-0 left-0 min-w-full min-h-full object-cover",
                 src: asset.src(),
                 srcset: asset.srcset()
+            }
+        }
+    ))
+}
+
+#[derive(Props)]
+struct RenderBrowserComponentProps<'a, GetBrowserComponent, BrowserComponentProps>
+where
+    GetBrowserComponent: Fn() -> BrowserComponent<BrowserComponentProps>,
+    BrowserComponentProps: Serialize,
+{
+    class: Option<&'static str>,
+    component: GetBrowserComponent,
+    children: Option<Element<'a>>,
+}
+
+fn RenderBrowserComponent<'a, GetBrowserComponent, BrowserComponentProps>(
+    cx: Scope<'a, RenderBrowserComponentProps<'a, GetBrowserComponent, BrowserComponentProps>>,
+) -> Element
+where
+    GetBrowserComponent: Fn() -> BrowserComponent<BrowserComponentProps>,
+    BrowserComponentProps: Serialize,
+{
+    let component = &cx.props.component;
+    let browser_component = component();
+    let serialized_props = serde_json::to_string(&browser_component.props).unwrap();
+
+    cx.render(rsx!(
+        div {
+            class: cx.props.class,
+            "data-browser-component-name": browser_component.name,
+            "data-browser-component-props": "{serialized_props}",
+            if let Some(children) = &cx.props.children {
+                children
             }
         }
     ))

@@ -16,8 +16,8 @@ impl NonImageAsset for HtmlAsset {
         self.asset_path
     }
 
-    fn bytes(&self, mode: &Mode) -> Vec<u8> {
-        match mode {
+    fn bytes(&self) -> Vec<u8> {
+        match *mode {
             Mode::Dev => self.contents.as_bytes().to_vec(),
             Mode::Production => self.minified_contents(),
         }
