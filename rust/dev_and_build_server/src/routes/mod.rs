@@ -66,7 +66,7 @@ fn FloatingNav(cx: Scope) -> Element {
             "
         }
 
-        RenderBrowserComponent { component: show_if_scrolled }
+        RenderBrowserComponent { component: show_if_scrolled() }
 
         nav {
             //
@@ -394,31 +394,28 @@ fn Image<'a>(cx: Scope, asset: &'a ImageAsset, classes: &'static str) -> Element
 }
 
 #[derive(Props)]
-struct RenderBrowserComponentProps<'a, GetBrowserComponent, BrowserComponentProps>
+struct RenderBrowserComponentProps<'a, BrowserComponentProps>
 where
-    GetBrowserComponent: Fn() -> BrowserComponent<BrowserComponentProps>,
     BrowserComponentProps: Serialize,
 {
     class: Option<&'static str>,
-    component: GetBrowserComponent,
+    component: BrowserComponent<BrowserComponentProps>,
     children: Option<Element<'a>>,
 }
 
-fn RenderBrowserComponent<'a, GetBrowserComponent, BrowserComponentProps>(
-    cx: Scope<'a, RenderBrowserComponentProps<'a, GetBrowserComponent, BrowserComponentProps>>,
+fn RenderBrowserComponent<'a, BrowserComponentProps>(
+    cx: Scope<'a, RenderBrowserComponentProps<'a, BrowserComponentProps>>,
 ) -> Element
 where
-    GetBrowserComponent: Fn() -> BrowserComponent<BrowserComponentProps>,
     BrowserComponentProps: Serialize,
 {
     let component = &cx.props.component;
-    let browser_component = component();
-    let serialized_props = serde_json::to_string(&browser_component.props).unwrap();
+    let serialized_props = serde_json::to_string(&component.props).unwrap();
 
     cx.render(rsx!(
         div {
             class: cx.props.class,
-            "data-browser-component-name": browser_component.name,
+            "data-browser-component-name": component.name,
             "data-browser-component-props": "{serialized_props}",
             if let Some(children) = &cx.props.children {
                 children
