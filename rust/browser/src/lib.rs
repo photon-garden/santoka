@@ -4,7 +4,7 @@ use gloo::console;
 use prelude::*;
 // use serde::de::DeserializeOwned;
 use shared::prelude::*;
-use web_sys::Element;
+use web_sys::HtmlElement;
 
 #[cfg(feature = "dev")]
 mod dev;
@@ -32,12 +32,13 @@ fn main() -> Result<(), JsValue> {
     // load_more_poems_on_link_click();
 
     mount_component(show_if_scrolled::name, hydrate_show_if_scrolled);
+    mount_component(parallax::name, hydrate_parallax);
 
     Ok(())
 }
 
 // fn mount_component<Props: DeserializeOwned>(
-fn mount_component(component_name: &'static str, hydrate: fn(Element)) {
+fn mount_component(component_name: &'static str, hydrate: fn(HtmlElement)) {
     console::log!("Mounting components named:", component_name);
 
     let window = web_sys::window().expect("web_sys::window() failed.");
@@ -51,7 +52,7 @@ fn mount_component(component_name: &'static str, hydrate: fn(Element)) {
 
     for index in 0..nodes.length() {
         let node = nodes.get(index).expect("nodes.get() failed.");
-        let element: Element = node.dyn_into().expect("element.dyn_into() failed.");
+        let element: HtmlElement = node.dyn_into().expect("element.dyn_into() failed.");
         // let serialized_props = element
         //     .get_attribute("data-browser-component-props")
         //     .expect("element.get_attribute() failed.");

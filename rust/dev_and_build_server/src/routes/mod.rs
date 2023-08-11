@@ -154,14 +154,7 @@ fn HeroSection(cx: Scope) -> Element {
                 NavLinks { classes: "" }
             }
 
-            // Light mode image.
-            LightDarkImage {
-                asset: &non_html_assets.images.hasui_hero,
-                classes: "
-                    shrink-0 min-w-full min-h-full object-cover
-                    transform -scale-x-100 lg:scale-x-100 object-right lg:object-left
-                "
-            }
+            HeroImage {}
 
             div { class: "absolute bottom-0 left-0 flex flex-col p-4 lg:p-8",
                 span {
@@ -424,11 +417,7 @@ fn Image<'a>(cx: Scope, asset: &'a ImageAsset, classes: &'static str) -> Element
 // }
 
 #[inline_props]
-fn LightDarkImage<'a>(
-    cx: Scope,
-    asset: &'a LightDarkImageAsset,
-    classes: &'static str,
-) -> Element<'a> {
+fn LightDarkImage<'a>(cx: Scope, asset: &'a LightDarkImageAsset, classes: String) -> Element<'a> {
     dbg!("Image");
     cx.render(rsx!(
         div {
@@ -488,4 +477,17 @@ fn LightDarkImage<'a>(
             }
         }
     ))
+}
+
+fn HeroImage(cx: Scope) -> Element {
+    let classes = format!(
+        "
+            shrink-0 min-w-full min-h-full object-cover
+            transform -scale-x-100 lg:scale-x-100 object-right lg:object-left
+            {}
+        ",
+        parallax()
+    );
+
+    cx.render(rsx!( LightDarkImage { asset: &non_html_assets.images.hasui_hero, classes: classes } ))
 }

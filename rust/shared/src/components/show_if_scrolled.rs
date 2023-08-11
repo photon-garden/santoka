@@ -13,10 +13,10 @@ pub mod browser {
     // use super::*;
     use crate::prelude::*;
     use gloo::events::EventListener;
-    use web_sys::{Element, Event};
+    use web_sys::{Event, HtmlElement};
 
     // pub fn hydrate_show_if_scrolled(target_element: Element, _props: Props) {
-    pub fn hydrate_show_if_scrolled(target_element: Element) {
+    pub fn hydrate_show_if_scrolled(target_element: HtmlElement) {
         let window = web_sys::window().expect("web_sys::window() failed.");
         let document = window.document().expect("window.document() failed.");
 
