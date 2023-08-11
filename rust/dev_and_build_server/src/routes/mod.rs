@@ -66,8 +66,6 @@ fn FloatingNav(cx: Scope) -> Element {
             "
         }
 
-        RenderBrowserComponent { component: show_if_scrolled() }
-
         nav {
             //
             class: "
@@ -77,6 +75,7 @@ fn FloatingNav(cx: Scope) -> Element {
                 pointer-events-none
                 px-4 lg:px-8
                 text-base lg:text-2xl tracking-wide
+                {show_if_scrolled()}
             ",
 
             div {
@@ -393,36 +392,36 @@ fn Image<'a>(cx: Scope, asset: &'a ImageAsset, classes: &'static str) -> Element
     ))
 }
 
-#[derive(Props)]
-struct RenderBrowserComponentProps<'a, BrowserComponentProps>
-where
-    BrowserComponentProps: Serialize,
-{
-    class: Option<&'static str>,
-    component: BrowserComponent<BrowserComponentProps>,
-    children: Option<Element<'a>>,
-}
+// #[derive(Props)]
+// struct RenderBrowserComponentProps<BrowserComponentProps>
+// where
+//     BrowserComponentProps: Serialize,
+// {
+//     class: Option<&'static str>,
+//     component: BrowserComponent<BrowserComponentProps>,
+//     children: Option<Element<'static>>,
+// }
 
-fn RenderBrowserComponent<'a, BrowserComponentProps>(
-    cx: Scope<'a, RenderBrowserComponentProps<'a, BrowserComponentProps>>,
-) -> Element
-where
-    BrowserComponentProps: Serialize,
-{
-    let component = &cx.props.component;
-    let serialized_props = serde_json::to_string(&component.props).unwrap();
+// fn RenderBrowserComponent<BrowserComponentProps>(
+//     cx: Scope<'static, RenderBrowserComponentProps<BrowserComponentProps>>,
+// ) -> Element<'static>
+// where
+//     BrowserComponentProps: Serialize,
+// {
+//     let component = &cx.props.component;
+//     let serialized_props = serde_json::to_string(&component.props).unwrap();
 
-    cx.render(rsx!(
-        div {
-            class: cx.props.class,
-            "data-browser-component-name": component.name,
-            "data-browser-component-props": "{serialized_props}",
-            if let Some(children) = &cx.props.children {
-                children
-            }
-        }
-    ))
-}
+//     cx.render(rsx!(
+//         div {
+//             class: cx.props.class,
+//             "data-browser-component-name": component.name,
+//             "data-browser-component-props": "{serialized_props}",
+//             if let Some(children) = &cx.props.children {
+//                 children
+//             }
+//         }
+//     ))
+// }
 
 #[inline_props]
 fn LightDarkImage<'a>(

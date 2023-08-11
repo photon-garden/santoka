@@ -2,7 +2,7 @@
 
 use gloo::console;
 use prelude::*;
-use serde::de::DeserializeOwned;
+// use serde::de::DeserializeOwned;
 use shared::prelude::*;
 use web_sys::Element;
 
@@ -36,16 +36,15 @@ fn main() -> Result<(), JsValue> {
     Ok(())
 }
 
-fn mount_component<Props: DeserializeOwned>(
-    component_name: &'static str,
-    mount: fn(Element, Props),
-) {
+// fn mount_component<Props: DeserializeOwned>(
+fn mount_component(component_name: &'static str, hydrate: fn(Element)) {
     console::log!("Mounting components named:", component_name);
 
     let window = web_sys::window().expect("web_sys::window() failed.");
     let document = window.document().expect("window.document() failed.");
 
-    let selector = format!("[data-browser-component-name=\"{}\"]", component_name);
+    // let selector = format!("[data-browser-component-name=\"{}\"]", component_name);
+    let selector = format!(".{}", component_name).replace(':', "\\:");
     let nodes = document
         .query_selector_all(&selector)
         .expect("document.query_selector_all() failed.");
@@ -53,12 +52,13 @@ fn mount_component<Props: DeserializeOwned>(
     for index in 0..nodes.length() {
         let node = nodes.get(index).expect("nodes.get() failed.");
         let element: Element = node.dyn_into().expect("element.dyn_into() failed.");
-        let serialized_props = element
-            .get_attribute("data-browser-component-props")
-            .expect("element.get_attribute() failed.");
-        let deserialized_props: Props =
-            serde_json::from_str(&serialized_props).expect("serde_json::from_str() failed.");
-        mount(element, deserialized_props);
+        // let serialized_props = element
+        //     .get_attribute("data-browser-component-props")
+        //     .expect("element.get_attribute() failed.");
+        // let deserialized_props: Props =
+        //     serde_json::from_str(&serialized_props).expect("serde_json::from_str() failed.");
+        // hydrate(element, deserialized_props);
+        hydrate(element);
     }
 }
 

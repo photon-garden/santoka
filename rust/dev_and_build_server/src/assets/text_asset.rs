@@ -1,12 +1,12 @@
 use crate::prelude::*;
 
 #[derive(PartialEq)]
-pub struct JsonAsset {
+pub struct TextAsset {
     pub asset_path: &'static str,
     pub content: &'static str,
 }
 
-impl NonImageAsset for JsonAsset {
+impl NonImageAsset for TextAsset {
     fn asset_path(&self) -> &str {
         self.asset_path
     }

@@ -1,4 +1,4 @@
-pub static name: &str = "show-if-scrolled";
+pub static name: &str = "browser-component:show-if-scrolled";
 
 #[cfg(feature = "browser")]
 pub use self::browser::hydrate_show_if_scrolled;
@@ -10,12 +10,13 @@ pub type Props = ();
 
 #[cfg(feature = "browser")]
 pub mod browser {
-    use super::*;
+    // use super::*;
     use crate::prelude::*;
     use gloo::events::EventListener;
     use web_sys::{Element, Event};
 
-    pub fn hydrate_show_if_scrolled(target_element: Element, _props: Props) {
+    // pub fn hydrate_show_if_scrolled(target_element: Element, _props: Props) {
+    pub fn hydrate_show_if_scrolled(target_element: Element) {
         let window = web_sys::window().expect("web_sys::window() failed.");
         let document = window.document().expect("window.document() failed.");
 
@@ -50,9 +51,14 @@ pub mod browser {
 #[cfg(feature = "server")]
 pub mod server {
     use super::*;
-    use crate::prelude::*;
+    // use crate::prelude::*;
 
-    pub fn show_if_scrolled() -> BrowserComponent<Props> {
-        BrowserComponent { name, props: () }
+    // pub fn show_if_scrolled() -> BrowserComponent<Props> {
+    //     BrowserComponent { name, props: () }
+    // }
+
+    pub fn show_if_scrolled() -> &'static str {
+        name
+        // BrowserComponent { name, props: () }
     }
 }

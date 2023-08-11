@@ -20,8 +20,8 @@ pub use image_asset::*;
 mod js_asset;
 use js_asset::*;
 
-mod json_asset;
-use json_asset::*;
+mod text_asset;
+use text_asset::*;
 
 mod wasm_asset;
 use wasm_asset::*;
@@ -43,7 +43,7 @@ pub struct NonHtmlAssets {
     pub main_css: CssAsset,
     pub browser_js: JsAsset,
     pub browser_bg_wasm: WasmAsset,
-    pub build_time: JsonAsset,
+    pub build_time: TextAsset,
     pub images: ImageAssets,
 }
 
@@ -119,12 +119,12 @@ impl NonHtmlAssets {
         println!("browser_bg.wasm");
         let browser_bg_wasm = WasmAsset {
             asset_path: "browser_bg.wasm",
-            bytes: include_bytes!("../../../target/browser/browser_bg.wasm"),
+            bytes: browser_bg_wasm_bytes,
         };
 
         println!("build_time.txt");
-        let build_time = JsonAsset {
-            asset_path: "build-time.json",
+        let build_time = TextAsset {
+            asset_path: "build-time",
             content: include_str!("../../../target/build_time.txt"),
         };
 
