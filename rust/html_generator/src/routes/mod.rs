@@ -1,4 +1,4 @@
-use crate::{assets::ImageAsset, prelude::*};
+use crate::prelude::*;
 use dioxus::prelude::*;
 // use serde::Serialize;
 
@@ -103,7 +103,7 @@ fn FloatingNav(cx: Scope) -> Element {
                     select-none
                 ",
                     NavLogo {}
-                    NavLinks { classes: "" }
+                    NavLinks { class: "" }
                 }
             }
         }
@@ -148,7 +148,7 @@ fn HeroSection(cx: Scope) -> Element {
                     z-10
                 ",
                 NavLogo {}
-                NavLinks { classes: "" }
+                NavLinks { class: "" }
             }
 
             HeroImage {}
@@ -226,7 +226,7 @@ fn Publication(cx: Scope, publication: &'static Publication) -> Element {
             }
             span { class: "publication-year font-light lg:font-thin text-sm lg:text-2xl",
                 "{publication.year_or_unknown()} • "
-                Link { href: "", classes: "", "hide" }
+                Link { href: "", class: "", "hide" }
             }
         }
     ))
@@ -301,7 +301,7 @@ fn MainJs(cx: Scope) -> Element {
 #[derive(Props)]
 struct LinkProps<'a> {
     href: &'static str,
-    classes: &'static str,
+    class: &'static str,
     children: Element<'a>,
 }
 
@@ -309,7 +309,7 @@ fn Link<'a>(cx: Scope<'a, LinkProps<'a>>) -> Element {
     dbg!("Link");
     let props = cx.props;
     cx.render(rsx!(
-        a { class: "{props.classes} {link_classes()}", href: props.href, &props.children }
+        a { class: "{props.class} {link_classes()}", href: props.href, &props.children }
     ))
 }
 
@@ -330,7 +330,7 @@ fn NavLogo(cx: Scope) -> Element {
 }
 
 #[inline_props]
-fn NavLinks(cx: Scope, classes: &'static str) -> Element {
+fn NavLinks(cx: Scope, class: &'static str) -> Element {
     dbg!("NavLinks");
     cx.render(rsx!(
         div {
@@ -340,10 +340,10 @@ fn NavLinks(cx: Scope, classes: &'static str) -> Element {
                 flex flex-row gap-4
                 font-light lg:font-normal
                 text-neutral-100 dark:text-neutral-300
-                {classes}
+                {class}
             ",
-            Link { href: "", classes: "tracking-wide", "about" }
-            Link { href: "", classes: "tracking-wide", "data + code" }
+            Link { href: "", class: "tracking-wide", "about" }
+            Link { href: "", class: "tracking-wide", "data + code" }
         }
     ))
 }
@@ -353,34 +353,34 @@ fn bg_background() -> &'static str {
 }
 
 fn link_classes() -> &'static str {
-    "underline decoration-1 underline-offset-4 cursor-pointer {classes}"
+    "underline decoration-1 underline-offset-4 cursor-pointer {class}"
 }
 
-#[inline_props]
-fn Image<'a>(cx: Scope, asset: &'a ImageAsset, classes: &'static str) -> Element<'a> {
-    dbg!("Image");
-    cx.render(rsx!(
-        div {
-            //
-            class: "select-none relative {classes}",
+// #[inline_props]
+// fn Image<'a>(cx: Scope, asset: &'a ImageAsset, class: &'static str) -> Element<'a> {
+//     dbg!("Image");
+//     cx.render(rsx!(
+//         div {
+//             //
+//             class: "select-none relative {class}",
 
-            img {
-                alt: asset.alt,
-                class: "shrink-0 min-w-full min-h-full object-cover",
-                style: "image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;",
-                src: "{asset.lqip}"
-            }
+//             img {
+//                 alt: asset.alt,
+//                 class: "shrink-0 min-w-full min-h-full object-cover",
+//                 style: "image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;",
+//                 src: "{asset.lqip}"
+//             }
 
-            img {
-                //
-                alt: asset.alt,
-                class: "absolute top-0 left-0 min-w-full min-h-full object-cover",
-                src: asset.src(),
-                srcset: asset.srcset()
-            }
-        }
-    ))
-}
+//             img {
+//                 //
+//                 alt: asset.alt,
+//                 class: "absolute top-0 left-0 min-w-full min-h-full object-cover",
+//                 src: asset.src(),
+//                 srcset: asset.srcset()
+//             }
+//         }
+//     ))
+// }
 
 // #[derive(Props)]
 // struct RenderBrowserComponentProps<BrowserComponentProps>
@@ -413,14 +413,28 @@ fn Image<'a>(cx: Scope, asset: &'a ImageAsset, classes: &'static str) -> Element
 //     ))
 // }
 
-#[inline_props]
-fn LightDarkImage<'a>(cx: Scope, asset: &'a LightDarkImageAsset, classes: String) -> Element<'a> {
+#[derive(Props)]
+struct LightDarkImageProps<'a> {
+    asset: &'a LightDarkImageAsset,
+    class: String,
+    #[props(default = false)]
+    above_the_fold: bool,
+    #[props(default = false)]
+    is_largest_contentful_paint: bool,
+}
+
+fn LightDarkImage<'a>(cx: Scope<'a, LightDarkImageProps<'a>>) -> Element<'a> {
+    let class = &cx.props.class;
+    let asset = cx.props.asset;
+    let above_the_fold = cx.props.above_the_fold;
+    let is_largest_contentful_paint = cx.props.is_largest_contentful_paint;
+
     dbg!("Image");
     // style: "image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;",
     cx.render(rsx!(
         div {
             //
-            class: "select-none relative {classes}",
+            class: "select-none relative {class}",
 
             picture { class: "shrink-0 min-w-full min-h-full object-cover blur-lg",
 
@@ -466,7 +480,8 @@ fn LightDarkImage<'a>(cx: Scope, asset: &'a LightDarkImageAsset, classes: String
 
                 img {
                     //
-                    "loading": "lazy",
+                    "loading": if above_the_fold { "eager" } else { "lazy" },
+                    "fetchpriority": if is_largest_contentful_paint { "high" } else { "auto" },
                     alt: asset.alt,
                     class: "absolute top-0 left-0 min-w-full min-h-full object-cover",
                     src: asset.light_mode.src()
@@ -477,7 +492,7 @@ fn LightDarkImage<'a>(cx: Scope, asset: &'a LightDarkImageAsset, classes: String
 }
 
 fn HeroImage(cx: Scope) -> Element {
-    let classes = format!(
+    let class = format!(
         "
             shrink-0 min-w-full min-h-full object-cover
             transform -scale-x-100 lg:scale-x-100 object-right lg:object-left
@@ -486,5 +501,12 @@ fn HeroImage(cx: Scope) -> Element {
         parallax()
     );
 
-    cx.render(rsx!( LightDarkImage { asset: &non_html_assets.images.hasui_hero, classes: classes } ))
+    cx.render(rsx!(
+        LightDarkImage {
+            asset: &non_html_assets.images.hasui_hero,
+            class: class,
+            above_the_fold: true,
+            is_largest_contentful_paint: true
+        }
+    ))
 }
