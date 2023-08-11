@@ -42,7 +42,7 @@ fn Layout<'a>(cx: Scope<'a, LayoutProps<'a>>) -> Element {
         body { class: "{bg_background()} flex flex-col items-center selection:bg-neutral-200/75 dark:selection:bg-neutral-700/75",
             FloatingNav {}
             &cx.props.children,
-            BrowserScript {}
+            MainJs {}
         }
     ))
 }
@@ -292,9 +292,9 @@ fn Poem(cx: Scope, poem: &'static Poem) -> Element {
     ))
 }
 
-fn BrowserScript(cx: Scope) -> Element {
-    dbg!("BrowserScript");
-    let contents = include_str!("../boot_browser.js");
+fn MainJs(cx: Scope) -> Element {
+    dbg!("MainJs");
+    let contents = include_str!("../main.js");
     cx.render(rsx!( script { "type": "module", dangerous_inner_html: "{contents}" } ))
 }
 
