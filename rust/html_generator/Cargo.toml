@@ -1,5 +1,5 @@
 [package]
-name = "dev_and_build_server"
+name = "html_generator"
 version = "0.1.0"
 edition = "2021"
 description = "The server for this project, used during development and for building the site."

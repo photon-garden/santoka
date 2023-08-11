@@ -1,5 +1,5 @@
 [workspace]
-members = ["browser", "dev_and_build_server", "shared"]
+members = ["browser", "html_generator", "shared"]
 
 [profile.release]
 # Tell `rustc` to optimize for small code size.
@@ -36,7 +36,7 @@ setup = [
 ]
 
 # Rust
-watch_rust = "./target/cargo_install/bin/cargo-watch --watch ./dev_and_build_server --watch ./browser --watch ./shared -x 'cmd build_rust_dev'"
+watch_rust = "./target/cargo_install/bin/cargo-watch --watch ./html_generator --watch ./browser --watch ./shared -x 'cmd build_rust_dev'"
 
 build_rust_dev = [
     "cargo cmd build_browser_dev",
@@ -62,5 +62,5 @@ build_server_production = "cargo run -- production"
 serve_static_files = "./target/cargo_install/bin/simple-http-server --port 3000 built"
 
 # Tailwind
-watch_tailwind = "npx --prefix ./target/node_modules tailwindcss -i ./dev_and_build_server/src/main.css -o ./target/tailwind/built.css --watch"
-build_tailwind_production = "npx --prefix ./target/node_modules tailwindcss -i ./dev_and_build_server/src/main.css -o ./target/tailwind/built.css --minify"
+watch_tailwind = "npx --prefix ./target/node_modules tailwindcss -i ./html_generator/src/main.css -o ./target/tailwind/built.css --watch"
+build_tailwind_production = "npx --prefix ./target/node_modules tailwindcss -i ./html_generator/src/main.css -o ./target/tailwind/built.css --minify"
