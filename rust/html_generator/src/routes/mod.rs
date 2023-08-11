@@ -1,11 +1,8 @@
 use crate::{assets::ImageAsset, prelude::*};
 use dioxus::prelude::*;
-use serde::Serialize;
+// use serde::Serialize;
 
 mod test_mod;
-
-// type Element = LazyNodes<'static, 'static>;
-// type Element = VirtualDom;
 
 pub fn get() -> String {
     // create a VirtualDom with the app component

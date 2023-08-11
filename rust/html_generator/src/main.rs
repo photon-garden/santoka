@@ -1,6 +1,6 @@
 #![allow(non_snake_case, non_upper_case_globals)]
 
-use std::{env, fs};
+use std::fs;
 
 pub mod assets;
 pub mod database;
@@ -31,21 +31,4 @@ fn main() -> Result<()> {
     Assets::new().save_to_disk(&built_dir);
 
     Ok(())
-}
-
-fn get_mode() -> Mode {
-    let args: Vec<String> = env::args().collect();
-
-    let arg = args[1].as_str();
-
-    match arg {
-        "production" => Mode::Production,
-        "dev" => Mode::Dev,
-        _ => panic!("Pass either 'dev' or 'production' as an arg."),
-    }
-}
-
-pub enum Mode {
-    Dev,
-    Production,
 }
