@@ -7,7 +7,9 @@ pub struct HtmlAsset {
 
 impl HtmlAsset {
     fn minified_contents(&self) -> Vec<u8> {
-        minify_html::minify(self.contents.as_bytes(), &minify_html::Cfg::new())
+        let mut minify_html_config = minify_html::Cfg::new();
+        minify_html_config.minify_js = true;
+        minify_html::minify(self.contents.as_bytes(), &minify_html_config)
     }
 }
 
