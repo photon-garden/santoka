@@ -39,7 +39,7 @@ fn main() -> Result<(), JsValue> {
 
 // fn mount_component<Props: DeserializeOwned>(
 fn mount_component(component_name: &'static str, hydrate: fn(HtmlElement)) {
-    console::log!("Mounting components named:", component_name);
+    // console::log!("Mounting components named:", component_name);
 
     let window = web_sys::window().expect("web_sys::window() failed.");
     let document = window.document().expect("window.document() failed.");
