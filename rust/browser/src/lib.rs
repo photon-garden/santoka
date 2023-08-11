@@ -1,6 +1,5 @@
 #![allow(non_upper_case_globals)]
 
-use gloo::console;
 use prelude::*;
 // use serde::de::DeserializeOwned;
 use shared::prelude::*;

@@ -10,10 +10,7 @@ pub mod prelude;
 pub mod routes;
 
 use color_eyre::eyre::Result;
-use once_cell::sync::Lazy;
 use prelude::*;
-
-pub static mode: Lazy<Mode> = Lazy::new(get_mode);
 
 fn main() -> Result<()> {
     color_eyre::install()?;

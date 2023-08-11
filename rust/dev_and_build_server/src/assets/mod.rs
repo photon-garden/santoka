@@ -109,17 +109,10 @@ impl NonHtmlAssets {
             contents: include_str!("../../../target/browser/browser.js"),
         };
 
-        let browser_bg_wasm_bytes = match *mode {
-            Mode::Dev => include_bytes!("../../../target/browser/browser_bg.wasm").to_vec(),
-            Mode::Production => {
-                include_bytes!("../../../target/browser/browser_bg.min.wasm").to_vec()
-            }
-        };
-
         println!("browser_bg.wasm");
         let browser_bg_wasm = WasmAsset {
             asset_path: "browser_bg.wasm",
-            bytes: browser_bg_wasm_bytes,
+            bytes: include_bytes!("../../../target/browser/browser_bg.wasm"),
         };
 
         println!("build_time.txt");

@@ -17,9 +17,10 @@ impl NonImageAsset for HtmlAsset {
     }
 
     fn bytes(&self) -> Vec<u8> {
-        match *mode {
-            Mode::Dev => self.contents.as_bytes().to_vec(),
-            Mode::Production => self.minified_contents(),
-        }
+        // Un-minified. You can comment this back in if you want to debug.
+        // self.contents.as_bytes().to_vec()
+
+        // Minified.
+        self.minified_contents()
     }
 }
