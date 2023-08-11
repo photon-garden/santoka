@@ -21,6 +21,7 @@ minify-html = "0.11.1"
 minify-js = "0.5.6"
 rayon = "1.7.0"
 tree_magic = "0.2.3"
+base64 = { version = "0.21.2" }
 
 [build-dependencies]
 chrono = "0.4.26"

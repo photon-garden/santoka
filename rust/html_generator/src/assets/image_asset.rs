@@ -1,7 +1,9 @@
 use crate::prelude::*;
-use image::{DynamicImage, GenericImageView};
+use base64::prelude::*;
+use image::{DynamicImage, GenericImageView, ImageFormat};
 use rayon::prelude::*;
 use std::collections::HashSet;
+use std::io::Cursor;
 use std::path::{Path, PathBuf};
 use std::sync::Arc;
 
@@ -17,7 +19,7 @@ pub struct ImageAsset {
     pub asset_path: String,
     pub alt: &'static str,
     pub bytes: &'static [u8],
-    pub lqip: &'static str,
+    pub lqip: String,
 
     mime_type: String,
 
@@ -34,7 +36,7 @@ impl ImageAsset {
         asset_path: &'static str,
         alt: &'static str,
         bytes: &'static [u8],
-        lqip: &'static str,
+        // lqip: &'static str,
     ) -> ImageAsset {
         let asset_path = "images/".to_string() + asset_path;
         let image = image::load_from_memory(bytes).unwrap();
@@ -43,6 +45,7 @@ impl ImageAsset {
         let srcset = Self::create_srcset(&asset_path, width);
         let resized_variants = Self::resized_variants(&asset_path, &image);
         let mime_type = tree_magic::from_u8(bytes);
+        let lqip = Self::create_lqip(image.clone(), &mime_type);
 
         ImageAsset {
             asset_path,
@@ -116,6 +119,21 @@ impl ImageAsset {
         map_filename_without_extension(asset_path, |filename_without_extension| {
             format!("{filename_without_extension}-{width}w")
         })
+    }
+
+    fn create_lqip(image: Arc<DynamicImage>, mime_type: &str) -> String {
+        let resized = image.resize_to_width(40);
+        let mut bytes: Cursor<Vec<u8>> = Cursor::new(Vec::new());
+        resized
+            .write_to(&mut bytes, ImageFormat::Jpeg)
+            .expect("Error encoding low quality image placeholder.");
+        let base64_encoded = base64::engine::general_purpose::STANDARD.encode(bytes.into_inner());
+
+        format!(
+            "data:{mime_type};base64,{base64}",
+            mime_type = mime_type,
+            base64 = base64_encoded
+        )
     }
 }
 

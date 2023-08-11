@@ -371,7 +371,7 @@ fn Image<'a>(cx: Scope, asset: &'a ImageAsset, classes: &'static str) -> Element
                 alt: asset.alt,
                 class: "shrink-0 min-w-full min-h-full object-cover",
                 style: "image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;",
-                src: asset.lqip
+                src: "{asset.lqip}"
             }
 
             img {
@@ -419,26 +419,25 @@ fn Image<'a>(cx: Scope, asset: &'a ImageAsset, classes: &'static str) -> Element
 #[inline_props]
 fn LightDarkImage<'a>(cx: Scope, asset: &'a LightDarkImageAsset, classes: String) -> Element<'a> {
     dbg!("Image");
+    // style: "image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;",
     cx.render(rsx!(
         div {
             //
             class: "select-none relative {classes}",
 
-            picture {
-                class: "shrink-0 min-w-full min-h-full object-cover",
-                style: "image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;",
+            picture { class: "shrink-0 min-w-full min-h-full object-cover blur-lg",
 
                 source {
                     //
                     "media": "(prefers-color-scheme: light)",
-                    "srcset": asset.light_mode.lqip,
+                    "srcset": "{asset.light_mode.lqip}",
                     "type": "image/jpeg"
                 }
 
                 source {
                     //
                     "media": "(prefers-color-scheme: dark)",
-                    "srcset": asset.dark_mode.lqip,
+                    "srcset": "{asset.dark_mode.lqip}",
                     "type": "image/jpeg"
                 }
 
