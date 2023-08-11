@@ -466,6 +466,7 @@ fn LightDarkImage<'a>(cx: Scope, asset: &'a LightDarkImageAsset, classes: String
 
                 img {
                     //
+                    "loading": "lazy",
                     alt: asset.alt,
                     class: "absolute top-0 left-0 min-w-full min-h-full object-cover",
                     src: asset.light_mode.src()
