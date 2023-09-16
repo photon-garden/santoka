@@ -3,6 +3,7 @@
 use std::fs;
 
 pub mod assets;
+mod components;
 pub mod database;
 pub mod extensions;
 pub mod manifest;

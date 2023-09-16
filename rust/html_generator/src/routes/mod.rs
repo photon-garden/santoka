@@ -259,8 +259,6 @@ fn PoemsInPublication(cx: Scope, publication: &'static Publication) -> Element {
                 button {
                     disabled: "true",
                     class: "
-                        script-link
-                        script:load-more-poems
                         tracking-wide
                         whitespace-nowrap
                         font-thin
@@ -292,12 +290,6 @@ fn Poem(cx: Scope, poem: &'static Poem) -> Element {
     ))
 }
 
-fn MainJs(cx: Scope) -> Element {
-    dbg!("MainJs");
-    let contents = include_str!("../main.js");
-    cx.render(rsx!( script { "type": "module", dangerous_inner_html: "{contents}" } ))
-}
-
 #[derive(Props)]
 struct LinkProps<'a> {
     href: &'static str,
@@ -315,18 +307,16 @@ fn Link<'a>(cx: Scope<'a, LinkProps<'a>>) -> Element {
 
 fn NavLogo(cx: Scope) -> Element {
     dbg!("NavLogo");
-    cx.render(rsx!(
-        a {
-            class: "
+    cx.render(rsx!(a {
+        class: "
                 logo
                 block rounded-full
                 w-6 lg:w-8 h-6 lg:h-8
                 bg-neutral-50 dark:bg-neutral-300
                 cursor-pointer
             ",
-            href: ""
-        }
-    ))
+        href: ""
+    }))
 }
 
 #[inline_props]
@@ -501,12 +491,10 @@ fn HeroImage(cx: Scope) -> Element {
         parallax()
     );
 
-    cx.render(rsx!(
-        LightDarkImage {
-            asset: &non_html_assets.images.hasui_hero,
-            class: class,
-            above_the_fold: true,
-            is_largest_contentful_paint: true
-        }
-    ))
+    cx.render(rsx!(LightDarkImage {
+        asset: &non_html_assets.images.hasui_hero,
+        class: class,
+        above_the_fold: true,
+        is_largest_contentful_paint: true
+    }))
 }
