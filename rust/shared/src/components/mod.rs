@@ -1,3 +1,6 @@
+pub mod append_html;
+pub use self::append_html::*;
+
 pub mod parallax;
 pub use self::parallax::*;
 
