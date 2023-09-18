@@ -1,3 +1,8 @@
+use std::{
+    fmt::{Display, Formatter},
+    str::FromStr,
+};
+
 use once_cell::sync::Lazy;
 use ts_rs::TS;
 
@@ -22,21 +27,21 @@ pub struct Database {
 }
 
 impl Database {
-    // As long as our tests pass, get_translator and get_publication can't panic
+    // As long as our tests pass, translator and publication can't panic
     // even though they contain unwrap. That's because:
     // - Code outside this module can't construct publication ids, so all publication
     //   ids come from poems in the database.
     // - Our tests confirm that all poems have valid publication ids.
     // - We include the serialized database at compile time and it's immutable.
 
-    pub fn get_translator(&self, id: TranslatorId) -> &Translator {
+    pub fn translator(&self, id: TranslatorId) -> &Translator {
         self.translators
             .iter()
             .find(|translator| translator.id == id)
             .unwrap()
     }
 
-    pub fn get_publication(&self, id: PublicationId) -> &Publication {
+    pub fn publication(&self, id: PublicationId) -> &Publication {
         self.publications
             .iter()
             .find(|publication| publication.id == id)
@@ -87,12 +92,22 @@ pub struct Publication {
     pub description: String,
 }
 
+static num_preview_poems: usize = 3;
+
 impl Publication {
     pub fn poems(&self) -> impl Iterator<Item = &Poem> {
         database
             .poems
             .iter()
             .filter(|poem| poem.publication_id == self.id)
+    }
+
+    pub fn preview_poems(&self) -> impl Iterator<Item = &Poem> {
+        self.poems().take(num_preview_poems)
+    }
+
+    pub fn non_preview_poems(&self) -> impl Iterator<Item = &Poem> {
+        self.poems().skip(num_preview_poems)
     }
 
     pub fn year_or_unknown(&self) -> String {
@@ -108,6 +123,26 @@ impl Publication {
     export_to = "../data/2023-06-26T14:52:00.000Z/typescript-types/PublicationId.ts"
 )]
 pub struct PublicationId(usize);
+
+impl FromStr for PublicationId {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s.parse::<usize>() {
+            Ok(parsed) => {
+                let publication_id = PublicationId(parsed);
+                Ok(publication_id)
+            }
+            Err(e) => Err(format!("Failed to parse publication id: {}", e)),
+        }
+    }
+}
+
+impl Display for PublicationId {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.0)
+    }
+}
 
 #[derive(Debug, serde::Deserialize, TS, Clone)]
 #[ts(
@@ -144,8 +179,8 @@ mod tests {
             let translator_id = poem.translator_id;
 
             // These functions panic if the record isn't found, failing the test.
-            db.get_publication(publication_id);
-            db.get_translator(translator_id);
+            db.publication(publication_id);
+            db.translator(translator_id);
         }
     }
 }

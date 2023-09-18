@@ -48,22 +48,64 @@ impl HtmlAsset {
         .await
         .unwrap();
 
-        // relative paths with out the file name
+        // Pre-render the NonPreviewPoems route for each publication.
+        // This isn't static, so doesn't get handled by pre_cache_static_routes.
+        // We use an empty string for before_body and after_body because these
+        // html files will get pulled in dynamically by JS in the browser.
+        for publication in database.publications.iter() {
+            render_route(
+                &mut renderer,
+                Route::NonPreviewPoems {
+                    publication_id: publication.id,
+                },
+                &mut tokio::io::sink(),
+                |vdom| {
+                    Box::pin(async move {
+                        let _ = vdom.rebuild();
+                        vdom.wait_for_suspense().await;
+                    })
+                },
+                &DefaultRenderer {
+                    before_body: "".to_string(),
+                    after_body: "".to_string(),
+                },
+            )
+            .await
+            .unwrap();
+        }
+
+        // Relative paths without the file name.
         let paths = Route::SITE_MAP
             .iter()
             .flat_map(|route| route.flatten().into_iter())
-            .filter_map(|route| {
-                let segments = &route
+            .flat_map(|segments| {
+                let joined_segments = &segments
                     .iter()
                     .map(|segment| segment.to_string())
                     .collect::<Vec<_>>()
                     .join("")[1..];
 
+                // Handle the non-preview-poems route by expanding /non-preview-poems/:publication_id
+                // into a vector of paths, one for each publication: /non-preview-poems/1, /non-preview-poems/2, etc.
+                if joined_segments.contains(":publication_id") {
+                    return database
+                        .publications
+                        .iter()
+                        .map(|publication| {
+                            joined_segments
+                                .replace(":publication_id", publication.id.to_string().as_str())
+                        })
+                        .collect::<Vec<_>>();
+                }
+
+                vec![joined_segments.to_string()]
+            })
+            .filter_map(|segments| {
                 if segments == ":...segments" {
                     return None;
                 }
 
-                Some(PathBuf::from_str(segments).unwrap())
+                Some(PathBuf::from_str(&segments).unwrap())
             })
             .collect::<Vec<_>>();
 

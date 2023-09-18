@@ -14,6 +14,9 @@ use self::css_class_groups::*;
 mod layout;
 use self::layout::*;
 
+mod non_preview_poems;
+use self::non_preview_poems::*;
+
 mod not_found;
 use self::not_found::*;
 
@@ -25,10 +28,13 @@ mod prelude;
 pub enum Route {
     #[layout(Layout)]
         #[route("/")]
-        Home,  
+        Home,
         #[route("/contact")]
         Contact {},  
     #[end_layout]
+
+    #[route("/non-preview-poems/:publication_id")]
+    NonPreviewPoems { publication_id: PublicationId },
 
     #[route("/:..segments")]
     NotFound { segments: Vec<String> },
@@ -154,7 +160,7 @@ fn PoemsAndPublication(cx: Scope, publication: &'static Publication) -> Element 
 #[inline_props]
 fn Publication(cx: Scope, publication: &'static Publication, show_hide: ShowHide) -> Element {
     dbg!("Publication");
-    let translator = database.get_translator(publication.translator_id);
+    let translator = database.translator(publication.translator_id);
 
     // a { class: "underline decoration-1 underline-offset-4 cursor-pointer",
     //     "hide"
@@ -227,29 +233,38 @@ fn VisiblePoemsInPublication<'show_hide>(
                 {show_hide.show_by_default()}
             ",
 
-            for poem in publication.poems().take(3) {
+            for poem in publication.preview_poems() {
                 Poem { poem: poem }
             }
 
-            // bg-neutral-200 dark:bg-neutral-600
-            span { class: "
+            LoadMorePoems { publication: publication }
+        }
+    )
+}
+
+#[inline_props]
+fn LoadMorePoems(cx: Scope, publication: &'static Publication) -> Element {
+    dbg!(publication);
+
+    render!(
+        // bg-neutral-200 dark:bg-neutral-600
+        span { class: "
                     text-neutral-400 dark:text-neutral-400
                     flex flex-row gap-2
                 ",
 
-                "⨀"
+            "⨀"
 
-                button {
-                    disabled: "true",
-                    class: "
+            button {
+                disabled: "true",
+                class: "
                         tracking-wide
                         whitespace-nowrap
                         font-thin
                         w-min
                         {link_classes()}
                     ",
-                    "load more"
-                }
+                "load more"
             }
         }
     )
@@ -278,7 +293,7 @@ fn HiddenPoemsInPublication<'show_hide>(cx: Scope, show_hide: &'show_hide ShowHi
 }
 
 #[inline_props]
-fn Poem(cx: Scope, poem: &'static Poem) -> Element {
+pub fn Poem(cx: Scope, poem: &'static Poem) -> Element {
     dbg!("Poem");
     let english_text = poem.english_text.replace("—\n", "—");
     let japanese_text = poem.japanese_text_or_default(); //.replace('\n', "<br>");
