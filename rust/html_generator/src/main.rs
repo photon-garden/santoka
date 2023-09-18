@@ -3,19 +3,16 @@
 use std::fs;
 
 pub mod assets;
-mod components;
 pub mod database;
 pub mod extensions;
 pub mod manifest;
 pub mod prelude;
 pub mod routes;
 
-use color_eyre::eyre::Result;
 use prelude::*;
 
-fn main() -> Result<()> {
-    color_eyre::install()?;
-
+#[tokio::main]
+async fn main() {
     let built_dir = manifest::dir().join("built");
 
     // println!("Removing built folder");
@@ -29,7 +26,5 @@ fn main() -> Result<()> {
     }
 
     println!("Saving assets to disk.");
-    Assets::new().save_to_disk(&built_dir);
-
-    Ok(())
+    Assets::new().await.save_to_disk(&built_dir);
 }

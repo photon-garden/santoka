@@ -1,10 +1,10 @@
 pub static name: &str = "browser-component:parallax";
 
 #[cfg(feature = "browser")]
-pub use self::browser::hydrate_parallax;
+pub use self::browser::*;
 
 #[cfg(feature = "server")]
-pub use self::server::parallax;
+pub use self::server::*;
 
 pub type Props = ();
 

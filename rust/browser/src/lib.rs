@@ -7,7 +7,6 @@ use web_sys::HtmlElement;
 
 #[cfg(feature = "dev")]
 mod dev;
-mod extensions;
 mod prelude;
 
 // #[wasm_bindgen]
@@ -28,10 +27,9 @@ fn main() -> Result<(), JsValue> {
     #[cfg(feature = "dev")]
     dev::main();
 
-    // load_more_poems_on_link_click();
-
     mount_component(show_if_scrolled::name, hydrate_show_if_scrolled);
     mount_component(parallax::name, hydrate_parallax);
+    mount_component(show_hide::name, hydrate_show_hide);
 
     Ok(())
 }
@@ -43,15 +41,9 @@ fn mount_component(component_name: &'static str, hydrate: fn(HtmlElement)) {
     let window = web_sys::window().expect("web_sys::window() failed.");
     let document = window.document().expect("window.document() failed.");
 
-    // let selector = format!("[data-browser-component-name=\"{}\"]", component_name);
-    let selector = format!(".{}", component_name).replace(':', "\\:");
-    let nodes = document
-        .query_selector_all(&selector)
-        .expect("document.query_selector_all() failed.");
+    let elements = document.find_child_elements_with_name(component_name);
 
-    for index in 0..nodes.length() {
-        let node = nodes.get(index).expect("nodes.get() failed.");
-        let element: HtmlElement = node.dyn_into().expect("element.dyn_into() failed.");
+    for element in elements {
         // let serialized_props = element
         //     .get_attribute("data-browser-component-props")
         //     .expect("element.get_attribute() failed.");
@@ -61,27 +53,3 @@ fn mount_component(component_name: &'static str, hydrate: fn(HtmlElement)) {
         hydrate(element);
     }
 }
-
-// fn load_more_poems_on_link_click() {
-//     let window = web_sys::window().expect("web_sys::window() failed.");
-//     let document = window.document().expect("window.document() failed.");
-//     let load_more_links = document
-//         .query_selector_all(".script\\:load-more-poems")
-//         .expect("document.query_selector_all() failed.");
-
-//     console::log!(
-//         "Registering event listeners for {} load more links.",
-//         load_more_links.length()
-//     );
-
-//     for index in 0..load_more_links.length() {
-//         let link = load_more_links
-//             .get(index)
-//             .expect("load_more_links.get() failed.");
-
-//         EventListener::new(&link, "click", move |_: &Event| {
-//             console::log!("Clicked load more poems link.");
-//         })
-//         .forget();
-//     }
-// }

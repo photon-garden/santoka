@@ -1,9 +1,13 @@
+use std::path::{Path, PathBuf};
+use std::time::Duration;
+
 use crate::prelude::*;
 
 #[derive(PartialEq)]
 pub struct JsAsset {
-    pub asset_path: &'static str,
+    pub path: PathBuf,
     pub contents: &'static str,
+    pub load_time_budget: Duration,
 }
 
 impl JsAsset {
@@ -23,8 +27,8 @@ impl JsAsset {
 }
 
 impl NonImageAsset for JsAsset {
-    fn asset_path(&self) -> &str {
-        self.asset_path
+    fn path(&self) -> &Path {
+        &self.path
     }
 
     fn bytes(&self) -> Vec<u8> {
@@ -33,5 +37,9 @@ impl NonImageAsset for JsAsset {
 
         // Minified.
         self.minified_contents()
+    }
+
+    fn load_time_budget(&self) -> Duration {
+        self.load_time_budget
     }
 }
