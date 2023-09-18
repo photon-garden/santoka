@@ -18,7 +18,6 @@ mod not_found;
 use self::not_found::*;
 
 mod prelude;
-use self::prelude::*;
 
 // ANCHOR: router
 #[rustfmt::skip]
@@ -228,7 +227,7 @@ fn VisiblePoemsInPublication<'show_hide>(
                 {show_hide.show_by_default()}
             ",
 
-            for poem in publication.poems().into_iter().take(3) {
+            for poem in publication.poems().take(3) {
                 Poem { poem: poem }
             }
 

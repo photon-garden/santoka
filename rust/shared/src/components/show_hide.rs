@@ -14,7 +14,6 @@ pub type Props = ();
 #[cfg(feature = "browser")]
 pub mod browser {
     use std::cell::Cell;
-    use std::rc::Rc;
 
     use super::*;
     use crate::prelude::*;

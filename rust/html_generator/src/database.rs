@@ -88,12 +88,11 @@ pub struct Publication {
 }
 
 impl Publication {
-    pub fn poems(&self) -> Vec<&Poem> {
+    pub fn poems(&self) -> impl Iterator<Item = &Poem> {
         database
             .poems
             .iter()
             .filter(|poem| poem.publication_id == self.id)
-            .collect()
     }
 
     pub fn year_or_unknown(&self) -> String {
