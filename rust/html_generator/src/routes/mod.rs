@@ -33,7 +33,7 @@ pub enum Route {
         Contact {},  
     #[end_layout]
 
-    #[route("/non-preview-poems/:publication_id")]
+    #[route("/publications/:publication_id/non-preview-poems")]
     NonPreviewPoems { publication_id: PublicationId },
 
     #[route("/:..segments")]
