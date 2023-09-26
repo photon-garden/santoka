@@ -110,7 +110,7 @@ impl Assets {
     }
 
     pub fn built_dir() -> PathBuf {
-        manifest::dir().join("built")
+        crate::manifest::dir().join("built")
     }
 
     fn path_on_disk(built_dir: &Path, asset_path: &Path) -> PathBuf {

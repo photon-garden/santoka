@@ -47,7 +47,7 @@ fn FloatingNav(cx: Scope) -> Element {
                 pointer-events-none
                 px-4 lg:px-8
                 text-base lg:text-2xl tracking-wide
-                {show_if_scrolled()}
+                {show_if_scrolled::show_if_scrolled()}
             ",
 
             div {

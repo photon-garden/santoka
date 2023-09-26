@@ -1,123 +1,80 @@
-// pub static name: &str = "browser-component:append-html";
-// static append_after_name: &str = "browser-component:append-html:append-after";
-// static trigger_name: &str = "browser-component:show-hide:trigger";
+use miniserde::{Deserialize, Serialize};
 
-// #[cfg(feature = "browser")]
-// pub use self::browser::*;
+pub static name: &str = "browser-component:append-html";
+static trigger_name: &str = "browser-component:append-html:trigger";
+static append_after_name: &str = "browser-component:append-html:append-after";
 
-// #[cfg(feature = "server")]
-// pub use self::server::*;
+#[cfg(feature = "browser")]
+pub use self::browser::*;
 
-// pub type Props = ();
+#[cfg(feature = "server")]
+pub use self::server::*;
 
-// #[cfg(feature = "browser")]
-// pub mod browser {
-//     use std::cell::Cell;
+#[derive(Serialize, Deserialize)]
+pub struct Props {
+    load_html_from: String,
+}
 
-//     use super::*;
-//     use crate::prelude::*;
-//     use gloo::console;
-//     use gloo::events::EventListener;
-//     use web_sys::HtmlElement;
+#[cfg(feature = "browser")]
+pub mod browser {
+    use std::cell::Cell;
 
-//     pub fn hydrate_show_hide(target_element: HtmlElement) {
-//         let container = target_element;
+    use super::*;
+    use crate::prelude::*;
+    use gloo::console;
+    use gloo::events::EventListener;
+    use web_sys::HtmlElement;
 
-//         let elements_to_show_by_default = container
-//             .find_child_elements_with_name(show_by_default_name)
-//             .into_rc();
+    pub fn hydrate_append_html(target_element: HtmlElement) {}
+}
 
-//         let elements_to_hide_by_default = container
-//             .find_child_elements_with_name(hide_by_default_name)
-//             .into_rc();
+#[cfg(feature = "server")]
+pub mod server {
+    use super::*;
+    use crate::server::*;
+    use dioxus::prelude::*;
 
-//         // let trigger = {
-//         //     let maybe_trigger = container.query_name_selector(trigger_name);
-//         //     match maybe_trigger {
-//         //         Some(trigger) => trigger,
-//         //         None => {
-//         //             let selector = component_name_to_selector(trigger_name);
-//         //             console::warn!(
-//         //                 "Expected a child element inside of",
-//         //                 container,
-//         //                 "that matched the selector",
-//         //                 selector,
-//         //                 "but didn't find any."
-//         //             );
-//         //             return;
-//         //         }
-//         //     }
-//         // };
+    #[derive(PartialEq, Clone)]
+    pub struct AppendHtml {
+        load_html_from: String,
+    }
 
-//         let triggers = {
-//             let triggers = container.find_child_elements_with_name(trigger_name);
-//             if triggers.is_empty() {
-//                 let selector = component_name_to_selector(trigger_name);
-//                 console::warn!(
-//                     "Expected at least one child element inside of",
-//                     container,
-//                     "to match the selector",
-//                     selector,
-//                     "but didn't find any."
-//                 );
-//                 return;
-//             }
-//             triggers
-//         };
+    #[derive(Props)]
+    pub struct ContainerProps<'a> {
+        append_html: AppendHtml,
+        #[props(default = "")]
+        class: &'static str,
+        children: Element<'a>,
+    }
 
-//         let in_default_state = Cell::new(true).into_rc();
+    pub fn AppendHtmlContainer<'a>(cx: Scope<'a, ContainerProps<'a>>) -> Element<'a> {
+        let props = Props {
+            load_html_from: cx.props.append_html.load_html_from.clone(),
+        };
 
-//         for trigger in triggers {
-//             let in_default_state = in_default_state.clone();
-//             let elements_to_show_by_default = elements_to_show_by_default.clone();
-//             let elements_to_hide_by_default = elements_to_hide_by_default.clone();
+        let browser_component = crate::server::BrowserComponent { name, props };
 
-//             EventListener::new(&trigger, "click", move |_event| {
-//                 console::debug!("Toggling element.");
-//                 let new_in_default_state = !in_default_state.get();
-//                 in_default_state.set(new_in_default_state);
+        render!(
+            RenderBrowserComponent {
+                class: "append-html {cx.props.class}",
+                component: browser_component,
+                element_name: ElementName::Div,
+                &cx.props.children
+            }
+        )
+    }
 
-//                 if in_default_state.get() {
-//                     elements_to_show_by_default.show();
-//                     elements_to_hide_by_default.hide();
-//                 } else {
-//                     elements_to_show_by_default.hide();
-//                     elements_to_hide_by_default.show();
-//                 }
-//             })
-//             .forget();
-//         }
-//     }
-// }
+    impl AppendHtml {
+        pub fn new(load_html_from: String) -> AppendHtml {
+            AppendHtml { load_html_from }
+        }
 
-// #[cfg(feature = "server")]
-// pub mod server {
-//     use super::*;
+        pub fn trigger(&self) -> &'static str {
+            trigger_name
+        }
 
-//     #[derive(PartialEq, Clone)]
-//     pub struct AppendHtml {}
-
-//     impl AppendHtml {
-//         pub fn new() -> AppendHtml {
-//             AppendHtml {}
-//         }
-
-//         pub fn container(&self) -> String {
-//             name.to_string()
-//         }
-
-//         pub fn trigger(&self) -> String {
-//             trigger_name.to_string()
-//         }
-
-//         pub fn append_after(&self) -> String {
-//             append_after_name.to_string()
-//         }
-//     }
-
-//     impl Default for AppendHtml {
-//         fn default() -> Self {
-//             AppendHtml::new()
-//         }
-//     }
-// }
+        pub fn append_after(&self) -> &'static str {
+            append_after_name
+        }
+    }
+}

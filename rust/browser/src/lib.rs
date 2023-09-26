@@ -27,9 +27,12 @@ fn main() -> Result<(), JsValue> {
     #[cfg(feature = "dev")]
     dev::main();
 
-    mount_component(show_if_scrolled::name, hydrate_show_if_scrolled);
-    mount_component(parallax::name, hydrate_parallax);
-    mount_component(show_hide::name, hydrate_show_hide);
+    mount_component(
+        show_if_scrolled::name,
+        show_if_scrolled::hydrate_show_if_scrolled,
+    );
+    mount_component(parallax::name, parallax::hydrate_parallax);
+    mount_component(show_hide::name, show_hide::hydrate_show_hide);
 
     Ok(())
 }

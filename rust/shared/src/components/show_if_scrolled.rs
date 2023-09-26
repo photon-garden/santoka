@@ -51,14 +51,11 @@ pub mod browser {
 #[cfg(feature = "server")]
 pub mod server {
     use super::*;
-    // use crate::prelude::*;
+    use crate::server::BrowserComponent;
 
-    // pub fn show_if_scrolled() -> BrowserComponent<Props> {
-    //     BrowserComponent { name, props: () }
-    // }
+    pub type ShowIfScrolled = BrowserComponent<()>;
 
     pub fn show_if_scrolled() -> &'static str {
-        name
-        // BrowserComponent { name, props: () }
+        json::to_string(BrowserComponent { name, props: () })
     }
 }

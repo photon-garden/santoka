@@ -1,6 +1,9 @@
 use crate::prelude::*;
 use dioxus::prelude::*;
 use dioxus_router::prelude::*;
+use shared::append_html::AppendHtml;
+use shared::append_html::AppendHtmlContainer;
+use shared::show_hide::ShowHide;
 
 mod components;
 use self::components::*;
@@ -51,37 +54,6 @@ fn Home(cx: Scope) -> Element {
         }
     }
 }
-
-// #[derive(Props)]
-// struct RenderBrowserComponentProps<BrowserComponentProps>
-// where
-//     BrowserComponentProps: Serialize,
-// {
-//     class: Option<&'static str>,
-//     component: BrowserComponent<BrowserComponentProps>,
-//     children: Option<Element<'static>>,
-// }
-
-// fn RenderBrowserComponent<BrowserComponentProps>(
-//     cx: Scope<'static, RenderBrowserComponentProps<BrowserComponentProps>>,
-// ) -> Element<'static>
-// where
-//     BrowserComponentProps: Serialize,
-// {
-//     let component = &cx.props.component;
-//     let serialized_props = serde_json::to_string(&component.props).unwrap();
-
-//     render!(
-//         div {
-//             class: cx.props.class,
-//             "data-browser-component-name": component.name,
-//             "data-browser-component-props": "{serialized_props}",
-//             if let Some(children) = &cx.props.children {
-//                 children
-//             }
-//         }
-//     ))
-// }
 
 fn HeroSection(cx: Scope) -> Element {
     dbg!("HeroSection");
@@ -225,12 +197,23 @@ fn VisiblePoemsInPublication<'show_hide>(
     publication: &'static Publication,
     show_hide: &'show_hide ShowHide,
 ) -> Element {
+    let append_html = AppendHtml::new(
+        Route::NonPreviewPoems {
+            publication_id: publication.id,
+        }
+        .to_string(),
+    );
+
+    let show_by_default_class = show_hide.show_by_default();
+
     render!(
-        div { class: "
+        AppendHtmlContainer {
+            append_html: append_html,
+            class: "
                 visible-poems-in-publication
                 flex flex-col gap-8 lg:gap-24
                 text-base lg:text-3xl 
-                {show_hide.show_by_default()}
+                {show_by_default_class}
             ",
 
             for poem in publication.preview_poems() {
@@ -317,7 +300,7 @@ fn HeroImage(cx: Scope) -> Element {
             transform -scale-x-100 lg:scale-x-100 object-right lg:object-left
             {}
         ",
-        parallax()
+        parallax::parallax()
     );
 
     render!(

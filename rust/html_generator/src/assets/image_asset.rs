@@ -167,7 +167,7 @@ impl ResizedImageAsset {
         if self.needs_to_be_recreated(&path, paths_of_files_in_built_dir) {
             let parent_dir = path.parent().unwrap();
             if !parent_dir.exists() {
-                fs::create_dir_all(parent_dir).unwrap();
+                std::fs::create_dir_all(parent_dir).unwrap();
             }
 
             println!("Saving resized image to disk: {:?}", &self.path);
