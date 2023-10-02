@@ -1,28 +1,33 @@
 dev() {
-	echo "✨ Starting development server."
-	watch_rust
+	echo "✨ Starting development server"
+	watch_rust &
+	watch_serverless_functions
 }
 
 build() {
-	echo "✨ Building for production."
+	echo "✨ Building for production"
 	build_tailwind_production && build_rust_production
 }
 
 preview() {
-	echo "✨ Previewing production build."
-	build && serve_static_files
+	echo "✨ Previewing production build"
+	build && (
+		serve_static_files &
+		watch_serverless_functions
+	)
 }
 
 deploy() {
-	echo "✨ Deploying."
+	echo "✨ Deploying"
 	build &&
 		git add --all &&
 		git commit -m "Deploy." &&
-		git push
+		git push &&
+		deploy_serverless_functions
 }
 
 setup() {
-	echo "✨ Installing CLI dependencies."
+	echo "✨ Setting up libraries"
 	cargo install cargo-watch --version 8.4.0 --root ./target/cargo_install &&
 		cargo install wasm-pack --version 0.12.1 --root ./target/cargo_install &&
 		cargo install wasm-opt --version 0.114.0 --root ./target/cargo_install &&
@@ -31,17 +36,30 @@ setup() {
 		rm -rf ./target/node_modules && npm install && mv node_modules ./target/node_modules
 }
 
+profile_bundle_size() {
+	echo "✨ Profiling the browser bundle size."
+	build_tailwind_production &&
+		build_rust_profiling &&
+		echo "" &&
+		du -sh ./built/browser_bg.wasm &&
+		echo "" &&
+		./target/cargo_install/bin/twiggy top -n 20 ./built/browser_bg.wasm &&
+		echo "" &&
+		./target/cargo_install/bin/twiggy dominators ./built/browser_bg.wasm 
+
+}
+
 # Semi private 🤷‍♂️
 
 build_rust_dev() {
-	echo "✨ Building Rust for development."
+	echo "✨ Building Rust for development"
 	build_tailwind_dev && build_browser_dev && build_html && serve_static_files
 }
 
 # Private
 
 watch_rust() {
-	echo "✨ Watching Rust."
+	echo "✨ Watching Rust"
 	./target/cargo_install/bin/cargo-watch \
 		--watch ./html_generator \
 		--watch ./browser \
@@ -49,28 +67,89 @@ watch_rust() {
 		--shell './scripts build_rust_dev'
 }
 
+watch_serverless_functions() {
+	echo "✨ Watching serverless functions"
+	cd ./serverless_functions && npm run dev
+}
+
+deploy_serverless_functions() {
+	cd ./serverless_functions
+
+	npm run deploy
+
+	# Store the exit status of the last command.
+	exit_status=$?
+
+	cd ..
+
+	# Exit with the stored exit status.
+	return $exit_status
+}
+
 build_rust_production() {
 	echo "✨ Building Rust for production."
 	build_browser_production && build_html
 }
 
+build_rust_profiling() {
+	echo "✨ Building Rust for profiling."
+	build_browser_profiling && build_html
+}
+
 build_browser_dev() {
-	echo "✨ Building the browser crate for development."
-	cd browser && ../target/cargo_install/bin/wasm-pack build \
+	echo "✨ Building browser crate for development"
+
+	cd browser
+
+	../target/cargo_install/bin/wasm-pack build \
 		--target web \
 		--out-dir ../target/browser \
 		--out-name browser \
 		--dev \
 		--features dev
+
+	# Store the exit status of the last command.
+	exit_status=$?
+
 	cd ..
+
+	# Exit with the stored exit status.
+	return $exit_status
+}
+
+build_browser_profiling() {
+	echo "✨ Building browser crate for profiling."
+	cd browser
+
+	../target/cargo_install/bin/wasm-pack build \
+		--target web \
+		--out-dir ../target/browser \
+		--out-name browser \
+		--profiling
+
+	# Store the exit status of the last command.
+	exit_status=$?
+
+	cd ..
+
+	# Exit with the stored exit status.
+	return $exit_status
 }
 
 build_browser_production() {
-	echo "✨ Building browser crate for production."
-	cd browser &&
-		../target/cargo_install/bin/wasm-pack build --target web --out-dir ../target/browser --out-name browser --release &&
+	echo "✨ Building browser crate for production"
+	cd browser 
+
+	../target/cargo_install/bin/wasm-pack build --target web --out-dir ../target/browser --out-name browser --release &&
 		../target/cargo_install/bin/wasm-opt -Os -o ../target/browser/browser_bg.wasm ../target/browser/browser_bg.wasm
+
+	# Store the exit status of the last command.
+	exit_status=$?
+
 	cd ..
+
+	# Exit with the stored exit status.
+	return $exit_status
 }
 
 build_html() {
@@ -79,7 +158,7 @@ build_html() {
 }
 
 serve_static_files() {
-	echo "✨ Serving static files."
+	echo "✨ Serving static files"
 	./target/cargo_install/bin/simple-http-server \
 		--port 3000 \
 		--index \
@@ -87,16 +166,16 @@ serve_static_files() {
 }
 
 build_tailwind_dev() {
-	echo "✨ Building Tailwind for development."
+	echo "✨ Watching Tailwind"
 	npx \
 		--prefix ./target/node_modules tailwindcss \
 		-i ./html_generator/src/main.css \
 		-o ./target/tailwind/built.css
-		# --watch
+	# --watch
 }
 
 build_tailwind_production() {
-	echo "✨ Building Tailwind for production."
+	echo "✨ Building Tailwind for production"
 	npx \
 		--prefix ./target/node_modules tailwindcss \
 		-i ./html_generator/src/main.css \
@@ -125,8 +204,12 @@ for target in $ARGV; do
 		deploy
 	elif [ $target == "setup" ]; then
 		setup
+	elif [ $target == "watch_serverless_functions" ]; then
+		watch_serverless_functions
 	elif [ $target == "build_tailwind_dev" ]; then
 		build_tailwind_dev
+	elif [ $target == "profile_bundle_size" ]; then
+		profile_bundle_size
 	else
 		echo "Unknown command: $target"
 		exit 1
