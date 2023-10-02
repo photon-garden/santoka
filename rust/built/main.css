@@ -658,6 +658,10 @@ body {
   height: 384px;
 }
 
+.h-\[500px\] {
+  height: 500px;
+}
+
 .max-h-\[calc\(100vh-4rem\)\] {
   max-height: calc(100vh - 4rem);
 }
@@ -998,6 +1002,10 @@ body {
 }
 
 @media (prefers-color-scheme: dark) {
+  .dark\:hidden {
+    display: none;
+  }
+
   .dark\:justify-end {
     justify-content: flex-end;
   }

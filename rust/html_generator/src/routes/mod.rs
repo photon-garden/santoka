@@ -1,8 +1,6 @@
 use crate::prelude::*;
 use dioxus::prelude::*;
 use dioxus_router::prelude::*;
-use shared::append_html::AppendHtml;
-use shared::append_html::AppendHtmlContainer;
 use shared::show_hide::ShowHide;
 
 mod components;
@@ -197,23 +195,21 @@ fn VisiblePoemsInPublication<'show_hide>(
     publication: &'static Publication,
     show_hide: &'show_hide ShowHide,
 ) -> Element {
-    let append_html = AppendHtml::new(
-        Route::NonPreviewPoems {
-            publication_id: publication.id,
-        }
-        .to_string(),
-    );
+    let no_preview_poems_route = Route::NonPreviewPoems {
+        publication_id: publication.id,
+    }
+    .to_string();
+    let replace_class = replace(no_preview_poems_route);
 
     let show_by_default_class = show_hide.show_by_default();
 
     render!(
-        AppendHtmlContainer {
-            append_html: append_html,
-            class: "
+        div { class: "
                 visible-poems-in-publication
                 flex flex-col gap-8 lg:gap-24
                 text-base lg:text-3xl 
                 {show_by_default_class}
+                {replace_class}
             ",
 
             for poem in publication.preview_poems() {

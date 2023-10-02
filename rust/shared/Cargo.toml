@@ -32,4 +32,3 @@ web-sys = { version = "0.3.4", optional = true, features = [
     "DomTokenList",
 ] }
 miniserde = "0.1.31"
-dioxus = "0.4.0"

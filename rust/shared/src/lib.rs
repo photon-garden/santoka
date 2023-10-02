@@ -3,7 +3,5 @@
 pub mod components;
 pub mod extensions;
 pub mod prelude;
-#[cfg(feature = "server")]
-pub mod server;
 
 pub use prelude::*;

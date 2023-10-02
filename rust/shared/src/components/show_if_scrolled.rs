@@ -1,4 +1,7 @@
-pub static name: &str = "browser-component:show-if-scrolled";
+use super::BrowserComponent;
+use gloo::console;
+
+pub static name: &str = "show-if-scrolled";
 
 #[cfg(feature = "browser")]
 pub use self::browser::*;
@@ -7,16 +10,18 @@ pub use self::browser::*;
 pub use self::server::*;
 
 pub type Props = ();
+pub type ShowIfScrolled = BrowserComponent<Props>;
 
 #[cfg(feature = "browser")]
 pub mod browser {
-    // use super::*;
+    use super::*;
     use crate::prelude::*;
     use gloo::events::EventListener;
     use web_sys::{Event, HtmlElement};
 
     // pub fn hydrate_show_if_scrolled(target_element: Element, _props: Props) {
-    pub fn hydrate_show_if_scrolled(target_element: HtmlElement) {
+    pub fn hydrate_show_if_scrolled(target_element: HtmlElement, _props: Props) {
+        console::log!("hydrating show_if_scrolled");
         let window = web_sys::window().expect("web_sys::window() failed.");
         let document = window.document().expect("window.document() failed.");
 
@@ -51,11 +56,12 @@ pub mod browser {
 #[cfg(feature = "server")]
 pub mod server {
     use super::*;
-    use crate::server::BrowserComponent;
 
-    pub type ShowIfScrolled = BrowserComponent<()>;
-
-    pub fn show_if_scrolled() -> &'static str {
-        json::to_string(BrowserComponent { name, props: () })
+    pub fn show_if_scrolled() -> String {
+        ShowIfScrolled {
+            name: name.to_string(),
+            props: (),
+        }
+        .to_class()
     }
 }

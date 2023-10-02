@@ -109,9 +109,7 @@ impl HtmlAsset {
             })
             .collect::<Vec<_>>();
 
-        dbg!(&paths);
-
-        let html_assets = paths
+        paths
             .into_iter()
             .map(|cleaned_path| {
                 let temp_path = temporary_asset_directory
@@ -127,11 +125,7 @@ impl HtmlAsset {
                     load_time_budget: Duration::from_millis(1),
                 }
             })
-            .collect::<Vec<_>>();
-
-        dbg!(&html_assets);
-
-        html_assets
+            .collect::<Vec<_>>()
     }
 
     fn minified_contents(&self) -> Vec<u8> {

@@ -224,6 +224,7 @@ dependencies = [
  "console_error_panic_hook",
  "futures-util",
  "gloo",
+ "miniserde",
  "once_cell",
  "serde",
  "serde_json",
@@ -2161,7 +2162,6 @@ dependencies = [
 name = "shared"
 version = "0.1.0"
 dependencies = [
- "dioxus",
  "gloo",
  "miniserde",
  "wasm-bindgen",
